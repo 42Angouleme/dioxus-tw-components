@@ -1,3 +1,26 @@
+/* TODO */
+@utility scrollbar {
+  &::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: var(--primary);
+    /* Does not work */
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: #e0cbcb;
+    border-radius: 10px;
+    /* border: 3px solid #f6f7ed; */
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    /* background: var(--color-primary); */
+    background: #000000;
+  }
+}
+
 @layer base {
     /* :root {
         --background: 0 0% 100%;
@@ -153,26 +176,3 @@
         @apply py-[1.5rem] md:py-[1.75rem] lg:py-[2rem] xl:py-[2.25rem]
     } */
 }
-    
-/* TODO */
-@layer utilities {
-    .scrollbar::-webkit-scrollbar {
-      width: 8px;
-    }
-  
-    .scrollbar::-webkit-scrollbar-track {
-        background: var(--primary);
-        /* Does not work */
-    }
-  
-    .scrollbar::-webkit-scrollbar-thumb {
-      background: #e0cbcb;
-      border-radius: 10px;
-      /* border: 3px solid #f6f7ed; */
-    }
-  
-    .scrollbar::-webkit-scrollbar-thumb:hover {
-      /* background: var(--color-primary); */
-      background: #000000;
-    }
-  }

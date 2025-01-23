@@ -14,7 +14,7 @@ pub fn CarouselPage() -> Element {
         hash.insert(
             2,
             FieldPreview::default()
-                .class("bg-gradient-to-r from-primary/40 to-secondary/40".to_string()),
+                .class("bg-linear-to-r from-primary/40 to-secondary/40".to_string()),
         );
         hash.insert(
             3,

@@ -1,6 +1,47 @@
-@import "tailwindcss/base";
-@import "tailwindcss/components";
-@import "tailwindcss/utilities";
+@import 'tailwindcss';
+
+@config './tailwind.config.js';
+
+/*
+  The default border color has changed to `currentColor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
+
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
+*/
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentColor);
+  }
+}
+
+/* TODO */
+@utility scrollbar {
+  &::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: var(--primary);
+    /* Does not work */
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: #acacac;
+    border-radius: 10px;
+    /* border: 3px solid #f6f7ed; */
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    /* background: var(--color-primary); */
+    background: #000000;
+  }
+}
 
 @layer base {
     :root {
@@ -80,28 +121,5 @@
 
     .anchor {
         @apply text-foreground/70 hover:text-foreground transition-colors cursor-pointer;
-    }
-}
-    
-/* TODO */
-@layer utilities {
-    .scrollbar::-webkit-scrollbar {
-      width: 8px;
-    }
-  
-    .scrollbar::-webkit-scrollbar-track {
-        background: var(--primary);
-        /* Does not work */
-    }
-  
-    .scrollbar::-webkit-scrollbar-thumb {
-      background: #acacac;
-      border-radius: 10px;
-      /* border: 3px solid #f6f7ed; */
-    }
-  
-    .scrollbar::-webkit-scrollbar-thumb:hover {
-      /* background: var(--color-primary); */
-      background: #000000;
     }
 }

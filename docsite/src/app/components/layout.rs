@@ -52,7 +52,7 @@ pub fn SideBarComponent() -> Element {
                     }
                 }
             }
-            div { id: "component-main", class: "max-w-screen-lg", Outlet::<Route> {} }
+            div { id: "component-main", class: "max-w-(--breakpoint-lg)", Outlet::<Route> {} }
         }
     )
 }

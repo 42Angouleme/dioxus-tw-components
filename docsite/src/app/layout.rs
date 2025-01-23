@@ -33,10 +33,10 @@ pub fn Layout() -> Element {
 
             main { class: "flex justify-center w-full mt-12 mb-auto", Outlet::<Route> {} }
 
-            footer { class: "h-16 bottom-0 w-full items-center overflow-hidden border-t border-border backdrop-blur bg-background/65",
+            footer { class: "h-16 bottom-0 w-full items-center overflow-hidden border-t border-border backdrop-blur-sm bg-background/65",
                 div { class: "flex flex-row m-5",
-                    h6 { class: "h6 text-xs flex-grow", "© 2024 - {chrono::Utc::now().year()} | 42 Angoulême" }
-                    h6 { class: "h6 text-xs flex-grow right-0 text-right", "Made with Dioxus 0.6" }
+                    h6 { class: "h6 text-xs grow", "© 2024 - {chrono::Utc::now().year()} | 42 Angoulême" }
+                    h6 { class: "h6 text-xs grow right-0 text-right", "Made with Dioxus 0.6" }
                 }
             }
         }
