@@ -63,16 +63,17 @@ jobs:
             export | grep CLEANED_COMMIT_MSG
             # Get the ansi-escaped message from bash's export builtin
             CLEANED_COMMIT_MSG=$(export | grep CLEANED_COMMIT_MSG | cut -d= -f2- | sed -e 's/^\$//')
-            # The string will always be quoted, either via single quotes if it was ansi-escaped,
-            # or double quotes if it was not. Assigning the variable to itself will remove the quotes
-            # due to how the shell's parsing works.
-            CLEANED_COMMIT_MSG=$CLEANED_COMMIT_MSG
+            # The string will either be in the ansi-escaped $'...' format (with the dollar-sign removed), 
+            # or in the plain "..." format. Either way, we can strip the first and last characters to get
+            # the properly escaped message
+            CLEANED_COMMIT_MSG="${CLEANED_COMMIT_MSG:1:-1}"
             # Add the message to the environment variables for use in the next steps"
             echo "CLEANED_COMMIT_MSG=$CLEANED_COMMIT_MSG" >> $GITHUB_ENV
             set +x
 
         - name: Send custom JSON data to Slack workflow
           uses: slackapi/slack-github-action@v1.26.0
+          continue-on-error: true
           with:
             payload: |
               {
