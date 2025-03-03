@@ -1,182 +1,96 @@
-@import "tailwindcss/base";
-@import "tailwindcss/components";
-@import "tailwindcss/utilities";
+@import 'tailwindcss';
+@config "./tailwind.config.js";
 
 @layer base {
-    /* :root {
-        --background: 0 0% 100%;
-        --foreground: 240 10% 3.9%;
-        --primary: 292 100% 30%;
-        --primary-foreground: 355.7 100% 97.3%;
-        --secondary: 123 100% 22%;
-        --secondary-foreground: 123 100% 70%;
-        --accent: 240 4.8% 95.9%;
-        --accent-foreground: 240 5.9% 10%;
-        --muted: 240 4.8% 95.9%;
-        --muted-foreground: 240 3.8% 46.1%;
-        --destructive: 0 84.2% 60.2%;
-        --destructive-foreground: 0 0% 98%;
-        --success: 142 70% 45%;
-        --success-foreground: 120 100% 97.3%;
-        --border: 240 5.9% 90%;
-        --input: 240 5.9% 90%;
-        --ring: 240 10% 3.9%;
-        --global-shadow: 0 0px 0px 0px rgba(0, 0, 0, 0.3);
-        --global-radius: 10px;
-    }
-
-    .dark {
-        --background: 20 14.3% 4.1%;
-        --foreground: 0 0% 95%;
-        --primary: 346.8 77.2% 49.8%;
-        --primary-foreground: 355.7 100% 97.3%;
-        --secondary: 240 3.7% 15.9%;
-        --secondary-foreground: 0 0% 98%;
-        --accent: 12 6.5% 15.1%;
-        --accent-foreground: 0 0% 98%;
-        --border: 240 3.7% 15.9%;
-        --input: 240 3.7% 15.9%;
-        --ring: 240 10% 3.9%;
-        --global-shadow: 0 0px 0px 0px rgba(255, 255, 255, 0.3);
-    } */
-
-    .h1 {
-        @apply text-4xl font-extrabold md:text-5xl;
-    }
-      
-    .h2 {
-        @apply text-2xl font-bold md:text-4xl;
-    }
-
-    .h3 {
-        @apply text-2xl font-semibold md:text-3xl;
-    }
-      
-    .h4 {
-        @apply text-xl font-semibold md:text-2xl;
-    }
-      
-    .h5 {
-        @apply text-lg font-semibold md:text-xl;
-    }
-      
-    .h6 {
-        @apply text-base font-semibold md:text-lg;
-    }
-
-    .paragraph {
-        @apply font-normal text-foreground;
-    }
-
-    .span {
-        @apply font-normal text-foreground;
-    }
-
-    .anchor {
-        @apply text-foreground/70 hover:text-foreground transition-colors cursor-pointer;
-    }
-    /* Not used anymore */
-    /*
-    .d-text-extrasmall {
-        @apply text-[0.5rem] md:text-[0.625rem] lg:text-[0.75rem] xl:text-[0.875rem]
-    }
-    
-    .d-text-small {
-        @apply text-[0.75rem] md:text-[0.875rem] lg:text-[1rem] xl:text-[1.125rem]
-    }
-
-    .d-text-medium {
-        @apply text-[1rem] md:text-[1.125rem] lg:text-[1.25rem] xl:text-[1.375rem]
-    }
-    
-    .d-text-large {
-        @apply text-[1.25rem] md:text-[1.375rem] lg:text-[1.5rem] xl:text-[1.625rem]
-    }
-    
-    .d-text-extralarge {
-        @apply text-[1.5rem] md:text-[1.625rem] lg:text-[1.75rem] xl:text-[1.875rem]
-    }
-
-    .p-extrasmall {
-        @apply p-[0.6rem] md:p-[0.12rem] lg:p-[0.18rem] xl:p-[0.25rem]
-    }
-
-    .p-small {
-        @apply p-[0.12rem] md:p-[0.25rem] lg:p-[0.37rem] xl:p-[0.5rem]
-    }
-    
-    .p-medium {
-        @apply p-[0.5rem] md:p-[0.75rem] lg:p-[1rem] xl:p-[1.25rem]
-    }
-    
-    .p-large {
-        @apply p-[1rem] md:p-[1.25rem] lg:p-[1.5rem] xl:p-[1.75rem]
-    }
-
-    .p-extralarge {
-        @apply p-[1.5rem] md:p-[1.75rem] lg:p-[2rem] xl:p-[2.25rem]
-    }
-
-    .px-extrasmall {
-        @apply px-[0.6rem] md:px-[0.12rem] lg:px-[0.18rem] xl:px-[0.25rem]
-    }
-    
-    .px-small {
-        @apply px-[0.12rem] md:px-[0.25rem] lg:px-[0.37rem] xl:px-[0.5rem]
-    }
-    
-    .px-medium {
-        @apply px-[0.5rem] md:px-[0.75rem] lg:px-[1rem] xl:px-[1.25rem]
-    }
-    
-    .px-large {
-        @apply px-[1rem] md:px-[1.25rem] lg:px-[1.5rem] xl:px-[1.75rem]
-    }
-
-    .px-extralarge {
-        @apply px-[1.5rem] md:px-[1.75rem] lg:px-[2rem] xl:px-[2.25rem]
-    }
-
-    .py-extrasmall {
-        @apply py-[0.6rem] md:py-[0.12rem] lg:py-[0.18rem] xl:py-[0.25rem]
-    }
-    
-    .py-small {
-        @apply py-[0.12rem] md:py-[0.25rem] lg:py-[0.37rem] xl:py-[0.5rem]
-    }
-    
-    .py-medium {
-        @apply py-[0.5rem] md:py-[0.75rem] lg:py-[1rem] xl:py-[1.25rem]
-    }
-    
-    .py-large {
-        @apply py-[1rem] md:py-[1.25rem] lg:py-[1.5rem] xl:py-[1.75rem]
-    }
-
-    .py-extralarge {
-        @apply py-[1.5rem] md:py-[1.75rem] lg:py-[2rem] xl:py-[2.25rem]
-    } */
+	*,
+	::after,
+	::before,
+	::backdrop,
+	::file-selector-button {
+		border-color: var(--color-gray-200, currentColor);
+	}
 }
-    
-/* TODO */
-@layer utilities {
-    .scrollbar::-webkit-scrollbar {
-      width: 8px;
-    }
-  
-    .scrollbar::-webkit-scrollbar-track {
-        background: var(--primary);
-        /* Does not work */
-    }
-  
-    .scrollbar::-webkit-scrollbar-thumb {
-      background: #e0cbcb;
-      border-radius: 10px;
-      /* border: 3px solid #f6f7ed; */
-    }
-  
-    .scrollbar::-webkit-scrollbar-thumb:hover {
-      /* background: var(--color-primary); */
-      background: #000000;
-    }
-  }
+
+@utility scrollbar {
+	&::-webkit-scrollbar {
+		width: 8px;
+	}
+	&::-webkit-scrollbar-track {
+		background: var(--primary);
+		/* Does not work */
+	}
+	&::-webkit-scrollbar-thumb {
+		background: #e0cbcb;
+		border-radius: 10px;
+		/* border: 3px solid #f6f7ed; */
+	}
+	&::-webkit-scrollbar-thumb:hover {
+		/* background: var(--color-primary); */
+		background: #000000;
+	}
+}
+
+@layer base {
+	 :root {
+		--background: 0 0% 100%;
+		--foreground: 240 10% 3.9%;
+		--primary: 292 100% 30%;
+		--primary-foreground: 355.7 100% 97.3%;
+		--secondary: 123 100% 22%;
+		--secondary-foreground: 123 100% 70%;
+		--accent: 240 4.8% 95.9%;
+		--accent-foreground: 240 5.9% 10%;
+		--muted: 240 4.8% 95.9%;
+		--muted-foreground: 240 3.8% 46.1%;
+		--destructive: 0 84.2% 60.2%;
+		--destructive-foreground: 0 0% 98%;
+		--success: 142 70% 45%;
+		--success-foreground: 120 100% 97.3%;
+		--border: 240 5.9% 90%;
+		--input: 240 5.9% 90%;
+		--ring: 240 10% 3.9%;
+		--global-shadow: 0 0px 0px 0px rgba(0, 0, 0, 0.3);
+		--global-radius: 10px;
+	}
+	.dark {
+		--background: 20 14.3% 4.1%;
+		--foreground: 0 0% 95%;
+		--primary: 346.8 77.2% 49.8%;
+		--primary-foreground: 355.7 100% 97.3%;
+		--secondary: 240 3.7% 15.9%;
+		--secondary-foreground: 0 0% 98%;
+		--accent: 12 6.5% 15.1%;
+		--accent-foreground: 0 0% 98%;
+		--border: 240 3.7% 15.9%;
+		--input: 240 3.7% 15.9%;
+		--ring: 240 10% 3.9%;
+		--global-shadow: 0 0px 0px 0px rgba(255, 255, 255, 0.3);
+	}
+	.h1 {
+		@apply text-4xl font-extrabold md:text-5xl;
+	}
+	.h2 {
+		@apply text-2xl font-bold md:text-4xl;
+	}
+	.h3 {
+		@apply text-2xl font-semibold md:text-3xl;
+	}
+	.h4 {
+		@apply text-xl font-semibold md:text-2xl;
+	}
+	.h5 {
+		@apply text-lg font-semibold md:text-xl;
+	}
+	.h6 {
+		@apply text-base font-semibold md:text-lg;
+	}
+	.paragraph {
+		@apply font-normal text-foreground;
+	}
+	.span {
+		@apply font-normal text-foreground;
+	}
+	.anchor {
+		@apply text-foreground/70 hover:text-foreground transition-colors cursor-pointer;
+	}
+}

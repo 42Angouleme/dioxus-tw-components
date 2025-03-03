@@ -1,6 +1,6 @@
 # Dioxus Tailwind Components [![Main CI](https://github.com/42Angouleme/dioxus-tw-components/actions/workflows/mail.yml/badge.svg)](https://github.com/42Angouleme/dioxus-tw-components/actions/workflows/mail.yml)
 
-A simple but highly customizable and efficient cross-platform components library for Dioxus 0.6 based on TailwindCSS 3.
+A simple but highly customizable and efficient cross-platform components library for Dioxus 0.6 based on TailwindCSS 4.
 
 ## List of available components
 
@@ -36,6 +36,7 @@ Here's a non exhaustive list of all currently available components. They are div
         <tr><td>ProgressBar</td></tr>
         <tr><td>Scrollable</td></tr>
         <tr><td>SidePanel</td></tr>
+        <tr><td>SortTable</td></tr>
         <tr><td>Table</td></tr>
         <tr><td>Tabs</td></tr>
         <tr><td>Toast</td></tr>
@@ -117,8 +118,7 @@ Dioxus Tailwind Components uses special CSS variable names to style properly. Yo
     </summary>
 
 ```css
-@import "tailwindcss/base";
-@import "tailwindcss/components";
+@import 'tailwindcss';
 
 @layer base {
     :root {

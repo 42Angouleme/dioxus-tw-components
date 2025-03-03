@@ -161,9 +161,9 @@ pub fn SidePanelContent(mut props: SidePanelContentProps) -> Element {
 
     props.update_class_attribute();
 
-    rsx!(
+    rsx! {
         div { "data-state": state.read().into_value(), ..props.attributes, {props.children} }
-    )
+    }
 }
 
 #[derive(Clone, PartialEq, Props, UiComp)]
@@ -210,12 +210,12 @@ pub fn SidePanelBackground(mut props: SidePanelBackgroundProps) -> Element {
         }
     };
 
-    rsx!(
+    rsx! {
         div {
             "data-state": state.read().into_value(),
             onclick,
             ..props.attributes,
             {props.children}
         }
-    )
+    }
 }

@@ -298,7 +298,7 @@ impl std::default::Default for Theme {
         );
 
         colors.insert(
-            "ring".to_string(),
+            "ring-3".to_string(),
             ColorChoice::Simple(HslColor {
                 h: 240,
                 s: 10.0,
@@ -448,7 +448,7 @@ impl Theme {
         );
 
         colors.insert(
-            "ring".to_string(),
+            "ring-3".to_string(),
             ColorChoice::Simple(HslColor {
                 h: 0,
                 s: 0.0,

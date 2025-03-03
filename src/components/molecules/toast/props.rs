@@ -340,7 +340,7 @@ fn ToastView(mut state: Signal<ToasterState>, toast: ReadOnlySignal<Toast>) -> E
 fn ToastClose(mut state: Signal<ToasterState>, mut toast_state: Signal<ToastState>) -> Element {
     rsx!(
         button {
-            class: "absolute top-4 right-4 rounded-global-radius hidden group-hover:block transition-colors focus:outline-none focus:ring focus:ring-foreground",
+            class: "absolute top-4 right-4 rounded-global-radius hidden group-hover:block transition-colors focus:outline-hidden focus:ring-3 focus:ring-foreground",
             r#type: "button",
             onclick: move |_| {
                 spawn(async move {

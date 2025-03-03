@@ -24,7 +24,7 @@ impl Class for PlaceholderProps {
             Animation::None => "",
             Animation::Light => "animate-pulse",
             Animation::Full => {
-                "relative overflow-hidden before:absolute before:inset-0 before:-translate-x-full before:bg-gradient-to-r before:from-transparent before:via-white/40 before:animate-[shimmer_2s_infinite]"
+                "relative overflow-hidden before:absolute before:inset-0 before:-translate-x-full before:bg-linear-to-r before:from-transparent before:via-white/40 before:animate-[shimmer_2s_infinite]"
             }
         })
     }

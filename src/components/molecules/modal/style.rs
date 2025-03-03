@@ -8,7 +8,7 @@ impl Class for ModalProps {}
 // Also used by ModalCancelProps
 impl Class for ModalTriggerProps {
     fn base(&self) -> &'static str {
-        "px-4 py-2 text-sm font-medium text-foreground bg-background border border-input rounded-global-radius shadow shadow-global-shadow whitespace-nowrap cursor-pointer hover:bg-accent hover:text-accent-foreground"
+        "px-4 py-2 text-sm font-medium text-foreground bg-background border border-input rounded-global-radius shadow-sm shadow-global-shadow whitespace-nowrap cursor-pointer hover:bg-accent hover:text-accent-foreground"
     }
 }
 

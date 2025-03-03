@@ -37,11 +37,11 @@ impl Class for ProgressBarInnerProps {
 
     fn color(&self) -> Option<&'static str> {
         Some(match *self.color.read() {
-            Color::Primary => "bg-primary-foreground [&>*]:text-primary",
-            Color::Secondary => "bg-secondary-foreground [&>*]:text-secondary",
-            Color::Destructive => "bg-destructive-foreground [&>*]:text-destructive",
-            Color::Success => "bg-success-foreground [&>*]:text-success",
-            _ => "bg-foreground [&>*]:text-background",
+            Color::Primary => "bg-primary-foreground *:text-primary",
+            Color::Secondary => "bg-secondary-foreground *:text-secondary",
+            Color::Destructive => "bg-destructive-foreground *:text-destructive",
+            Color::Success => "bg-success-foreground *:text-success",
+            _ => "bg-foreground *:text-background",
         })
     }
 }
