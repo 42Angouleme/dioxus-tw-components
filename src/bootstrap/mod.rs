@@ -3,7 +3,7 @@ use dioxus::prelude::*;
 #[derive(Default, Clone, PartialEq, Props)]
 pub struct BootstrapConfig {
     #[props(optional, default)]
-    icon: Option<Asset>,
+    pub icon: Option<Asset>,
 }
 
 #[component]
