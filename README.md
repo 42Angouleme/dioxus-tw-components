@@ -1,8 +1,10 @@
 # Dioxus Tailwind Components [![Main CI](https://github.com/42Angouleme/dioxus-tw-components/actions/workflows/mail.yml/badge.svg)](https://github.com/42Angouleme/dioxus-tw-components/actions/workflows/mail.yml)
 
-A simple but highly customizable and efficient cross-platform components library for Dioxus 0.6 based on TailwindCSS 3.
+A simple but highly customizable and efficient cross-platform components library for Dioxus 0.6 based on TailwindCSS 4.
 
 ## List of available components
+
+All components are compatible with dioxus Web, Desktop and Mobile.
 
 Here's a non exhaustive list of all currently available components. They are divided in 3 categories based on their complexity:
 
@@ -36,6 +38,7 @@ Here's a non exhaustive list of all currently available components. They are div
         <tr><td>ProgressBar</td></tr>
         <tr><td>Scrollable</td></tr>
         <tr><td>SidePanel</td></tr>
+        <tr><td>SortTable</td></tr>
         <tr><td>Table</td></tr>
         <tr><td>Tabs</td></tr>
         <tr><td>Toast</td></tr>
@@ -57,6 +60,13 @@ Here's a non exhaustive list of all currently available components. They are div
         <tr><td>Toggle</td></tr>
     </table>
 </details>
+
+## Docsite
+
+Dioxus Tailwind Components offers a docsite to showcase the components and experiment with them.
+Here is the [docsite (live)](https://42angouleme.github.io/dioxus-tw-components-docsite) showcase _a la Storybook_, which also comes with a live theme customizer and exporter.
+While most of the time the showcase will be your first choice, you might want to manipulate the docsite source code, which you'll find [here](https://github.com/42Angouleme/dioxus-tw-components-docsite).
+Additionally, you can use it to export custom themes to embed in your own projects.
 
 ## Getting started
 
@@ -117,8 +127,7 @@ Dioxus Tailwind Components uses special CSS variable names to style properly. Yo
     </summary>
 
 ```css
-@import "tailwindcss/base";
-@import "tailwindcss/components";
+@import 'tailwindcss';
 
 @layer base {
     :root {
@@ -187,11 +196,6 @@ Dioxus Tailwind Components uses special CSS variable names to style properly. Yo
 ```
 
 </details>
-
-## Docsite
-
-Dioxus Tailwind Components offers a [docsite](https://42angouleme.github.io/dioxus-tw-components-docsite) to showcase the components and experiment with them.
-Additionally, you can use it to export custom themes to embed in your own projects.
 
 ## Disclaimer
 

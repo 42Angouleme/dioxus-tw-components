@@ -21,7 +21,7 @@ impl Class for TableBodyProps {
 
 impl Class for TableFooterProps {
     fn base(&self) -> &'static str {
-        "border-t bg-muted/50 font-medium [&>tr]:last:border-b-0 hover:bg-muted/70"
+        "border-t bg-muted/50 font-medium last:[&>tr]:border-b-0 hover:bg-muted/70"
     }
 }
 

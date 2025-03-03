@@ -20,6 +20,6 @@ pub fn HeaderTemplate(mut props: HeaderTemplateProps) -> Element {
 
 impl Class for HeaderTemplateProps {
     fn base(&self) -> &'static str {
-        "sticky top-0 bg-background/65 backdrop-blur border-b border-border"
+        "sticky top-0 bg-background/65 backdrop-blur-sm border-b border-border"
     }
 }
