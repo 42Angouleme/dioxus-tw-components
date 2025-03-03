@@ -61,6 +61,13 @@ Here's a non exhaustive list of all currently available components. They are div
     </table>
 </details>
 
+## Docsite
+
+Dioxus Tailwind Components offers a docsite to showcase the components and experiment with them.
+Here is the [docsite (live)](https://42angouleme.github.io/dioxus-tw-components-docsite) showcase _a la Storybook_, which also comes with a live theme customizer and exporter.
+While most of the time the showcase will be your first choice, you might want to manipulate the docsite source code, which you'll find [here](https://github.com/42Angouleme/dioxus-tw-components-docsite).
+Additionally, you can use it to export custom themes to embed in your own projects.
+
 ## Getting started
 
 ### Public crate
@@ -189,13 +196,6 @@ Dioxus Tailwind Components uses special CSS variable names to style properly. Yo
 ```
 
 </details>
-
-## Docsite
-
-Dioxus Tailwind Components offers a docsite to showcase the components and experiment with them.
-Here is the [docsite (live)](https://42angouleme.github.io/dioxus-tw-components-docsite) showcase _a la Storybook_, which also comes with a live theme customizer and exporter.
-While most of the time the showcase will be your first choice, you might want to manipulate the docsite source code, which you'll find [here](https://42angouleme.github.io/dioxus-tw-components-docsite).
-Additionally, you can use it to export custom themes to embed in your own projects.
 
 ## Disclaimer
 
