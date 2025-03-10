@@ -29,6 +29,7 @@ Here's a non exhaustive list of all currently available components. They are div
     <table>
         <tr><td>Accordion</td></tr>
         <tr><td>Breadcumb</td></tr>
+        <tr><td>Callout</td></tr>
         <tr><td>Carousel</td></tr>
         <tr><td>Dropdown</td></tr>
         <tr><td>Hovercard</td></tr>
