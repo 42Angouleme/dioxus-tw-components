@@ -54,7 +54,7 @@ pub fn Button(mut props: ButtonProps) -> Element {
     let onmouseleave = move |event| props.onmouseleave.call(event);
     let onfocus = move |event| props.onfocus.call(event);
 
-    rsx!(
+    rsx! {
         button {
             onclick,
             onmouseenter,
@@ -63,7 +63,7 @@ pub fn Button(mut props: ButtonProps) -> Element {
             ..props.attributes,
             {props.children}
         }
-    )
+    }
 }
 
 // TODO

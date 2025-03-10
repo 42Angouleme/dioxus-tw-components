@@ -108,13 +108,13 @@ pub fn LightSwitch(mut props: LightSwitchProps) -> Element {
     let icon = if state.read().get_active() {
         rsx! {
             Icon {
-                icon: Icons::LightMode
+                icon: Icons::DarkMode
             }
         }
     } else {
         rsx! {
             Icon {
-                icon: Icons::DarkMode
+                icon: Icons::LightMode
             }
         }
     };
