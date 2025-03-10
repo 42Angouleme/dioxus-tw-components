@@ -44,10 +44,10 @@ impl FromStr for CalloutVariant {
 impl std::fmt::Display for CalloutVariant {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         let s = match self {
-            CalloutVariant::Note => "Note",
             CalloutVariant::Tip => "Tip",
             CalloutVariant::Warning => "Warning",
             CalloutVariant::Caution => "Caution",
+            _ => "Note",
         };
         f.write_str(s)
     }

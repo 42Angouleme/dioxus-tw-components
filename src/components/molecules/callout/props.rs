@@ -1,7 +1,7 @@
 use super::CalloutVariant;
 use crate::attributes::*;
-use dioxus::prelude::*;
 use crate::prelude::*;
+use dioxus::prelude::*;
 use dioxus_tw_components_macro::UiComp;
 
 #[derive(Clone, PartialEq, Props, UiComp)]
@@ -39,10 +39,9 @@ pub fn Callout(mut props: CalloutProps) -> Element {
         CalloutVariant::Tip => Icons::Lightbulb,
         CalloutVariant::Warning => Icons::Warning,
         CalloutVariant::Caution => Icons::Report,
-        _ => Icons::Info,
     };
 
-    rsx!{
+    rsx! {
         div {
             ..props.attributes,
             div { class: "text-md flex flex-row align-middle",
@@ -53,7 +52,7 @@ pub fn Callout(mut props: CalloutProps) -> Element {
                 }
                 "{props.title}"
             }
-            div{ class: "text-sm text-foreground/70", 
+            div{ class: "text-sm text-foreground/70",
                 {props.children}
             }
         }
