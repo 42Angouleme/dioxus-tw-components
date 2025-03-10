@@ -187,9 +187,9 @@ impl std::default::Default for Theme {
             "primary".to_string(),
             ColorChoice::Duo(
                 HslColor {
-                    h: 217,
-                    s: 71.0,
-                    l: 66.0,
+                    h: 216,
+                    s: 83.61,
+                    l: 52.16,
                 },
                 HslColor {
                     h: 0,
@@ -251,9 +251,9 @@ impl std::default::Default for Theme {
             "destructive".to_string(),
             ColorChoice::Duo(
                 HslColor {
-                    h: 0,
-                    s: 84.0,
-                    l: 60.0,
+                    h: 1,
+                    s: 69.29,
+                    l: 52.75,
                 },
                 HslColor {
                     h: 0,
@@ -283,8 +283,8 @@ impl std::default::Default for Theme {
             "border".to_string(),
             ColorChoice::Simple(HslColor {
                 h: 20,
-                s: 5.9,
-                l: 90.0,
+                s: 2.0,
+                l: 80.0,
             }),
         );
 
@@ -321,9 +321,9 @@ impl Theme {
             "background".to_string(),
             ColorChoice::Duo(
                 HslColor {
-                    h: 0,
-                    s: 0.0,
-                    l: 10.0,
+                    h: 214,
+                    s: 15.22,
+                    l: 18.04,
                 },
                 HslColor {
                     h: 0,
@@ -337,9 +337,9 @@ impl Theme {
             "primary".to_string(),
             ColorChoice::Duo(
                 HslColor {
-                    h: 217,
-                    s: 71.0,
-                    l: 50.0,
+                    h: 216,
+                    s: 83.61,
+                    l: 52.16,
                 },
                 HslColor {
                     h: 0,
@@ -401,9 +401,9 @@ impl Theme {
             "destructive".to_string(),
             ColorChoice::Duo(
                 HslColor {
-                    h: 0,
-                    s: 84.0,
-                    l: 40.0,
+                    h: 1,
+                    s: 69.29,
+                    l: 52.75,
                 },
                 HslColor {
                     h: 0,

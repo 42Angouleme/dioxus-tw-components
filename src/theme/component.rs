@@ -8,7 +8,7 @@ pub fn ThemePicker() -> Element {
             MiniPicker {}
             SidePanelBackground { class: "opacity-15" }
             SidePanelContent {
-                class: "h-full min-w-0 w-full sm:w-1/2 xl:w-1/3 p-0",
+                class: "h-full min-w-0 w-full sm:w-1/2 xl:w-1/3 p-0 z-999",
                 side: Side::Right,
                 ColorPicker {}
             }
@@ -228,7 +228,7 @@ fn MiniPicker() -> Element {
     let current_theme = theme_manager.read().current_theme;
 
     rsx! {
-        div { class: "fixed right-0 bottom-1/2 rounded-global-radius border bg-background border-border flex flex-col p-2 items-center space-y-2",
+        div { class: "fixed right-0 top-14 md:top-[40%] rounded-global-radius border bg-background border-border flex flex-col p-2 items-center space-y-2 z-500",
             SidePanelTrigger { class: "p-0 border-none shadow-none hover:bg-inherit bg-inherit",
                 Icon { icon: Icons::ChevronLeft }
             }

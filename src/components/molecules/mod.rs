@@ -4,6 +4,9 @@ pub use accordion::{Accordion, AccordionContent, AccordionItem, AccordionTrigger
 pub mod breadcrumb;
 pub use breadcrumb::{Breadcrumb, BreadcrumbItem, BreadcrumbSeparator};
 
+pub mod callout;
+pub use callout::{Callout, CalloutVariant};
+
 pub mod carousel;
 pub use carousel::{Carousel, CarouselContent, CarouselItem, CarouselTrigger, CarouselWindow};
 

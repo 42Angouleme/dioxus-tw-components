@@ -9,6 +9,7 @@ pub use crate::components::molecules::{
     Accordion, AccordionContent, AccordionItem, AccordionTrigger,
 };
 pub use crate::components::molecules::{Breadcrumb, BreadcrumbItem, BreadcrumbSeparator};
+pub use crate::components::molecules::{Callout, CalloutVariant};
 pub use crate::components::molecules::{
     Carousel, CarouselContent, CarouselItem, CarouselTrigger, CarouselWindow,
 };
