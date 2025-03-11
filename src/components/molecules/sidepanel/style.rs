@@ -6,7 +6,7 @@ impl Class for SidePanelProps {}
 
 impl Class for SidePanelTriggerProps {
     fn base(&self) -> &'static str {
-        "px-4 py-2 text-sm font-medium text-foreground bg-background border border-input rounded-global-radius shadow-sm shadow-global-shadow whitespace-nowrap cursor-pointer hover:bg-accent hover:text-accent-foreground"
+        "px-4 py-2 text-sm font-medium text-foreground bg-background border border-input rounded-global-radius whitespace-nowrap cursor-pointer hover:bg-accent hover:text-accent-foreground"
     }
 }
 
@@ -20,16 +20,16 @@ impl Class for SidePanelContentProps {
     fn base(&self) -> &'static str {
         match *self.side.read() {
             Side::Top => {
-                "z-800 p-4 flex flex-col bottom-[100%] left-[50%]   z-50 min-w-96 bg-background border border-border rounded-global-radius fixed translate-x-[-50%]  translate-y-[100%]  data-[state=inactive]:invisible"
+                "fixed z-800 p-4 overflow-hidden flex flex-col bottom-[100%] left-[50%]   min-w-96 bg-background border border-border rounded-global-radius translate-x-[-50%]  translate-y-[100%]  data-[state=inactive]:invisible"
             }
             Side::Bottom => {
-                "z-800 p-4 flex flex-col top-[100%]    left-[50%]   z-50 min-w-96 bg-background border border-border rounded-global-radius fixed translate-x-[-50%]  translate-y-[-100%] data-[state=inactive]:invisible"
+                "fixed z-800 p-4 overflow-hidden flex flex-col top-[100%]    left-[50%]   min-w-96 bg-background border border-border rounded-global-radius translate-x-[-50%]  translate-y-[-100%] data-[state=inactive]:invisible"
             }
             Side::Left => {
-                "z-800 p-4 flex flex-col top-[50%]     right-[100%] z-50 min-w-96 bg-background border border-border rounded-global-radius fixed translate-x-[100%]  translate-y-[-50%]  data-[state=inactive]:invisible"
+                "fixed z-800 p-4 overflow-hidden flex flex-col top-[50%]     right-[100%] min-w-96 bg-background border border-border rounded-global-radius translate-x-[100%]  translate-y-[-50%]  data-[state=inactive]:invisible"
             }
             Side::Right => {
-                "z-800 p-4 flex flex-col top-[50%]     left-[100%]  z-50 min-w-96 bg-background border border-border rounded-global-radius fixed translate-x-[-100%] translate-y-[-50%]  data-[state=inactive]:invisible"
+                "fixed z-800 p-4 overflow-hidden flex flex-col top-[50%]     left-[100%]  min-w-96 bg-background border border-border rounded-global-radius translate-x-[-100%] translate-y-[-50%]  data-[state=inactive]:invisible"
             }
         }
     }
@@ -53,7 +53,7 @@ impl Class for SidePanelContentProps {
 
 impl Class for SidePanelBackgroundProps {
     fn base(&self) -> &'static str {
-        "w-full h-full top-0 left-0 z-40 opacity-75 fixed data-[state=inactive]:invisible"
+        "fixed overflow-hidden w-screen h-screen top-0 left-0 z-799 opacity-15 data-[state=inactive]:invisible"
     }
 
     fn color(&self) -> Option<&'static str> {

@@ -24,55 +24,6 @@ impl std::default::Default for ThemeManager {
     }
 }
 
-// impl ThemeManager {
-//     /// Import css theme as this one
-//     /// @layer base {
-//     ///  :root {
-//     ///   --muted: 240deg 0.048% 95.9%;
-//     ///   --muted-foreground: 240deg 0.038% 46.1%;
-//     ///   --border: 240deg 0.059% 90%;
-//     ///   --secondary: 123deg 1% 22%;
-//     ///   --secondary-foreground: 123deg 1% 70%;
-//     ///   --input: 240deg 0.059% 90%;
-//     ///   --background: 0deg 9.278% 19.02%;
-//     ///   --foreground: 0deg 82.609% 45.098%;
-//     ///   --ring: 240deg 0.1% 3.9%;
-//     ///   --success: 142deg 0.7% 45%;
-//     ///   --success-foreground: 120deg 1% 97.3%;
-//     ///   --primary: 292deg 1% 30%;
-//     ///   --primary-foreground: 355deg 1% 97.3%;
-//     ///   --destructive: 0deg 0.842% 60.2%;
-//     ///   --destructive-foreground: 0deg 0% 98%;
-//     ///   --accent: 0deg 0% 85.6%;
-//     ///   --accent-foreground: 0deg 0% 17.4%;
-//     ///   --global-radius: 10px;
-//     ///  }
-//     ///  .dark {
-//     ///   --ring: 240deg 0.1% 3.9%;
-//     ///   --primary: 355deg 1% 97.3%;
-//     ///   --primary-foreground: 292deg 1% 30%;
-//     ///   --destructive: 0deg 0% 98%;
-//     ///   --destructive-foreground: 0deg 0.842% 60.2%;
-//     ///   --accent: 0deg 0% 17.4%;
-//     ///   --accent-foreground: 0deg 0% 85.6%;
-//     ///   --secondary: 123deg 1% 70%;
-//     ///   --secondary-foreground: 123deg 1% 22%;
-//     ///   --muted: 240deg 0.038% 46.1%;
-//     ///   --muted-foreground: 240deg 0.048% 95.9%;
-//     ///   --success: 120deg 1% 97.3%;
-//     ///   --success-foreground: 142deg 0.7% 45%;
-//     ///   --border: 240deg 0.059% 90%;
-//     ///   --input: 240deg 0.059% 90%;
-//     ///   --background: 240deg 0.1% 3.9%;
-//     ///   --foreground: 0deg 0% 100%;
-//     ///   --global-radius: 0px;
-//     ///  }
-//     /// }
-//     // pub fn import_theme() -> Result<(), ()> {
-//         // TODO
-//     // }
-// }
-
 impl ToStyle for ThemeManager {
     fn to_style(&self) -> String {
         self.themes[self.current_theme].to_style()
