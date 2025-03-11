@@ -1,11 +1,11 @@
 [package]
 name = "dioxus-tw-components"
-version = "0.1.2"
+version = "0.1.3"
 edition = "2024"
 license = "MIT OR Apache-2.0"
 description = "Components made for Dioxus using TailwindCSS 4."
 readme = "README.md"
-homepage = "https://dioxuslabs.com"
+homepage = "https://42angouleme.github.io/dioxus-tw-components-docsite/"
 repository = "https://github.com/42Angouleme/dioxus-components"
 keywords = ["web", "desktop", "gui", "dioxus", "components"]
 authors = ["Louis Truchelut", "kbz_8", "Ziale", "gpoblon", "42Angouleme"]
