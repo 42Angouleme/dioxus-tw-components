@@ -8,7 +8,7 @@ pub fn ThemePicker() -> Element {
             MiniPicker {}
             SidePanelBackground { class: "z-998" }
             SidePanelContent {
-                class: "h-screen min-w-0 w-full sm:w-1/2 xl:w-1/3 p-0 z-999",
+                class: "h-screen min-w-0 w-full sm:w-120 p-0 sm:px-8 z-999",
                 side: Side::Right,
                 ColorPicker {}
             }
@@ -68,15 +68,13 @@ fn ColorPicker() -> Element {
 
     rsx! {
         SidePanelClose {}
-        div { class: "flex flex-col items-start overflow-auto h-full mt-14 py-auto pb-4 px-2 sm:px-4 space-y-2",
+        div { class: "flex flex-col items-start overflow-auto h-full mt-20 py-auto px-2 sm:px-4 space-y-2",
             Input {
                 role: "button",
                 id: "color-picker-input",
                 r#type: "color",
+                class: "hidden",
                 oninput,
-            }
-            p { class: "text-sm font-medium",
-                "Selected: {theme_manager.read().themes[current_theme].name} {selected_color.read().to_string()}"
             }
             for (str , color) in theme_manager.read().themes[current_theme].colors.iter() {
                 ColorSelector {

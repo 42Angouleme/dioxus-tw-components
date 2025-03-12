@@ -19,7 +19,7 @@ impl std::default::Default for ThemeManager {
     fn default() -> Self {
         Self {
             themes: vec![Theme::default(), Theme::dark()],
-            current_theme: 0,
+            current_theme: 1,
         }
     }
 }
@@ -124,7 +124,7 @@ impl std::default::Default for Theme {
                 HslColor {
                     h: 0,
                     s: 0.0,
-                    l: 100.0,
+                    l: 96.08,
                 },
                 HslColor {
                     h: 0,
@@ -242,9 +242,9 @@ impl std::default::Default for Theme {
         colors.insert(
             "input".to_string(),
             ColorChoice::Simple(HslColor {
-                h: 20,
-                s: 5.9,
-                l: 90.0,
+                h: 0,
+                s: 0.0,
+                l: 80.0,
             }),
         );
 
