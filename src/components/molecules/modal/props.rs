@@ -63,7 +63,9 @@ impl std::default::Default for ModalProps {
 pub fn Modal(props: ModalProps) -> Element {
     use_context_provider(|| Signal::new(ModalState::new(props.is_active)));
 
-    rsx!({ props.children })
+    rsx! {
+        {props.children}
+    }
 }
 
 #[derive(Clone, PartialEq, Props, UiComp)]
@@ -98,9 +100,9 @@ pub fn ModalTrigger(mut props: ModalTriggerProps) -> Element {
         props.onclick.call(event)
     };
 
-    rsx!(
+    rsx! {
         div { onclick, ..props.attributes, {props.children} }
-    )
+    }
 }
 
 #[derive(Clone, PartialEq, Props, UiComp)]
@@ -137,7 +139,7 @@ pub fn ModalClose(mut props: ModalCloseProps) -> Element {
         state.write().toggle();
     };
 
-    rsx!(
+    rsx! {
         div { onclick, ..props.attributes,
             if !has_children {
                 Icon { icon: Icons::Close }
@@ -145,7 +147,7 @@ pub fn ModalClose(mut props: ModalCloseProps) -> Element {
                 {props.children}
             }
         }
-    )
+    }
 }
 
 #[derive(Clone, PartialEq, Props, UiComp)]
@@ -174,9 +176,9 @@ pub fn ModalContent(mut props: ModalContentProps) -> Element {
 
     props.update_class_attribute();
 
-    rsx!(
+    rsx! {
         div { "data-state": state.read().into_value(), ..props.attributes, {props.children} }
-    )
+    }
 }
 
 #[derive(Clone, PartialEq, Props, UiComp)]
@@ -223,12 +225,12 @@ pub fn ModalBackground(mut props: ModalBackgroundProps) -> Element {
         }
     };
 
-    rsx!(
+    rsx! {
         div {
             "data-state": state.read().into_value(),
             onclick,
             ..props.attributes,
             {props.children}
         }
-    )
+    }
 }

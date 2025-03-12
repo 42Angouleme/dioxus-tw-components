@@ -17,11 +17,7 @@ pub struct IconProps {
 pub fn Icon(mut props: IconProps) -> Element {
     props.update_class_attribute();
     rsx! {
-        p {
-            style: "font-family: 'Material Icons';",
-            ..props.attributes,
-            "{props.icon.to_string()}"
-        }
+        p { style: "font-family: 'Material Icons';", ..props.attributes, "{props.icon.to_string()}" }
     }
 }
 

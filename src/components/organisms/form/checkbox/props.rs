@@ -23,12 +23,12 @@ pub fn Checkbox(mut props: CheckboxProps) -> Element {
 
     let oninput = move |event| props.oninput.call(event);
 
-    rsx!(
+    rsx! {
         input {
             r#type: "checkbox",
             oninput,
             checked: props.checked,
             ..props.attributes,
         }
-    )
+    }
 }

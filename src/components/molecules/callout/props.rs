@@ -42,19 +42,16 @@ pub fn Callout(mut props: CalloutProps) -> Element {
     };
 
     rsx! {
-        div {
-            ..props.attributes,
+        div {..props.attributes,
             div { class: "text-md flex flex-row align-middle",
                 Icon {
                     class: "mr-2",
                     size: Size::Sm,
-                    icon: if props.icon.is_some() { props.icon.unwrap() } else { icon }
+                    icon: if props.icon.is_some() { props.icon.unwrap() } else { icon },
                 }
                 "{props.title}"
             }
-            div{ class: "text-sm text-foreground/70",
-                {props.children}
-            }
+            div { class: "text-sm text-foreground/70", {props.children} }
         }
     }
 }

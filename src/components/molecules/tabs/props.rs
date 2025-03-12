@@ -30,9 +30,9 @@ pub fn Tabs(mut props: TabsProps) -> Element {
 
     props.update_class_attribute();
 
-    rsx!(
+    rsx! {
         div { ..props.attributes,{props.children} }
-    )
+    }
 }
 
 #[derive(Clone, PartialEq, Props, UiComp)]
@@ -55,9 +55,9 @@ impl std::default::Default for TabsListProps {
 pub fn TabsList(mut props: TabsListProps) -> Element {
     props.update_class_attribute();
 
-    rsx!(
+    rsx! {
         div { ..props.attributes,{props.children} }
-    )
+    }
 }
 
 #[derive(Clone, PartialEq, Props, UiComp)]
@@ -95,9 +95,9 @@ pub fn TabsTrigger(mut props: TabsTriggerProps) -> Element {
         tab_state.set(TabsState(props.id.read().clone()));
     };
 
-    rsx!(
+    rsx! {
         button { onclick, "data-state": state, ..props.attributes, {props.children} }
-    )
+    }
 }
 
 #[derive(Clone, PartialEq, Props, UiComp)]
@@ -131,7 +131,7 @@ pub fn TabsContent(mut props: TabsContentProps) -> Element {
         false => ("inactive", true),
     };
 
-    rsx!(
+    rsx! {
         div { "data-state": state, hidden: is_hidden, ..props.attributes, {props.children} }
-    )
+    }
 }

@@ -34,7 +34,7 @@ pub fn Toggle(mut props: ToggleProps) -> Element {
         props.onclick.call(event);
     };
 
-    rsx!(
+    rsx! {
         button {
             "data-state": match interior_sig() {
                 true => AttributeValue::Text("active".to_string()),
@@ -44,5 +44,5 @@ pub fn Toggle(mut props: ToggleProps) -> Element {
             onclick,
             ..props.attributes,
         }
-    )
+    }
 }

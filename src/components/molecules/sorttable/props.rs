@@ -390,7 +390,7 @@ pub fn SortTable(mut props: SortTableProps) -> Element {
                                 {
                                     Icon {
                                         class: if state.read().get_sort_ascending() { "fill-foreground transition-all -rotate-180" } else { "fill-foreground transition-all" },
-                                        icon: Icons::ExpandMore
+                                        icon: Icons::ExpandMore,
                                     }
                                 }
                             }

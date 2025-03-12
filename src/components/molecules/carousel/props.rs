@@ -184,10 +184,12 @@ pub fn CarouselContent(mut props: CarouselContentProps) -> Element {
             onresize: move |element| {
                 carousel_state
                     .write()
-                    .set_content_size(match element.data().get_content_box_size() {
-                        Ok(size) => size.width as i32,
-                        Err(_) => 0
-                    });
+                    .set_content_size(
+                        match element.data().get_content_box_size() {
+                            Ok(size) => size.width as i32,
+                            Err(_) => 0,
+                        },
+                    );
             },
             ..props.attributes,
             {props.children}

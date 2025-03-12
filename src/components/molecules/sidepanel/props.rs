@@ -47,7 +47,9 @@ impl std::default::Default for SidePanelProps {
 pub fn SidePanel(props: SidePanelProps) -> Element {
     use_context_provider(|| Signal::new(SidePanelState::new(props.is_active)));
 
-    rsx!({ props.children })
+    rsx! {
+        {props.children}
+    }
 }
 
 #[derive(Clone, PartialEq, Props, UiComp)]
@@ -82,9 +84,9 @@ pub fn SidePanelTrigger(mut props: SidePanelTriggerProps) -> Element {
         props.onclick.call(event)
     };
 
-    rsx!(
+    rsx! {
         div { onclick, ..props.attributes, {props.children} }
-    )
+    }
 }
 
 #[derive(Clone, PartialEq, Props, UiComp)]
@@ -121,7 +123,7 @@ pub fn SidePanelClose(mut props: SidePanelCloseProps) -> Element {
         state.write().toggle();
     };
 
-    rsx!(
+    rsx! {
         div { onclick, ..props.attributes,
             if !has_children {
                 Icon { icon: Icons::Close }
@@ -129,7 +131,7 @@ pub fn SidePanelClose(mut props: SidePanelCloseProps) -> Element {
                 {props.children}
             }
         }
-    )
+    }
 }
 
 #[derive(Clone, PartialEq, Props, UiComp)]

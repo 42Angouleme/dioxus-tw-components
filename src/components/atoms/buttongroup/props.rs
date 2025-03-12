@@ -47,9 +47,9 @@ pub fn ButtonGroup(mut props: ButtonGroupProps) -> Element {
         Signal::new(data)
     });
 
-    rsx!(
+    rsx! {
         div { ..props.attributes,{props.children} }
-    )
+    }
 }
 
 #[derive(Clone, PartialEq, Props, UiComp)]
@@ -105,7 +105,7 @@ pub fn ButtonGroupItem(mut props: ButtonGroupItemProps) -> Element {
     let onmouseleave = move |event| props.onmouseleave.call(event);
     let onfocus = move |event| props.onfocus.call(event);
 
-    rsx!(
+    rsx! {
         button {
             onclick,
             onmouseenter,
@@ -114,5 +114,5 @@ pub fn ButtonGroupItem(mut props: ButtonGroupItemProps) -> Element {
             ..props.attributes,
             {props.children}
         }
-    )
+    }
 }

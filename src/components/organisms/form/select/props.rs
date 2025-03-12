@@ -28,9 +28,9 @@ pub fn SelectGroup(mut props: SelectGroupProps) -> Element {
 
     let oninput = move |event| props.oninput.call(event);
 
-    rsx!(
+    rsx! {
         select { oninput, ..props.attributes, {props.children} }
-    )
+    }
 }
 
 #[derive(Clone, PartialEq, Props, UiComp)]
@@ -53,9 +53,9 @@ impl std::default::Default for SelectPlaceholderProps {
 pub fn SelectPlaceholder(mut props: SelectPlaceholderProps) -> Element {
     props.update_class_attribute();
 
-    rsx!(
+    rsx! {
         option { disabled: true, selected: true, value: r#"{""}"#, {props.children} }
-    )
+    }
 }
 
 #[derive(Default, Clone, PartialEq, Props, UiComp)]
@@ -67,7 +67,9 @@ pub struct SelectLabelProps {
 pub fn SelectLabel(mut props: SelectLabelProps) -> Element {
     props.update_class_attribute();
 
-    rsx!(optgroup { ..props.attributes })
+    rsx! {
+        optgroup { ..props.attributes }
+    }
 }
 
 #[derive(Clone, PartialEq, Props, UiComp)]
@@ -95,12 +97,12 @@ pub fn SelectItem(mut props: SelectItemProps) -> Element {
     props.update_class_attribute();
 
     if let Some(selected) = props.selected {
-        rsx!(
+        rsx! {
             option { selected, ..props.attributes, {props.children} }
-        )
+        }
     } else {
-        rsx!(
+        rsx! {
             option { ..props.attributes,{props.children} }
-        )
+        }
     }
 }

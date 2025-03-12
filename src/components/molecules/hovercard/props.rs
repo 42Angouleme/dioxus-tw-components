@@ -142,7 +142,7 @@ pub fn HoverCard(mut props: HoverCardProps) -> Element {
         });
     };
 
-    rsx!(
+    rsx! {
         div {
             "data-state": state.into_value(),
             onmouseenter,
@@ -150,7 +150,7 @@ pub fn HoverCard(mut props: HoverCardProps) -> Element {
             ..props.attributes,
             {props.children}
         }
-    )
+    }
 }
 
 #[derive(Clone, PartialEq, Props, UiComp)]
@@ -185,7 +185,7 @@ pub fn HoverCardTrigger(mut props: HoverCardTriggerProps) -> Element {
         props.onclick.call(event);
     };
 
-    rsx!(
+    rsx! {
         div {
             role: "button",
             "data-state": state.into_value(),
@@ -193,7 +193,7 @@ pub fn HoverCardTrigger(mut props: HoverCardTriggerProps) -> Element {
             ..props.attributes,
             {props.children}
         }
-    )
+    }
 }
 
 #[derive(Clone, PartialEq, Props, UiComp)]
@@ -222,11 +222,7 @@ pub fn HoverCardContent(mut props: HoverCardContentProps) -> Element {
 
     props.update_class_attribute();
 
-    rsx!(
-        div {
-            "data-state": state.into_value(),
-            ..props.attributes,
-            {props.children}
-        }
-    )
+    rsx! {
+        div { "data-state": state.into_value(), ..props.attributes, {props.children} }
+    }
 }

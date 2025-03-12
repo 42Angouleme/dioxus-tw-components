@@ -22,9 +22,9 @@ impl std::default::Default for TableProps {
 pub fn Table(mut props: TableProps) -> Element {
     props.update_class_attribute();
 
-    rsx!(
+    rsx! {
         table { ..props.attributes,{props.children} }
-    )
+    }
 }
 
 #[derive(Clone, PartialEq, Props, UiComp)]
@@ -47,9 +47,9 @@ impl std::default::Default for TableHeaderProps {
 pub fn TableHeader(mut props: TableHeaderProps) -> Element {
     props.update_class_attribute();
 
-    rsx!(
+    rsx! {
         thead { ..props.attributes,{props.children} }
-    )
+    }
 }
 
 #[derive(Clone, PartialEq, Props, UiComp)]
@@ -72,9 +72,9 @@ impl std::default::Default for TableBodyProps {
 pub fn TableBody(mut props: TableBodyProps) -> Element {
     props.update_class_attribute();
 
-    rsx!(
+    rsx! {
         tbody { ..props.attributes,{props.children} }
-    )
+    }
 }
 
 #[derive(Clone, PartialEq, Props, UiComp)]
@@ -97,9 +97,9 @@ impl std::default::Default for TableFooterProps {
 pub fn TableFooter(mut props: TableFooterProps) -> Element {
     props.update_class_attribute();
 
-    rsx!(
+    rsx! {
         tfoot { ..props.attributes,{props.children} }
-    )
+    }
 }
 
 #[derive(Clone, PartialEq, Props, UiComp)]
@@ -128,9 +128,9 @@ pub fn TableHead(mut props: TableHeadProps) -> Element {
 
     let onclick = move |event| props.onclick.call(event);
 
-    rsx!(
+    rsx! {
         th { onclick, ..props.attributes, {props.children} }
-    )
+    }
 }
 
 #[derive(Clone, PartialEq, Props, UiComp)]
@@ -153,9 +153,9 @@ impl std::default::Default for TableRowProps {
 pub fn TableRow(mut props: TableRowProps) -> Element {
     props.update_class_attribute();
 
-    rsx!(
+    rsx! {
         tr { ..props.attributes,{props.children} }
-    )
+    }
 }
 
 #[derive(Clone, PartialEq, Props, UiComp)]
@@ -178,9 +178,9 @@ impl std::default::Default for TableCellProps {
 pub fn TableCell(mut props: TableCellProps) -> Element {
     props.update_class_attribute();
 
-    rsx!(
+    rsx! {
         td { ..props.attributes,{props.children} }
-    )
+    }
 }
 
 #[derive(Clone, PartialEq, Props, UiComp)]
@@ -203,7 +203,7 @@ impl std::default::Default for TableCaptionProps {
 pub fn TableCaption(mut props: TableCaptionProps) -> Element {
     props.update_class_attribute();
 
-    rsx!(
+    rsx! {
         caption { ..props.attributes,{props.children} }
-    )
+    }
 }
