@@ -35,7 +35,7 @@ impl Class for ModalContentProps {
 
 impl Class for ModalBackgroundProps {
     fn base(&self) -> &'static str {
-        "w-full h-full top-0 left-0 z-40 opacity-75 fixed data-[state=inactive]:invisible"
+        "w-full h-full top-0 left-0 z-40 opacity-15 fixed data-[state=inactive]:invisible"
     }
 
     fn color(&self) -> Option<&'static str> {

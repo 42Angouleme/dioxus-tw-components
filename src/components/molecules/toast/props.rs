@@ -29,14 +29,14 @@ pub fn Toaster(mut props: ToasterProps) -> Element {
     let state =
         use_context_provider::<Signal<ToasterState>>(|| Signal::new(ToasterState::default()));
 
-    rsx!(
+    rsx! {
         {props.children}
         ol { role: "alert", id: "dx-toast", ..props.attributes,
             if let Some(toast) = &state.read().toast {
                 ToastView { state, toast: toast.clone() }
             }
         }
-    )
+    }
 }
 
 pub trait ToastRenderer {
@@ -338,7 +338,7 @@ fn ToastView(mut state: Signal<ToasterState>, toast: ReadOnlySignal<Toast>) -> E
 /// The Timeout is there to let the animation some time to play
 #[component]
 fn ToastClose(mut state: Signal<ToasterState>, mut toast_state: Signal<ToastState>) -> Element {
-    rsx!(
+    rsx! {
         button {
             class: "absolute top-4 right-4 rounded-global-radius hidden group-hover:block transition-colors focus:outline-hidden focus:ring-3 focus:ring-foreground",
             r#type: "button",
@@ -351,14 +351,18 @@ fn ToastClose(mut state: Signal<ToasterState>, mut toast_state: Signal<ToastStat
                     }
                     #[cfg(not(target_arch = "wasm32"))]
                     {
-                        let _ = tokio::time::timeout(std::time::Duration::from_millis(150), async {}).await;
+                        let _ = tokio::time::timeout(
+                                std::time::Duration::from_millis(150),
+                                async {},
+                            )
+                            .await;
                     }
                     state.set(ToasterState::default());
                 });
             },
             Icon { size: Size::Xs, icon: Icons::Close }
         }
-    )
+    }
 }
 
 /// Hook that returns the ToasterState to spawn a Toast

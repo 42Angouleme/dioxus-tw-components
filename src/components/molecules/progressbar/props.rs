@@ -29,9 +29,9 @@ impl std::default::Default for ProgressBarProps {
 pub fn ProgressBar(mut props: ProgressBarProps) -> Element {
     props.update_class_attribute();
 
-    rsx!(
+    rsx! {
         div { ..props.attributes,{props.children} }
-    )
+    }
 }
 
 #[derive(Clone, PartialEq, Props, UiComp)]
@@ -68,11 +68,11 @@ pub fn ProgressBarInner(mut props: ProgressBarInnerProps) -> Element {
         props.progress
     };
 
-    rsx!(
+    rsx! {
         div { style: "width: {progress}%", ..props.attributes,
             div { {props.children} }
         }
-    )
+    }
 }
 
 #[derive(Clone, PartialEq, Props, UiComp)]
@@ -102,12 +102,12 @@ impl std::default::Default for ProgressLabelProps {
 pub fn ProgressLabel(mut props: ProgressLabelProps) -> Element {
     props.update_class_attribute();
 
-    rsx!(
+    rsx! {
         span {..props.attributes,
             "{props.progress.to_string()}"
             if props.show_percentage {
                 "%"
             }
         }
-    )
+    }
 }

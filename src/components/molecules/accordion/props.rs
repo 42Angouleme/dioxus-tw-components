@@ -66,7 +66,7 @@ impl std::default::Default for AccordionProps {
 /// The Accordion component divides the content into collapsible items \
 /// Usage:
 /// ```ignore
-/// rsx!(Accordion {
+/// rsx!{Accordion {
 ///     AccordionItem {
 ///         AccordionTrigger { id: "acc-1", "Trigger 1" }
 ///         AccordionContent { id: "acc-1", "Content 1" }
@@ -75,16 +75,16 @@ impl std::default::Default for AccordionProps {
 ///         AccordionTrigger { id: "acc-2", "Trigger 2" }
 ///         AccordionContent { id: "acc-2", "Content 2" }
 ///     }
-/// })
+/// }}
 /// ```
 pub fn Accordion(mut props: AccordionProps) -> Element {
     use_context_provider(|| Signal::new(AccordionState::new(props.multi_open)));
 
     props.update_class_attribute();
 
-    rsx!(
+    rsx! {
         div { ..props.attributes,{props.children} }
-    )
+    }
 }
 
 #[derive(Clone, PartialEq, Props, UiComp)]
@@ -108,9 +108,9 @@ impl std::default::Default for AccordionItemProps {
 pub fn AccordionItem(mut props: AccordionItemProps) -> Element {
     props.update_class_attribute();
 
-    rsx!(
+    rsx! {
         div { ..props.attributes,{props.children} }
-    )
+    }
 }
 
 #[derive(Clone, PartialEq, Props, UiComp)]
@@ -186,8 +186,9 @@ pub fn AccordionTrigger(mut props: AccordionTriggerProps) -> Element {
 
 fn default_trigger_decoration() -> Element {
     rsx! {
-        Icon { class: "transition-transform transform duration-300 group-data-[state=active]:-rotate-180",
-            icon: Icons::ExpandMore
+        Icon {
+            class: "transition-transform transform duration-300 group-data-[state=active]:-rotate-180",
+            icon: Icons::ExpandMore,
         }
     }
 }
@@ -231,21 +232,26 @@ pub fn AccordionContent(mut props: AccordionContentProps) -> Element {
         false => "0".to_string(),
     };
 
-    rsx!(
+    rsx! {
         div {
             onmounted: move |element| async move {
                 if props.animation == Animation::None {
                     elem_height.set("auto".to_string());
                     return;
                 }
-
-                elem_height.set(match element.data().get_scroll_size().await {
-                    Ok(size) => format!("{}px", size.height),
-                    Err(e) => {
-                        log::error!("AccordionContent: Failed to get element height(id probably not set): setting it to auto: {:?}", e);
-                        "auto".to_string()
-                    }
-                });
+                elem_height
+                    .set(
+                        match element.data().get_scroll_size().await {
+                            Ok(size) => format!("{}px", size.height),
+                            Err(e) => {
+                                log::error!(
+                                    "AccordionContent: Failed to get element height(id probably not set): setting it to auto: {:?}",
+                                    e
+                                );
+                                "auto".to_string()
+                            }
+                        },
+                    );
             },
             "data-state": state.read().is_active_to_attr_value(props.id.read().to_string()),
             id: props.id,
@@ -253,5 +259,5 @@ pub fn AccordionContent(mut props: AccordionContentProps) -> Element {
             ..props.attributes,
             {props.children}
         }
-    )
+    }
 }

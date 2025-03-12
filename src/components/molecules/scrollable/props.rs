@@ -26,7 +26,7 @@ impl std::default::Default for ScrollableProps {
 pub fn Scrollable(mut props: ScrollableProps) -> Element {
     props.update_class_attribute();
 
-    rsx!(
+    rsx! {
         div { ..props.attributes,{props.children} }
-    )
+    }
 }

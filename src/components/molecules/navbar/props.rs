@@ -22,7 +22,7 @@ impl std::default::Default for NavbarProps {
 pub fn Navbar(mut props: NavbarProps) -> Element {
     props.update_class_attribute();
 
-    rsx!(
+    rsx! {
         nav { ..props.attributes,{props.children} }
-    )
+    }
 }

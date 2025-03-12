@@ -25,7 +25,7 @@ pub fn Slider(mut props: SliderProps) -> Element {
 
     let onmounted = move |event: Event<MountedData>| props.onmounted.call(event);
 
-    rsx!(
+    rsx! {
         input {
             onmounted,
             oninput,
@@ -33,7 +33,7 @@ pub fn Slider(mut props: SliderProps) -> Element {
             value: props.value,
             ..props.attributes,
         }
-    )
+    }
 }
 
 #[derive(Clone, PartialEq, Props, UiComp)]
@@ -63,7 +63,7 @@ impl std::default::Default for SliderTicksProps {
 pub fn SliderTicks(mut props: SliderTicksProps) -> Element {
     props.update_class_attribute();
 
-    rsx!(
+    rsx! {
         datalist {..props.attributes,
             for i in props.min..props.max {
                 if i % props.step == 0 {
@@ -72,7 +72,7 @@ pub fn SliderTicks(mut props: SliderTicksProps) -> Element {
             }
             option { value: props.max }
         }
-    )
+    }
 }
 
 #[derive(Clone, PartialEq, Props, UiComp)]
@@ -99,11 +99,11 @@ impl std::default::Default for SliderLabelProps {
 pub fn SliderLabel(mut props: SliderLabelProps) -> Element {
     props.update_class_attribute();
 
-    rsx!(
+    rsx! {
         div {..props.attributes,
             {props.value.to_string()}
             " / "
             {props.max.to_string()}
         }
-    )
+    }
 }

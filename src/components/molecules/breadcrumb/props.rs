@@ -32,9 +32,9 @@ impl std::default::Default for BreadcrumbProps {
 pub fn Breadcrumb(mut props: BreadcrumbProps) -> Element {
     props.update_class_attribute();
 
-    rsx!(
+    rsx! {
         ol { ..props.attributes,{props.children} }
-    )
+    }
 }
 
 #[derive(Clone, PartialEq, Props, UiComp)]
@@ -57,9 +57,9 @@ impl std::default::Default for BreadcrumbItemProps {
 pub fn BreadcrumbItem(mut props: BreadcrumbItemProps) -> Element {
     props.update_class_attribute();
 
-    rsx!(
+    rsx! {
         li { ..props.attributes,{props.children} }
-    )
+    }
 }
 
 #[derive(Clone, PartialEq, Props, UiComp)]
@@ -82,7 +82,7 @@ impl std::default::Default for BreadcrumbSeparatorProps {
 pub fn BreadcrumbSeparator(mut props: BreadcrumbSeparatorProps) -> Element {
     props.update_class_attribute();
 
-    rsx!(
+    rsx! {
         li { aria_hidden: "true", ..props.attributes,
             if props.children == rsx! {} {
                 "\u{203A}"
@@ -90,5 +90,5 @@ pub fn BreadcrumbSeparator(mut props: BreadcrumbSeparatorProps) -> Element {
                 {props.children}
             }
         }
-    )
+    }
 }

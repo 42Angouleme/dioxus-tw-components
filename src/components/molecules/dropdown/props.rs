@@ -107,7 +107,7 @@ pub fn Dropdown(mut props: DropdownProps) -> Element {
 
     props.update_class_attribute();
 
-    rsx!(
+    rsx! {
         div { "data-state": state.read().into_value(), ..props.attributes, {props.children} }
         if state.read().get_is_active() {
             div {
@@ -117,7 +117,7 @@ pub fn Dropdown(mut props: DropdownProps) -> Element {
                 },
             }
         }
-    )
+    }
 }
 
 #[derive(Clone, PartialEq, Props, UiComp)]
@@ -156,7 +156,7 @@ pub fn DropdownToggle(mut props: DropdownToggleProps) -> Element {
         on_mouse_enter(state);
     };
 
-    rsx!(
+    rsx! {
         div {
             role: "button",
             "data-state": state.read().into_value(),
@@ -166,7 +166,7 @@ pub fn DropdownToggle(mut props: DropdownToggleProps) -> Element {
             ..props.attributes,
             {props.children}
         }
-    )
+    }
 }
 
 #[derive(Clone, PartialEq, Props, UiComp)]
@@ -203,7 +203,7 @@ pub fn DropdownContent(mut props: DropdownContentProps) -> Element {
         on_mouse_enter(state);
     };
 
-    rsx!(
+    rsx! {
         div {
             "data-state": state.read().into_value(),
             onmouseleave,
@@ -211,7 +211,7 @@ pub fn DropdownContent(mut props: DropdownContentProps) -> Element {
             ..props.attributes,
             {props.children}
         }
-    )
+    }
 }
 
 fn on_mouse_leave(mut state: Signal<DropdownState>) {

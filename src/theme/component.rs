@@ -6,9 +6,9 @@ pub fn ThemePicker() -> Element {
     rsx! {
         SidePanel {
             MiniPicker {}
-            SidePanelBackground { class: "opacity-15" }
+            SidePanelBackground { class: "z-998" }
             SidePanelContent {
-                class: "h-full min-w-0 w-full sm:w-1/2 xl:w-1/3 p-0 z-999",
+                class: "h-screen min-w-0 w-full sm:w-120 p-0 sm:px-8 z-999",
                 side: Side::Right,
                 ColorPicker {}
             }
@@ -68,15 +68,13 @@ fn ColorPicker() -> Element {
 
     rsx! {
         SidePanelClose {}
-        div { class: "flex flex-col items-start h-full mt-14 py-auto pb-4 px-2 sm:px-4 space-y-2",
+        div { class: "flex flex-col items-start overflow-auto h-full mt-20 py-auto px-2 sm:px-4 space-y-2",
             Input {
                 role: "button",
                 id: "color-picker-input",
                 r#type: "color",
+                class: "hidden",
                 oninput,
-            }
-            p { class: "text-sm font-medium",
-                "Selected: {theme_manager.read().themes[current_theme].name} {selected_color.read().to_string()}"
             }
             for (str , color) in theme_manager.read().themes[current_theme].colors.iter() {
                 ColorSelector {
@@ -228,9 +226,9 @@ fn MiniPicker() -> Element {
     let current_theme = theme_manager.read().current_theme;
 
     rsx! {
-        div { class: "fixed right-0 top-14 md:top-[40%] rounded-global-radius border bg-background border-border flex flex-col p-2 items-center space-y-2 z-500",
-            SidePanelTrigger { class: "p-0 border-none shadow-none hover:bg-inherit bg-inherit",
-                Icon { icon: Icons::ChevronLeft }
+        div { class: "flex flex-row p-2 items-center space-x-4",
+            SidePanelTrigger { class: "border-none shadow-none bg-inherit cursor-pointer p-1 rounded-global-radius hover:bg-foreground/40 active:bg-foreground/60",
+                Icon { icon: Icons::Palette }
             }
             LightSwitch {
                 class: "cursor-pointer p-1 rounded-global-radius hover:bg-foreground/40 active:bg-foreground/60",

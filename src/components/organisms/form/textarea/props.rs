@@ -25,12 +25,12 @@ pub fn TextArea(mut props: TextAreaProps) -> Element {
 
     let onmounted = move |event: Event<MountedData>| props.onmounted.call(event);
 
-    rsx!(
+    rsx! {
         textarea {
             onmounted,
             oninput,
             value: props.value,
             ..props.attributes.clone(),
         }
-    )
+    }
 }

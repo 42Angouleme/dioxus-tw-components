@@ -13,9 +13,9 @@ pub struct MainTemplateProps {
 pub fn MainTemplate(mut props: MainTemplateProps) -> Element {
     props.update_class_attribute();
 
-    rsx!(
+    rsx! {
         div { ..props.attributes,{props.children} }
-    )
+    }
 }
 
 impl Class for MainTemplateProps {}
