@@ -120,7 +120,7 @@ pub fn SidePanelClose(mut props: SidePanelCloseProps) -> Element {
 
     let onclick = move |event: Event<MouseData>| {
         event.stop_propagation();
-        state.write().toggle();
+        state.write().is_active = false;
     };
 
     rsx! {
@@ -207,7 +207,7 @@ pub fn SidePanelBackground(mut props: SidePanelBackgroundProps) -> Element {
     let onclick = move |event: Event<MouseData>| {
         event.stop_propagation();
         if props.interactive {
-            state.write().toggle();
+            state.write().is_active = false;
             props.onclick.call(event)
         }
     };
