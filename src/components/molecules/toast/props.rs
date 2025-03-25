@@ -99,7 +99,7 @@ impl ToastRenderer for Signal<ToasterState> {
         if shape.color == Color::default() {
             shape = shape.color(Color::Success);
         }
-        if shape.description == rsx! {} {
+        if shape.description == Ok(VNode::default()) {
             shape = shape.description(rsx! {
                 p { "{description.to_string()}" }
             });
@@ -120,7 +120,7 @@ impl ToastRenderer for Signal<ToasterState> {
         if shape.color == Color::default() {
             shape = shape.color(Color::Destructive);
         }
-        if shape.description == rsx! {} {
+        if shape.description == Ok(VNode::default()) {
             shape = shape.description(rsx! {
                 p { "{description.to_string()}" }
             });
@@ -141,7 +141,7 @@ impl ToastRenderer for Signal<ToasterState> {
         if shape.color == Color::default() {
             shape = shape.color(Color::Primary);
         }
-        if shape.description == rsx! {} {
+        if shape.description == Ok(VNode::default()) {
             shape = shape.description(rsx! {
                 p { "{description.to_string()}" }
             });
@@ -186,7 +186,7 @@ impl std::default::Default for Toast {
         Self {
             id: use_unique_id(),
             title: String::default(),
-            description: rsx! {},
+            description: Ok(VNode::default()), // Default this way to be able to check the children
             duration_in_ms: 6_000,
             is_closable: true,
             color: Color::default(),
