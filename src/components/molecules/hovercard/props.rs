@@ -118,14 +118,13 @@ pub fn HoverCard(mut props: HoverCardProps) -> Element {
             }
             #[cfg(not(target_arch = "wasm32"))]
             {
-                let _ = tokio::time::timeout(
+                let _ = tokio::time::sleep(
                     std::time::Duration::from_millis(
                         closing_delay_ms
                             .num_milliseconds()
                             .try_into()
                             .unwrap_or_default(),
-                    ),
-                    async {},
+                    )
                 )
                 .await;
             }

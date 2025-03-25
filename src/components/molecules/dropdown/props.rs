@@ -236,14 +236,13 @@ fn on_mouse_leave(mut state: Signal<DropdownState>) {
         }
         #[cfg(not(target_arch = "wasm32"))]
         {
-            let _ = tokio::time::timeout(
+            let _ = tokio::time::sleep(
                 std::time::Duration::from_millis(
                     closing_delay
                         .num_milliseconds()
                         .try_into()
                         .unwrap_or_default(),
-                ),
-                async {},
+                )
             )
             .await;
         }
