@@ -96,7 +96,7 @@ impl ToastRenderer for Signal<ToasterState> {
         toast = toast
             .title(String::from("Success"))
             .color(Color::Success)
-            .description(rsx!{
+            .description(rsx! {
                 p { "{description.to_string()}" }
             });
         self.set(ToasterState {
@@ -112,7 +112,7 @@ impl ToastRenderer for Signal<ToasterState> {
         toast = toast
             .title(String::from("Error"))
             .color(Color::Destructive)
-            .description(rsx!{
+            .description(rsx! {
                 p { "{description.to_string()}" }
             });
         self.set(ToasterState {
@@ -128,7 +128,7 @@ impl ToastRenderer for Signal<ToasterState> {
         toast = toast
             .title(String::from("Loading"))
             .color(Color::Primary)
-            .description(rsx!{
+            .description(rsx! {
                 p { "{description.to_string()}" }
             });
         self.set(ToasterState {
@@ -267,7 +267,10 @@ fn ToastView(mut state: Signal<ToasterState>, toast: ReadOnlySignal<Toast>) -> E
             }
             #[cfg(not(target_arch = "wasm32"))]
             {
-                let _ = tokio::time::sleep(std::time::Duration::from_millis((duration_in_ms - animation_play_time) as u64)).await;
+                let _ = tokio::time::sleep(std::time::Duration::from_millis(
+                    (duration_in_ms - animation_play_time) as u64,
+                ))
+                .await;
             }
 
             toast_state.set(ToastState::Closing);
@@ -277,7 +280,10 @@ fn ToastView(mut state: Signal<ToasterState>, toast: ReadOnlySignal<Toast>) -> E
             }
             #[cfg(not(target_arch = "wasm32"))]
             {
-                let _ = tokio::time::sleep(std::time::Duration::from_millis(animation_play_time as u64)).await;
+                let _ = tokio::time::sleep(std::time::Duration::from_millis(
+                    animation_play_time as u64,
+                ))
+                .await;
             }
         } else {
             #[cfg(target_arch = "wasm32")]
@@ -286,7 +292,8 @@ fn ToastView(mut state: Signal<ToasterState>, toast: ReadOnlySignal<Toast>) -> E
             }
             #[cfg(not(target_arch = "wasm32"))]
             {
-                let _ = tokio::time::sleep(std::time::Duration::from_millis(duration_in_ms as u64)).await;
+                let _ = tokio::time::sleep(std::time::Duration::from_millis(duration_in_ms as u64))
+                    .await;
             }
         }
 
