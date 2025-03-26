@@ -92,7 +92,12 @@ impl ToastRenderer for Signal<ToasterState> {
     /// Build a toast with success background color and title "Success"
     /// The string passed as argument will be the description of the Toast
     fn success(&mut self, description: impl ToString) {
-        let mut toast = Toast::default();
+        let toast = Toast::default()
+            .title(String::from("Success"))
+            .color(Color::Success)
+            .description(rsx! {
+                p { "{description.to_string()}" }
+            });
         toast = toast
             .title(String::from("Success"))
             .color(Color::Success)
