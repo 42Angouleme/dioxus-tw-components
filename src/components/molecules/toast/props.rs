@@ -92,20 +92,14 @@ impl ToastRenderer for Signal<ToasterState> {
     /// Build a toast with success background color and title "Success"
     /// The string passed as argument will be the description of the Toast
     fn success(&mut self, description: impl ToString) {
-        let mut shape = self.read().shape.clone();
-        if shape.title == String::new() {
-            shape = shape.title(String::from("Success"));
-        }
-        if shape.color == Color::default() {
-            shape = shape.color(Color::Success);
-        }
-        if shape.description == rsx! {} {
-            shape = shape.description(rsx! {
+        let toast = Toast::default()
+            .title(String::from("Success"))
+            .color(Color::Success)
+            .description(rsx! {
                 p { "{description.to_string()}" }
             });
-        }
         self.set(ToasterState {
-            toast: Some(shape),
+            toast: Some(toast),
             shape: Toast::default(),
         });
     }
@@ -113,20 +107,14 @@ impl ToastRenderer for Signal<ToasterState> {
     /// Build a toast with destructive background color and title "Error"
     /// The string passed as argument will be the description of the Toast
     fn error(&mut self, description: impl ToString) {
-        let mut shape = self.read().shape.clone();
-        if shape.title == String::new() {
-            shape = shape.title(String::from("Error"));
-        }
-        if shape.color == Color::default() {
-            shape = shape.color(Color::Destructive);
-        }
-        if shape.description == rsx! {} {
-            shape = shape.description(rsx! {
+        let toast = Toast::default()
+            .title(String::from("Error"))
+            .color(Color::Destructive)
+            .description(rsx! {
                 p { "{description.to_string()}" }
             });
-        }
         self.set(ToasterState {
-            toast: Some(shape),
+            toast: Some(toast),
             shape: Toast::default(),
         });
     }
@@ -134,20 +122,14 @@ impl ToastRenderer for Signal<ToasterState> {
     /// Build a toast with primary background color and title "Loading"
     /// The string passed as argument will be the description of the Toast
     fn loading(&mut self, description: impl ToString) {
-        let mut shape = self.read().shape.clone();
-        if shape.title == String::new() {
-            shape = shape.title(String::from("Loading"));
-        }
-        if shape.color == Color::default() {
-            shape = shape.color(Color::Primary);
-        }
-        if shape.description == rsx! {} {
-            shape = shape.description(rsx! {
+        let toast = Toast::default()
+            .title(String::from("Loading"))
+            .color(Color::Primary)
+            .description(rsx! {
                 p { "{description.to_string()}" }
             });
-        }
         self.set(ToasterState {
-            toast: Some(shape),
+            toast: Some(toast),
             shape: Toast::default(),
         });
     }
@@ -186,7 +168,7 @@ impl std::default::Default for Toast {
         Self {
             id: use_unique_id(),
             title: String::default(),
-            description: rsx! {},
+            description: Ok(VNode::default()), // Default this way to be able to check the children
             duration_in_ms: 6_000,
             is_closable: true,
             color: Color::default(),
@@ -271,7 +253,7 @@ fn ToastView(mut state: Signal<ToasterState>, toast: ReadOnlySignal<Toast>) -> E
             }
             #[cfg(not(target_arch = "wasm32"))]
             {
-                let _ = tokio::time::timeout(std::time::Duration::from_millis(10), async {}).await;
+                let _ = tokio::time::sleep(std::time::Duration::from_millis(10)).await;
             }
             toast_state.set(ToastState::Open);
 
@@ -282,10 +264,9 @@ fn ToastView(mut state: Signal<ToasterState>, toast: ReadOnlySignal<Toast>) -> E
             }
             #[cfg(not(target_arch = "wasm32"))]
             {
-                let _ = tokio::time::timeout(
-                    std::time::Duration::from_millis((duration_in_ms - animation_play_time) as u64),
-                    async {},
-                )
+                let _ = tokio::time::sleep(std::time::Duration::from_millis(
+                    (duration_in_ms - animation_play_time) as u64,
+                ))
                 .await;
             }
 
@@ -296,10 +277,9 @@ fn ToastView(mut state: Signal<ToasterState>, toast: ReadOnlySignal<Toast>) -> E
             }
             #[cfg(not(target_arch = "wasm32"))]
             {
-                let _ = tokio::time::timeout(
-                    std::time::Duration::from_millis(animation_play_time as u64),
-                    async {},
-                )
+                let _ = tokio::time::sleep(std::time::Duration::from_millis(
+                    animation_play_time as u64,
+                ))
                 .await;
             }
         } else {
@@ -309,11 +289,8 @@ fn ToastView(mut state: Signal<ToasterState>, toast: ReadOnlySignal<Toast>) -> E
             }
             #[cfg(not(target_arch = "wasm32"))]
             {
-                let _ = tokio::time::timeout(
-                    std::time::Duration::from_millis(duration_in_ms as u64),
-                    async {},
-                )
-                .await;
+                let _ = tokio::time::sleep(std::time::Duration::from_millis(duration_in_ms as u64))
+                    .await;
             }
         }
 
@@ -351,11 +328,7 @@ fn ToastClose(mut state: Signal<ToasterState>, mut toast_state: Signal<ToastStat
                     }
                     #[cfg(not(target_arch = "wasm32"))]
                     {
-                        let _ = tokio::time::timeout(
-                                std::time::Duration::from_millis(150),
-                                async {},
-                            )
-                            .await;
+                        let _ = tokio::time::sleep(std::time::Duration::from_millis(150)).await;
                     }
                     state.set(ToasterState::default());
                 });
