@@ -98,12 +98,6 @@ impl ToastRenderer for Signal<ToasterState> {
             .description(rsx! {
                 p { "{description.to_string()}" }
             });
-        toast = toast
-            .title(String::from("Success"))
-            .color(Color::Success)
-            .description(rsx! {
-                p { "{description.to_string()}" }
-            });
         self.set(ToasterState {
             toast: Some(toast),
             shape: Toast::default(),
@@ -113,8 +107,7 @@ impl ToastRenderer for Signal<ToasterState> {
     /// Build a toast with destructive background color and title "Error"
     /// The string passed as argument will be the description of the Toast
     fn error(&mut self, description: impl ToString) {
-        let mut toast = Toast::default();
-        toast = toast
+        let toast = Toast::default()
             .title(String::from("Error"))
             .color(Color::Destructive)
             .description(rsx! {
@@ -129,8 +122,7 @@ impl ToastRenderer for Signal<ToasterState> {
     /// Build a toast with primary background color and title "Loading"
     /// The string passed as argument will be the description of the Toast
     fn loading(&mut self, description: impl ToString) {
-        let mut toast = Toast::default();
-        toast = toast
+        let toast = Toast::default()
             .title(String::from("Loading"))
             .color(Color::Primary)
             .description(rsx! {
