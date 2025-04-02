@@ -25,6 +25,9 @@ pub use modal::{Modal, ModalBackground, ModalClose, ModalContent, ModalTrigger};
 mod navbar;
 pub use navbar::Navbar;
 
+pub mod pagination;
+pub use pagination::Pagination;
+
 pub mod progressbar;
 pub use progressbar::{ProgressBar, ProgressBarInner, ProgressLabel};
 
