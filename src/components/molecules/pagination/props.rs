@@ -6,23 +6,13 @@ use crate::{
     attributes::*,
 };
 
-#[derive(Clone, PartialEq, Props, UiComp)]
+#[derive(Clone, PartialEq, Default, Props, UiComp)]
 pub struct PaginationProps {
     #[props(into)]
     pub data_size: ReadOnlySignal<usize>,
     #[props(into)]
     pub page_size: ReadOnlySignal<usize>,
     pub page_number: Signal<usize>,
-}
-
-impl std::default::Default for PaginationProps {
-    fn default() -> Self {
-        Self {
-            data_size: ReadOnlySignal::<usize>::default(),
-            page_size: ReadOnlySignal::<usize>::default(),
-            page_number: Signal::<usize>::default(),
-        }
-    }
 }
 
 #[component]
@@ -49,7 +39,7 @@ pub fn Pagination(mut props: PaginationProps) -> Element {
                 }
                 p { class: "text-center h-9 px-2 py-2", "..." }
             }
-            for page in (std::cmp::max(1 as isize, *props.page_number.read() as isize - 1) as usize)..=std::cmp::min(*max_pages.read(), *props.page_number.read() + 1) {
+            for page in (std::cmp::max(1_isize, *props.page_number.read() as isize - 1) as usize)..=std::cmp::min(*max_pages.read(), *props.page_number.read() + 1) {
                 Button {
                     disabled: *props.page_number.read() == page,
                     onclick: move |_event: MouseEvent| {
