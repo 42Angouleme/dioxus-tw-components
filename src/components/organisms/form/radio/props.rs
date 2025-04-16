@@ -24,11 +24,13 @@ pub fn Radio(mut props: RadioProps) -> Element {
     let oninput = move |event| props.oninput.call(event);
 
     rsx! {
-        input {
-            r#type: "radio",
-            checked: props.checked,
-            oninput,
-            ..props.attributes,
+        div { class: "flex items-center",
+            input {
+                r#type: "radio",
+                checked: props.checked,
+                oninput,
+                ..props.attributes,
+            }
         }
     }
 }

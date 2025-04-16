@@ -1,4 +1,6 @@
 use crate::attributes::*;
+use crate::prelude::{Icon, Icons};
+use dioxus::dioxus_core::AttributeValue;
 use dioxus::prelude::*;
 use dioxus_tw_components_macro::UiComp;
 
@@ -29,7 +31,11 @@ pub fn SelectGroup(mut props: SelectGroupProps) -> Element {
     let oninput = move |event| props.oninput.call(event);
 
     rsx! {
-        select { oninput, ..props.attributes, {props.children} }
+        select {
+            oninput,
+            ..props.attributes,
+            {props.children}
+        }
     }
 }
 

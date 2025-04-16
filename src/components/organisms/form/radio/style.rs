@@ -4,7 +4,7 @@ use dioxus::prelude::*;
 
 impl Class for RadioProps {
     fn base(&self) -> &'static str {
-        "peer"
+        "appearance-none w-3 h-3 border-2 border-foreground cursor-pointer checked:bg-foreground rounded-full peer"
     }
 
     fn color(&self) -> Option<&'static str> {
