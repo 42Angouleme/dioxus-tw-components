@@ -1,6 +1,11 @@
 use dioxus::prelude::*;
 use dioxus_tw_components_macro::UiComp;
 
+use std::string::String;
+use tailwind_fuse::tw_merge;
+
+use crate::prelude::ButtonVariant;
+
 use crate::{
     atoms::{Button, Icon, Icons},
     attributes::*,
@@ -8,6 +13,18 @@ use crate::{
 
 #[derive(Clone, PartialEq, Default, Props, UiComp)]
 pub struct PaginationProps {
+    #[props(optional, default)]
+    pub class: ReadOnlySignal<String>,
+    #[props(optional, default)]
+    pub style: ReadOnlySignal<String>,
+
+    #[props(optional, default)]
+    pub color: ReadOnlySignal<Color>,
+    #[props(optional, default)]
+    pub size: ReadOnlySignal<Size>,
+    #[props(optional, default)]
+    pub variant: ReadOnlySignal<ButtonVariant>,
+
     #[props(into)]
     pub data_size: ReadOnlySignal<usize>,
     #[props(into)]
@@ -31,16 +48,26 @@ pub fn Pagination(mut props: PaginationProps) -> Element {
         rsx! {
             if prev_dots {
                 Button {
+                    class: props.class,
+                    style: props.style,
+                    color: props.color,
+                    size: props.size,
+                    variant: props.variant,
                     disabled: *props.page_number.read() == 1,
                     onclick: move |_event: MouseEvent| {
                         props.page_number.set(1);
                     },
-                p { "1" }
+                    p { "1" }
                 }
                 p { class: "text-center h-9 px-2 py-2", "..." }
             }
             for page in (std::cmp::max(1_isize, *props.page_number.read() as isize - 1) as usize)..=std::cmp::min(*max_pages.read(), *props.page_number.read() + 1) {
                 Button {
+                    class: props.class,
+                    style: props.style,
+                    color: props.color,
+                    size: props.size,
+                    variant: props.variant,
                     disabled: *props.page_number.read() == page,
                     onclick: move |_event: MouseEvent| {
                         props.page_number.set(page);
@@ -51,6 +78,11 @@ pub fn Pagination(mut props: PaginationProps) -> Element {
             if next_dots {
                 p { class: "text-center h-9 px-2 py-2", "..." }
                 Button {
+                    class: props.class,
+                    style: props.style,
+                    color: props.color,
+                    size: props.size,
+                    variant: props.variant,
                     disabled: *props.page_number.read() == *max_pages.read(),
                     onclick: move |_event: MouseEvent| {
                         props.page_number.set(*max_pages.peek());
@@ -63,22 +95,32 @@ pub fn Pagination(mut props: PaginationProps) -> Element {
 
     rsx! {
         div { class: "flex flex-row gap-2 justify-center items-center",
-            Button { class: "flex justify-center items-center",
+            Button {
+                class: tw_merge!("flex justify-center items-center", props.class.read()),
+                style: props.style,
+                color: props.color,
+                size: props.size,
+                variant: props.variant,
                 disabled: *props.page_number.read() == 1,
-                    onclick: move |_event: MouseEvent| {
-                        let value = *props.page_number.peek();
-                        props.page_number.set(value - 1);
-                    },
+                onclick: move |_event: MouseEvent| {
+                    let value = *props.page_number.peek();
+                    props.page_number.set(value - 1);
+                },
                 Icon {icon: Icons::ArrowLeft}
                 p { "Previous" }
             }
             {page_selector}
-            Button { class: "flex justify-center items-center",
+            Button {
+                class: tw_merge!("flex justify-center items-center", props.class.read()),
+                style: props.style,
+                color: props.color,
+                size: props.size,
+                variant: props.variant,
                 disabled: *props.page_number.read() == *max_pages.read(),
-                    onclick: move |_event: MouseEvent| {
-                        let value = *props.page_number.peek();
-                        props.page_number.set(value + 1);
-                    },
+                onclick: move |_event: MouseEvent| {
+                    let value = *props.page_number.peek();
+                    props.page_number.set(value + 1);
+                },
                 p { "Next" }
                 Icon {icon: Icons::ArrowRight}
             }
