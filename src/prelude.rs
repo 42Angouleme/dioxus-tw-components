@@ -18,6 +18,7 @@ pub use crate::components::molecules::{HoverCard, HoverCardContent, HoverCardTri
 pub use crate::components::molecules::{
     Modal, ModalBackground, ModalClose, ModalContent, ModalTrigger,
 };
+pub use crate::components::molecules::Pagination;
 pub use crate::components::molecules::{ProgressBar, ProgressBarInner, ProgressLabel};
 pub use crate::components::molecules::{
     SidePanel, SidePanelBackground, SidePanelClose, SidePanelContent, SidePanelTrigger,
