@@ -4,6 +4,7 @@ pub use crate::components::atoms::{Button, ButtonVariant, Icon, Icons, Placehold
 
 pub use crate::components::molecules::LightSwitch;
 pub use crate::components::molecules::Navbar;
+pub use crate::components::molecules::Pagination;
 pub use crate::components::molecules::Scrollable;
 pub use crate::components::molecules::{
     Accordion, AccordionContent, AccordionItem, AccordionTrigger,
@@ -18,7 +19,6 @@ pub use crate::components::molecules::{HoverCard, HoverCardContent, HoverCardTri
 pub use crate::components::molecules::{
     Modal, ModalBackground, ModalClose, ModalContent, ModalTrigger,
 };
-pub use crate::components::molecules::Pagination;
 pub use crate::components::molecules::{ProgressBar, ProgressBarInner, ProgressLabel};
 pub use crate::components::molecules::{
     SidePanel, SidePanelBackground, SidePanelClose, SidePanelContent, SidePanelTrigger,

@@ -42,7 +42,7 @@ pub fn Pagination(mut props: PaginationProps) -> Element {
         if *props.page_number.read() > 2 {
             prev_dots = true;
         }
-        if *props.page_number.read() <= *max_pages.read() - 2 {
+        if *props.page_number.read() <= max_pages.read().checked_sub(2).unwrap_or(0) {
             next_dots = true;
         }
         rsx! {
