@@ -232,7 +232,13 @@ pub fn AccordionContent(mut props: AccordionContentProps) -> Element {
     let state = use_context::<Signal<AccordionState>>();
 
     let final_height = match state.read().is_active(&props.id.read()) {
-        true => if props.height.read().is_empty() { elem_height() } else { props.height.read().clone() },
+        true => {
+            if props.height.read().is_empty() {
+                elem_height()
+            } else {
+                props.height.read().clone()
+            }
+        }
         false => "0".to_string(),
     };
 
