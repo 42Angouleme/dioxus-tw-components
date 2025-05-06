@@ -94,7 +94,7 @@ pub fn Pagination(mut props: PaginationProps) -> Element {
     });
 
     rsx! {
-        div { tw_merge!("flex flex-row gap-2 justify-center items-center", props.class.read()),
+        div { class: tw_merge!("flex flex-row gap-2 justify-center items-center", props.class.read()),
             Button {
                 class: tw_merge!("flex justify-center items-center", props.class.read()),
                 style: props.style,
