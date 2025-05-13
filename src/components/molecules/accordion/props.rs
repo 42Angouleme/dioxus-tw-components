@@ -201,6 +201,9 @@ pub struct AccordionContentProps {
     #[props(optional)]
     id: ReadOnlySignal<String>,
 
+    #[props(optional)]
+    height: ReadOnlySignal<String>,
+
     #[props(default)]
     pub animation: ReadOnlySignal<Animation>,
 
@@ -212,6 +215,7 @@ impl std::default::Default for AccordionContentProps {
         Self {
             attributes: Vec::<Attribute>::default(),
             id: ReadOnlySignal::<String>::default(),
+            height: ReadOnlySignal::<String>::default(),
             animation: ReadOnlySignal::<Animation>::default(),
             children: rsx! {},
         }
@@ -228,13 +232,22 @@ pub fn AccordionContent(mut props: AccordionContentProps) -> Element {
     let state = use_context::<Signal<AccordionState>>();
 
     let final_height = match state.read().is_active(&props.id.read()) {
-        true => elem_height(),
+        true => {
+            if props.height.read().is_empty() {
+                elem_height()
+            } else {
+                props.height.read().clone()
+            }
+        }
         false => "0".to_string(),
     };
 
     rsx! {
         div {
             onmounted: move |element| async move {
+                if !props.height.read().is_empty() {
+                    return;
+                }
                 if props.animation == Animation::None {
                     elem_height.set("auto".to_string());
                     return;
