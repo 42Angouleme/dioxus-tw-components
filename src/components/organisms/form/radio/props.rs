@@ -18,6 +18,7 @@ pub struct RadioProps {
     pub size: ReadOnlySignal<Size>,
 }
 
+#[component]
 pub fn Radio(mut props: RadioProps) -> Element {
     props.update_class_attribute();
 

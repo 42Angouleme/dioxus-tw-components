@@ -77,6 +77,7 @@ impl std::default::Default for AccordionProps {
 ///     }
 /// }}
 /// ```
+#[component]
 pub fn Accordion(mut props: AccordionProps) -> Element {
     use_context_provider(|| Signal::new(AccordionState::new(props.multi_open)));
 
@@ -105,6 +106,7 @@ impl std::default::Default for AccordionItemProps {
 }
 
 /// Wrapper for the [AccordionTrigger] and [AccordionContent] components
+#[component]
 pub fn AccordionItem(mut props: AccordionItemProps) -> Element {
     props.update_class_attribute();
 
@@ -145,6 +147,7 @@ impl std::default::Default for AccordionTriggerProps {
 }
 
 /// The clickable element that toggles the visibility of the [AccordionContent] component
+#[component]
 pub fn AccordionTrigger(mut props: AccordionTriggerProps) -> Element {
     props.update_class_attribute();
 
@@ -184,6 +187,7 @@ pub fn AccordionTrigger(mut props: AccordionTriggerProps) -> Element {
     }
 }
 
+#[component]
 fn default_trigger_decoration() -> Element {
     rsx! {
         Icon {
@@ -223,6 +227,7 @@ impl std::default::Default for AccordionContentProps {
 }
 
 /// Collapsible element that is toggled by the [AccordionTrigger] component
+#[component]
 pub fn AccordionContent(mut props: AccordionContentProps) -> Element {
     // This is the height of the element when visible, we need to calcul it before rendering it to have a smooth transition
     let mut elem_height = use_signal(|| "".to_string());

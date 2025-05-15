@@ -65,6 +65,7 @@ impl std::default::Default for FormListProps {
     }
 }
 
+#[component]
 pub fn FormList(mut props: FormListProps) -> Element {
     use_context_provider(|| Signal::new(FormListState::new(props.current_size)));
 
@@ -83,6 +84,7 @@ pub struct FormListTriggerPlusProps {
     children: Element,
 }
 
+#[component]
 pub fn FormListTriggerPlus(mut props: FormListTriggerPlusProps) -> Element {
     let mut state = use_context::<Signal<FormListState>>();
 
@@ -116,6 +118,7 @@ impl std::default::Default for FormListTriggerMinusProps {
     }
 }
 
+#[component]
 pub fn FormListTriggerMinus(mut props: FormListTriggerMinusProps) -> Element {
     let mut state = use_context::<Signal<FormListState>>();
 
@@ -141,6 +144,7 @@ pub struct FormListContentProps {
     list_fields: Vec<Element>,
 }
 
+#[component]
 pub fn FormListContent(mut props: FormListContentProps) -> Element {
     let mut state = use_context::<Signal<FormListState>>();
 
@@ -169,6 +173,7 @@ pub fn FormListContent(mut props: FormListContentProps) -> Element {
 #[derive(Clone, PartialEq, Props, UiComp)]
 pub struct FormListMaxSizeProps {}
 
+#[component]
 pub fn FormListMaxSize() -> Element {
     let state = use_context::<Signal<FormListState>>();
 
@@ -178,6 +183,7 @@ pub fn FormListMaxSize() -> Element {
 #[derive(Clone, PartialEq, Props, UiComp)]
 pub struct FormListCurrentSizeProps {}
 
+#[component]
 pub fn FormListCurrentSize() -> Element {
     let state = use_context::<Signal<FormListState>>();
 

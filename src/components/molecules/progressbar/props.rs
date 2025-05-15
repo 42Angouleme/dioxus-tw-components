@@ -26,6 +26,7 @@ impl std::default::Default for ProgressBarProps {
     }
 }
 
+#[component]
 pub fn ProgressBar(mut props: ProgressBarProps) -> Element {
     props.update_class_attribute();
 
@@ -59,6 +60,7 @@ impl std::default::Default for ProgressBarInnerProps {
     }
 }
 
+#[component]
 pub fn ProgressBarInner(mut props: ProgressBarInnerProps) -> Element {
     props.update_class_attribute();
 
@@ -99,6 +101,7 @@ impl std::default::Default for ProgressLabelProps {
     }
 }
 
+#[component]
 pub fn ProgressLabel(mut props: ProgressLabelProps) -> Element {
     props.update_class_attribute();
 

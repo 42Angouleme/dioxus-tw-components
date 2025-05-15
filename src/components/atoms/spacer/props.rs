@@ -8,6 +8,7 @@ pub struct SpacerProps {
     attributes: Vec<Attribute>,
 }
 
+#[component]
 pub fn Spacer(mut props: SpacerProps) -> Element {
     props.update_class_attribute();
 

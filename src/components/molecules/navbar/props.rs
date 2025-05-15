@@ -19,6 +19,7 @@ impl std::default::Default for NavbarProps {
     }
 }
 
+#[component]
 pub fn Navbar(mut props: NavbarProps) -> Element {
     props.update_class_attribute();
 

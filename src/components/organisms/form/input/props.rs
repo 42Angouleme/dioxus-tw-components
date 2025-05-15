@@ -24,6 +24,7 @@ pub struct InputProps {
     pub color: ReadOnlySignal<Color>,
 }
 
+#[component]
 pub fn Input(mut props: InputProps) -> Element {
     props.update_class_attribute();
 

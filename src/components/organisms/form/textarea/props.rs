@@ -18,6 +18,7 @@ pub struct TextAreaProps {
     pub color: ReadOnlySignal<Color>,
 }
 
+#[component]
 pub fn TextArea(mut props: TextAreaProps) -> Element {
     props.update_class_attribute();
 

@@ -31,6 +31,7 @@ impl std::default::Default for CalloutProps {
     }
 }
 
+#[component]
 pub fn Callout(mut props: CalloutProps) -> Element {
     props.update_class_attribute();
 

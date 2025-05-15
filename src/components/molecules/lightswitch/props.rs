@@ -48,6 +48,7 @@ impl std::default::Default for LightSwitchProps {
 }
 
 /// This component inserts/remove "dark" in the DOM on the div with id of main
+#[component]
 pub fn LightSwitch(mut props: LightSwitchProps) -> Element {
     props.update_class_attribute();
 

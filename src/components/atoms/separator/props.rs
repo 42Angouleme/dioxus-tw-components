@@ -11,6 +11,7 @@ pub struct SeparatorProps {
     pub orientation: ReadOnlySignal<Orientation>,
 }
 
+#[component]
 pub fn Separator(mut props: SeparatorProps) -> Element {
     props.update_class_attribute();
 

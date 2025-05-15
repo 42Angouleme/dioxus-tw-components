@@ -25,6 +25,7 @@ impl std::default::Default for TabsProps {
     }
 }
 
+#[component]
 pub fn Tabs(mut props: TabsProps) -> Element {
     use_context_provider(|| Signal::new(TabsState(props.default_tab.read().clone())));
 
@@ -52,6 +53,7 @@ impl std::default::Default for TabsListProps {
     }
 }
 
+#[component]
 pub fn TabsList(mut props: TabsListProps) -> Element {
     props.update_class_attribute();
 
@@ -81,6 +83,7 @@ impl std::default::Default for TabsTriggerProps {
     }
 }
 
+#[component]
 pub fn TabsTrigger(mut props: TabsTriggerProps) -> Element {
     let mut tab_state = use_context::<Signal<TabsState>>();
 
@@ -121,6 +124,7 @@ impl std::default::Default for TabsContentProps {
     }
 }
 
+#[component]
 pub fn TabsContent(mut props: TabsContentProps) -> Element {
     let tab_state = use_context::<Signal<TabsState>>();
 

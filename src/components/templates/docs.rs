@@ -10,6 +10,7 @@ pub struct DocsTemplateProps {
     children: Element,
 }
 
+#[component]
 pub fn DocsTemplate(mut props: DocsTemplateProps) -> Element {
     props.update_class_attribute();
 

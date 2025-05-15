@@ -36,6 +36,7 @@ struct FieldData {
     pub animation: ReadOnlySignal<Animation>,
 }
 
+#[component]
 pub fn ButtonGroup(mut props: ButtonGroupProps) -> Element {
     props.update_class_attribute();
     let _class = use_context_provider(|| {
@@ -92,6 +93,7 @@ impl std::default::Default for ButtonGroupItemProps {
     }
 }
 
+#[component]
 pub fn ButtonGroupItem(mut props: ButtonGroupItemProps) -> Element {
     let data = use_context::<Signal<FieldData>>();
     props.color = data.read().color;

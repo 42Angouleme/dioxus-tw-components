@@ -18,6 +18,7 @@ pub struct SliderProps {
     pub color: ReadOnlySignal<Color>,
 }
 
+#[component]
 pub fn Slider(mut props: SliderProps) -> Element {
     props.update_class_attribute();
 
@@ -60,6 +61,7 @@ impl std::default::Default for SliderTicksProps {
     }
 }
 
+#[component]
 pub fn SliderTicks(mut props: SliderTicksProps) -> Element {
     props.update_class_attribute();
 
@@ -96,6 +98,7 @@ impl std::default::Default for SliderLabelProps {
     }
 }
 
+#[component]
 pub fn SliderLabel(mut props: SliderLabelProps) -> Element {
     props.update_class_attribute();
 

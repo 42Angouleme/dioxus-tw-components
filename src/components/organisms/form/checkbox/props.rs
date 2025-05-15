@@ -18,6 +18,7 @@ pub struct CheckboxProps {
     pub size: ReadOnlySignal<Size>,
 }
 
+#[component]
 pub fn Checkbox(mut props: CheckboxProps) -> Element {
     props.update_class_attribute();
 

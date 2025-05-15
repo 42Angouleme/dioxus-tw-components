@@ -23,6 +23,7 @@ impl std::default::Default for ToasterProps {
 }
 
 /// The toaster must wrap around your App as high as possible to be used
+#[component]
 pub fn Toaster(mut props: ToasterProps) -> Element {
     props.update_class_attribute();
 

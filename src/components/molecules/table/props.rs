@@ -19,6 +19,7 @@ impl std::default::Default for TableProps {
     }
 }
 
+#[component]
 pub fn Table(mut props: TableProps) -> Element {
     props.update_class_attribute();
 
@@ -44,6 +45,7 @@ impl std::default::Default for TableHeaderProps {
     }
 }
 
+#[component]
 pub fn TableHeader(mut props: TableHeaderProps) -> Element {
     props.update_class_attribute();
 
@@ -69,6 +71,7 @@ impl std::default::Default for TableBodyProps {
     }
 }
 
+#[component]
 pub fn TableBody(mut props: TableBodyProps) -> Element {
     props.update_class_attribute();
 
@@ -94,6 +97,7 @@ impl std::default::Default for TableFooterProps {
     }
 }
 
+#[component]
 pub fn TableFooter(mut props: TableFooterProps) -> Element {
     props.update_class_attribute();
 
@@ -123,6 +127,7 @@ impl std::default::Default for TableHeadProps {
     }
 }
 
+#[component]
 pub fn TableHead(mut props: TableHeadProps) -> Element {
     props.update_class_attribute();
 
@@ -150,6 +155,7 @@ impl std::default::Default for TableRowProps {
     }
 }
 
+#[component]
 pub fn TableRow(mut props: TableRowProps) -> Element {
     props.update_class_attribute();
 
@@ -175,6 +181,7 @@ impl std::default::Default for TableCellProps {
     }
 }
 
+#[component]
 pub fn TableCell(mut props: TableCellProps) -> Element {
     props.update_class_attribute();
 
@@ -200,6 +207,7 @@ impl std::default::Default for TableCaptionProps {
     }
 }
 
+#[component]
 pub fn TableCaption(mut props: TableCaptionProps) -> Element {
     props.update_class_attribute();
 
