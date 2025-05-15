@@ -1,6 +1,6 @@
 [package]
 name = "dioxus-tw-components"
-version = "0.1.7"
+version = "0.1.8"
 edition = "2024"
 license = "MIT OR Apache-2.0"
 description = "Components made for Dioxus using TailwindCSS 4."
@@ -21,9 +21,7 @@ theme = []
 dioxus-tw-components-sorttable-macro = { version = "0.1.0", path = "./dioxus-tw-components-sorttable-macro" }
 dioxus-tw-components-macro = { version = "0.1.0", path = "./dioxus-tw-components-macro" }
 log = "0.4.22"
-dioxus = { version = "0.6.3", features = ["web"] }
-dioxus-logger = "0.6.2"
-manganis = "0.6.2"
+dioxus = { version = "0.7.0-alpha.0", features = ["web"] }
 console = "0.15.10"
 tailwind_fuse = { version = "0.3.2", features = ["variant"] }
 

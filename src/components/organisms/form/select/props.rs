@@ -23,6 +23,7 @@ impl std::default::Default for SelectGroupProps {
     }
 }
 
+#[component]
 pub fn SelectGroup(mut props: SelectGroupProps) -> Element {
     props.update_class_attribute();
 
@@ -50,6 +51,7 @@ impl std::default::Default for SelectPlaceholderProps {
     }
 }
 
+#[component]
 pub fn SelectPlaceholder(mut props: SelectPlaceholderProps) -> Element {
     props.update_class_attribute();
 
@@ -64,6 +66,7 @@ pub struct SelectLabelProps {
     attributes: Vec<Attribute>,
 }
 
+#[component]
 pub fn SelectLabel(mut props: SelectLabelProps) -> Element {
     props.update_class_attribute();
 
@@ -93,6 +96,7 @@ impl std::default::Default for SelectItemProps {
     }
 }
 
+#[component]
 pub fn SelectItem(mut props: SelectItemProps) -> Element {
     props.update_class_attribute();
 

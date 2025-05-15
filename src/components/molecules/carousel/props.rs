@@ -100,6 +100,7 @@ impl std::default::Default for CarouselProps {
 ///     }
 ///     CarouselTrigger { next: true }
 /// }
+#[component]
 pub fn Carousel(mut props: CarouselProps) -> Element {
     use_context_provider(|| {
         Signal::new(CarouselState::new(
@@ -132,6 +133,7 @@ impl std::default::Default for CarouselWindowProps {
     }
 }
 
+#[component]
 pub fn CarouselWindow(mut props: CarouselWindowProps) -> Element {
     props.update_class_attribute();
 
@@ -165,6 +167,7 @@ impl std::default::Default for CarouselContentProps {
 }
 
 /// You need to pass it an id for it to work
+#[component]
 pub fn CarouselContent(mut props: CarouselContentProps) -> Element {
     let mut carousel_state = use_context::<Signal<CarouselState>>();
 
@@ -218,6 +221,7 @@ impl std::default::Default for CarouselItemProps {
     }
 }
 
+#[component]
 pub fn CarouselItem(mut props: CarouselItemProps) -> Element {
     let mut state = use_context::<Signal<CarouselState>>();
 
@@ -246,6 +250,7 @@ pub struct CarouselTriggerProps {
     attributes: Vec<Attribute>,
 }
 
+#[component]
 pub fn CarouselTrigger(mut props: CarouselTriggerProps) -> Element {
     let mut carousel_state = use_context::<Signal<CarouselState>>();
 

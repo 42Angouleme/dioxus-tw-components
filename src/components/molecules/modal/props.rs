@@ -60,6 +60,7 @@ impl std::default::Default for ModalProps {
 ///    }
 /// }
 /// ```
+#[component]
 pub fn Modal(props: ModalProps) -> Element {
     use_context_provider(|| Signal::new(ModalState::new(props.is_active)));
 
@@ -89,6 +90,7 @@ impl std::default::Default for ModalTriggerProps {
     }
 }
 
+#[component]
 pub fn ModalTrigger(mut props: ModalTriggerProps) -> Element {
     let mut state = use_context::<Signal<ModalState>>();
 
@@ -125,6 +127,7 @@ impl std::default::Default for ModalCloseProps {
 
 /// Div to close the content modal, by default it is a cross located at the top left corner of the modal
 /// If you provide a children, it will be used instead of the default cross and no internal styling will be provided
+#[component]
 pub fn ModalClose(mut props: ModalCloseProps) -> Element {
     let mut state = use_context::<Signal<ModalState>>();
 
@@ -171,6 +174,7 @@ impl std::default::Default for ModalContentProps {
     }
 }
 
+#[component]
 pub fn ModalContent(mut props: ModalContentProps) -> Element {
     let state = use_context::<Signal<ModalState>>();
 
@@ -212,6 +216,7 @@ impl std::default::Default for ModalBackgroundProps {
     }
 }
 
+#[component]
 pub fn ModalBackground(mut props: ModalBackgroundProps) -> Element {
     let mut state = use_context::<Signal<ModalState>>();
 

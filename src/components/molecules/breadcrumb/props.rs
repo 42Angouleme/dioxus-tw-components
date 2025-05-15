@@ -29,6 +29,7 @@ impl std::default::Default for BreadcrumbProps {
 ///     BreadcrumbItem { "Data" },
 /// }
 /// ```
+#[component]
 pub fn Breadcrumb(mut props: BreadcrumbProps) -> Element {
     props.update_class_attribute();
 
@@ -54,6 +55,7 @@ impl std::default::Default for BreadcrumbItemProps {
     }
 }
 
+#[component]
 pub fn BreadcrumbItem(mut props: BreadcrumbItemProps) -> Element {
     props.update_class_attribute();
 
@@ -79,6 +81,7 @@ impl std::default::Default for BreadcrumbSeparatorProps {
     }
 }
 
+#[component]
 pub fn BreadcrumbSeparator(mut props: BreadcrumbSeparatorProps) -> Element {
     props.update_class_attribute();
 

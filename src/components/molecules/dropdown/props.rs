@@ -101,6 +101,7 @@ impl std::default::Default for DropdownProps {
 /// }
 /// ```
 /// Use 0 closing_delay_ms to disable the auto close feature
+#[component]
 pub fn Dropdown(mut props: DropdownProps) -> Element {
     let mut state =
         use_context_provider(|| Signal::new(DropdownState::new(props.closing_delay_ms)));
@@ -137,6 +138,7 @@ impl std::default::Default for DropdownToggleProps {
     }
 }
 
+#[component]
 pub fn DropdownToggle(mut props: DropdownToggleProps) -> Element {
     let mut state = use_context::<Signal<DropdownState>>();
 
@@ -190,6 +192,7 @@ impl std::default::Default for DropdownContentProps {
     }
 }
 
+#[component]
 pub fn DropdownContent(mut props: DropdownContentProps) -> Element {
     let state = use_context::<Signal<DropdownState>>();
 

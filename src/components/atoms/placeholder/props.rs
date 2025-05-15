@@ -13,6 +13,7 @@ pub struct PlaceholderProps {
     pub animation: ReadOnlySignal<Animation>,
 }
 
+#[component]
 pub fn Placeholder(mut props: PlaceholderProps) -> Element {
     props.update_class_attribute();
 

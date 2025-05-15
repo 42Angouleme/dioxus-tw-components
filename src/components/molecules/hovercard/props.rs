@@ -89,6 +89,7 @@ impl std::default::Default for HoverCardProps {
     }
 }
 
+#[component]
 pub fn HoverCard(mut props: HoverCardProps) -> Element {
     let mut state = use_context_provider(|| Signal::new(HoverState::new(props.closing_delay_ms)));
 
@@ -171,6 +172,7 @@ impl std::default::Default for HoverCardTriggerProps {
     }
 }
 
+#[component]
 pub fn HoverCardTrigger(mut props: HoverCardTriggerProps) -> Element {
     let mut state = use_context::<Signal<HoverState>>();
 
@@ -214,6 +216,7 @@ impl std::default::Default for HoverCardContentProps {
     }
 }
 
+#[component]
 pub fn HoverCardContent(mut props: HoverCardContentProps) -> Element {
     let state = use_context::<Signal<HoverState>>();
 

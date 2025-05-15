@@ -10,6 +10,7 @@ pub struct HeaderTemplateProps {
     children: Element,
 }
 
+#[component]
 pub fn HeaderTemplate(mut props: HeaderTemplateProps) -> Element {
     props.update_class_attribute();
 

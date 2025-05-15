@@ -319,6 +319,7 @@ where
     data.sort_by_key(key_extractor);
 }
 
+#[component]
 pub fn SortTable(mut props: SortTableProps) -> Element {
     props.update_class_attribute();
     let mut state = use_signal(|| {

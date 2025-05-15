@@ -46,6 +46,7 @@ impl std::default::Default for ButtonProps {
     }
 }
 
+#[component]
 pub fn Button(mut props: ButtonProps) -> Element {
     props.update_class_attribute();
 

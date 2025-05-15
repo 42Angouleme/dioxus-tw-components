@@ -10,6 +10,7 @@ pub struct MainTemplateProps {
     children: Element,
 }
 
+#[component]
 pub fn MainTemplate(mut props: MainTemplateProps) -> Element {
     props.update_class_attribute();
 

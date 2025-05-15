@@ -24,6 +24,7 @@ pub struct ToggleProps {
 // Specifically stylised input type checkbox
 // The input use the tailwind peer class, you can use at your advantage to style the children
 // eg peer-disabled:font-mute will change children text-color when the input is disabled (Label component already does this by default)
+#[component]
 pub fn Toggle(mut props: ToggleProps) -> Element {
     props.update_class_attribute();
 

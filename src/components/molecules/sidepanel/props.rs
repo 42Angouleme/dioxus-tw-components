@@ -44,6 +44,7 @@ impl std::default::Default for SidePanelProps {
     }
 }
 
+#[component]
 pub fn SidePanel(props: SidePanelProps) -> Element {
     use_context_provider(|| Signal::new(SidePanelState::new(props.is_active)));
 
@@ -73,6 +74,7 @@ impl std::default::Default for SidePanelTriggerProps {
     }
 }
 
+#[component]
 pub fn SidePanelTrigger(mut props: SidePanelTriggerProps) -> Element {
     let mut state = use_context::<Signal<SidePanelState>>();
 
@@ -109,6 +111,7 @@ impl std::default::Default for SidePanelCloseProps {
 
 /// Div to close the content side panel, by default it is a cross located at the top left corner of the side panel
 /// If you provide a children, it will be used instead of the default cross and no internal styling will be provided
+#[component]
 pub fn SidePanelClose(mut props: SidePanelCloseProps) -> Element {
     let mut state = use_context::<Signal<SidePanelState>>();
 
@@ -158,6 +161,7 @@ impl std::default::Default for SidePanelContentProps {
     }
 }
 
+#[component]
 pub fn SidePanelContent(mut props: SidePanelContentProps) -> Element {
     let state = use_context::<Signal<SidePanelState>>();
 
@@ -199,6 +203,7 @@ impl std::default::Default for SidePanelBackgroundProps {
     }
 }
 
+#[component]
 pub fn SidePanelBackground(mut props: SidePanelBackgroundProps) -> Element {
     let mut state = use_context::<Signal<SidePanelState>>();
 
