@@ -55,37 +55,37 @@ pub trait ToastRenderer {
 
 impl ToastRenderer for Signal<ToasterState> {
     fn description(&mut self, description: Element) -> &mut Self {
-        let shape = self.read().shape.clone();
+        let shape = self.peek().shape.clone();
         self.write().shape = shape.description(description);
         self
     }
 
     fn color(&mut self, color: Color) -> &mut Self {
-        let shape = self.read().shape.clone();
+        let shape = self.peek().shape.clone();
         self.write().shape = shape.color(color);
         self
     }
 
     fn title(&mut self, title: impl ToString) -> &mut Self {
-        let shape = self.read().shape.clone();
+        let shape = self.peek().shape.clone();
         self.write().shape = shape.title(title);
         self
     }
 
     fn duration_in_ms(&mut self, duration: u32) -> &mut Self {
-        let shape = self.read().shape.clone();
+        let shape = self.peek().shape.clone();
         self.write().shape = shape.duration_in_ms(duration);
         self
     }
 
     fn animation(&mut self, animation: Animation) -> &mut Self {
-        let shape = self.read().shape.clone();
+        let shape = self.peek().shape.clone();
         self.write().shape = shape.animation(animation);
         self
     }
 
     fn is_closable(&mut self, is_closable: bool) -> &mut Self {
-        let shape = self.read().shape.clone();
+        let shape = self.peek().shape.clone();
         self.write().shape = shape.is_closable(is_closable);
         self
     }
@@ -136,7 +136,7 @@ impl ToastRenderer for Signal<ToasterState> {
     }
 
     fn render(&mut self) {
-        let shape = self.read().shape.clone();
+        let shape = self.peek().shape.clone();
         self.set(ToasterState {
             toast: Some(shape),
             shape: Toast::default(),

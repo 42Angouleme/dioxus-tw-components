@@ -21,7 +21,7 @@ theme = []
 dioxus-tw-components-sorttable-macro = { version = "0.1.0", path = "./dioxus-tw-components-sorttable-macro" }
 dioxus-tw-components-macro = { version = "0.1.0", path = "./dioxus-tw-components-macro" }
 log = "0.4.22"
-dioxus = { version = "0.7.0-alpha.0", features = ["web"] }
+dioxus = { version = "0.6.3", features = ["web"] }
 console = "0.15.10"
 tailwind_fuse = { version = "0.3.2", features = ["variant"] }
 
