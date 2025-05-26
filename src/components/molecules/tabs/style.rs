@@ -12,7 +12,7 @@ impl Class for TabsListProps {
 impl Class for TabsTriggerProps {
     fn base(&self) -> &'static str {
         "flex grow items-center justify-center whitespace-nowrap rounded-global-radius px-2 py-0.5 text-sm font-semibold ring-offset-background transition-all duration-75
-        data-[state=active]:bg-background data-[state=active]:text-foreground data-[state=active]:shadow-sm data-[state=active]:shadow-global-shadow"
+        data-[state=active]:bg-background data-[state=active]:text-foreground data-[state=active]:shadow-sm data-[state=active]:shadow-global-shadow cursor-pointer"
     }
 }
 

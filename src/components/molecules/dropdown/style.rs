@@ -10,7 +10,7 @@ impl Class for DropdownProps {
 
 impl Class for DropdownToggleProps {
     fn base(&self) -> &'static str {
-        "px-4 py-2 text-sm font-medium bg-background border border-input rounded-global-radius whitespace-nowrap hover:bg-accent hover:text-accent-foreground"
+        "px-4 py-2 text-sm font-medium bg-background border border-input rounded-global-radius whitespace-nowrap hover:bg-accent hover:text-accent-foreground select-none cursor-pointer"
     }
 }
 
@@ -22,9 +22,7 @@ impl Class for DropdownContentProps {
     fn animation(&self) -> Option<&'static str> {
         Some(match *self.animation.read() {
             Animation::None => "transition-none",
-            Animation::Light | Animation::Full => {
-                "transition-all duration-100 data-[state=inactive]:scale-90 data-[state=active]:scale-100 data-[state=inactive]:opacity-0"
-            }
+            Animation::Light | Animation::Full => "transition-all duration-100 data-[state=inactive]:scale-90 data-[state=active]:scale-100 data-[state=inactive]:opacity-0",
         })
     }
 }

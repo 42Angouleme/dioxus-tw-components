@@ -10,13 +10,13 @@ impl Class for AccordionProps {
 
 impl Class for AccordionItemProps {
     fn base(&self) -> &'static str {
-        "border-b border-border"
+        ""
     }
 }
 
 impl Class for AccordionTriggerProps {
     fn base(&self) -> &'static str {
-        "flex items-center justify-between w-full font-medium text-foreground group"
+        "flex items-center justify-between w-full font-medium text-foreground group cursor-pointer select-none"
     }
 }
 

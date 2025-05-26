@@ -4,7 +4,7 @@ use dioxus::prelude::*;
 
 impl Class for ToggleProps {
     fn base(&self) -> &'static str {
-        "peer relative bg-input rounded-full focus:outline-hidden focus:ring-2 focus:ring-black focus:ring-offset-2 data-[state=active]:after:translate-x-full data-[state=active]:after:border-white after:content-[''] after:absolute after:bg-background after:border-input after:border after:rounded-full disabled:opacity-40"
+        "peer relative bg-input rounded-full focus:outline-hidden focus:ring-2 cursor-pointer focus:ring-black focus:ring-offset-2 data-[state=active]:after:translate-x-full data-[state=active]:after:border-white after:content-[''] after:absolute after:bg-background after:border-input after:border after:rounded-full disabled:opacity-40"
     }
 
     fn color(&self) -> Option<&'static str> {

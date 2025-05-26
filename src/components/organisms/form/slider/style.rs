@@ -4,7 +4,7 @@ use dioxus::prelude::*;
 
 impl Class for SliderProps {
     fn base(&self) -> &'static str {
-        "w-full disabled:cursor-not-allowed disabled:opacity-50"
+        "w-full disabled:cursor-not-allowed disabled:opacity-50 cursor-pointer"
     }
 
     fn color(&self) -> Option<&'static str> {

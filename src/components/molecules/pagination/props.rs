@@ -59,7 +59,7 @@ pub fn Pagination(mut props: PaginationProps) -> Element {
                     },
                     p { "1" }
                 }
-                p { class: "text-center h-9 px-2 py-2", "..." }
+                p { class: "text-center h-9 px-2 py-2 select-none", "..." }
             }
             for page in (std::cmp::max(1_isize, *props.page_number.read() as isize - 1) as usize)..=std::cmp::min(*max_pages.read(), *props.page_number.read() + 1) {
                 Button {
@@ -76,7 +76,7 @@ pub fn Pagination(mut props: PaginationProps) -> Element {
                 }
             }
             if next_dots {
-                p { class: "text-center h-9 px-2 py-2", "..." }
+                p { class: "text-center h-9 px-2 py-2 select-none", "..." }
                 Button {
                     class: props.class,
                     style: props.style,
