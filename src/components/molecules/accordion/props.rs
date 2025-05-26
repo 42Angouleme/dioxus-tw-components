@@ -124,8 +124,11 @@ pub struct AccordionTriggerProps {
     id: ReadOnlySignal<String>,
 
     /// Determine if the accordion item is open by default
-    #[props(optional, default = false)]
-    is_open: bool,
+    #[props(optional, into)]
+    is_open: ReadOnlySignal<bool>,
+
+    #[props(optional, default)]
+    onclick: EventHandler<MouseEvent>,
 
     /// Decoration element that is displayed next to the trigger text, by default a chevron
     #[props(optional, default = default_trigger_decoration())]
@@ -139,7 +142,8 @@ impl std::default::Default for AccordionTriggerProps {
         Self {
             attributes: Vec::<Attribute>::default(),
             id: ReadOnlySignal::<String>::default(),
-            is_open: false,
+            is_open: ReadOnlySignal::<bool>::default(),
+            onclick: EventHandler::<MouseEvent>::default(),
             trigger_decoration: default_trigger_decoration(),
             children: rsx! {},
         }
@@ -153,13 +157,19 @@ pub fn AccordionTrigger(mut props: AccordionTriggerProps) -> Element {
 
     let mut state = use_context::<Signal<AccordionState>>();
 
-    let onmounted = move |_| async move {
-        if props.is_open {
-            state.write().add_id(props.id.read().clone());
+    use_effect(move || {
+        if *props.is_open.read() {
+            if !state.peek().multi_open {
+                state.write().set_id(props.id.read().clone());
+            } else {
+                state.write().add_id(props.id.read().clone());
+            }
+        } else if state.peek().is_active(&props.id.read()) {
+            state.write().remove_id(props.id.read().clone());
         }
-    };
+    });
 
-    let button_closure = move |_: Event<MouseData>| {
+    let button_closure = move |event: Event<MouseData>| {
         // If the current item is active, remove it from the list, effectively closing it
         if state.read().is_active(&props.id.read()) {
             state.write().remove_id(props.id.read().clone());
@@ -173,13 +183,13 @@ pub fn AccordionTrigger(mut props: AccordionTriggerProps) -> Element {
                 state.write().add_id(props.id.read().clone());
             }
         }
+        props.onclick.call(event)
     };
 
     rsx! {
         button {
             "data-state": state.read().is_active_to_attr_value(props.id.read().to_string()),
             onclick: button_closure,
-            onmounted,
             ..props.attributes,
             {props.children}
             {props.trigger_decoration}
@@ -187,7 +197,6 @@ pub fn AccordionTrigger(mut props: AccordionTriggerProps) -> Element {
     }
 }
 
-#[component]
 fn default_trigger_decoration() -> Element {
     rsx! {
         Icon {
