@@ -10,7 +10,7 @@ impl Class for AccordionProps {
 
 impl Class for AccordionItemProps {
     fn base(&self) -> &'static str {
-        "border-b border-border"
+        ""
     }
 }
 
