@@ -35,6 +35,6 @@ impl Class for CarouselItemProps {
 
 impl Class for CarouselTriggerProps {
     fn base(&self) -> &'static str {
-        "size-10 flex flex-nowrap items-center justify-center"
+        "size-10 flex flex-nowrap items-center justify-center cursor-pointer"
     }
 }

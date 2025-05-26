@@ -6,7 +6,7 @@ impl Class for SidePanelProps {}
 
 impl Class for SidePanelTriggerProps {
     fn base(&self) -> &'static str {
-        "px-4 py-2 text-sm font-medium text-foreground bg-background border border-input rounded-global-radius whitespace-nowrap cursor-pointer hover:bg-accent hover:text-accent-foreground"
+        "px-4 py-2 text-sm font-medium select-none text-foreground bg-background border border-input rounded-global-radius whitespace-nowrap cursor-pointer hover:bg-accent hover:text-accent-foreground"
     }
 }
 
