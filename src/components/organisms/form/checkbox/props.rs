@@ -6,8 +6,8 @@ use dioxus_tw_components_macro::UiComp;
 pub struct CheckboxProps {
     #[props(extends = input, extends = GlobalAttributes)]
     attributes: Vec<Attribute>,
-    #[props(optional, default = false)]
-    checked: bool,
+    #[props(optional, into, default)]
+    checked: ReadOnlySignal<bool>,
 
     #[props(optional)]
     oninput: EventHandler<FormEvent>,
@@ -28,7 +28,7 @@ pub fn Checkbox(mut props: CheckboxProps) -> Element {
         input {
             r#type: "checkbox",
             oninput,
-            checked: props.checked,
+            checked: *props.checked.read(),
             ..props.attributes,
         }
     }
