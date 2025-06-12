@@ -27,13 +27,27 @@ impl Class for ButtonGroupItemProps {
 
     fn color(&self) -> Option<&'static str> {
         Some(match *self.color.read() {
-            Color::Default => "bg-foreground text-background hover:bg-foreground/80 active:bg-foreground/70 active:shadow-sm",
-            Color::Primary => "bg-primary text-primary-foreground border-primary hover:bg-primary/90 active:bg-primary/80 active:shadow-sm",
-            Color::Secondary => "bg-secondary text-secondary-foreground border-secondary hover:bg-secondary/90 active:bg-secondary/80 active:shadow-sm",
-            Color::Destructive => "bg-destructive text-destructive-foreground border-destructive hover:bg-destructive/90 active:bg-destructive/80 active:shadow-sm",
-            Color::Success => "bg-success text-success-foreground border-success hover:bg-success/90 active:bg-success/80 active:shadow-sm",
-            Color::Accent => "bg-accent text-accent-foreground border-accent hover:bg-accent/90 active:bg-accent/80 active:shadow-sm",
-            Color::Muted => "bg-muted text-muted-foreground border-muted hover:bg-muted/90 active:bg-muted/80 active:shadow-sm",
+            Color::Default => {
+                "bg-foreground text-background hover:bg-foreground/80 active:bg-foreground/70 active:shadow-sm"
+            }
+            Color::Primary => {
+                "bg-primary text-primary-foreground border-primary hover:bg-primary/90 active:bg-primary/80 active:shadow-sm"
+            }
+            Color::Secondary => {
+                "bg-secondary text-secondary-foreground border-secondary hover:bg-secondary/90 active:bg-secondary/80 active:shadow-sm"
+            }
+            Color::Destructive => {
+                "bg-destructive text-destructive-foreground border-destructive hover:bg-destructive/90 active:bg-destructive/80 active:shadow-sm"
+            }
+            Color::Success => {
+                "bg-success text-success-foreground border-success hover:bg-success/90 active:bg-success/80 active:shadow-sm"
+            }
+            Color::Accent => {
+                "bg-accent text-accent-foreground border-accent hover:bg-accent/90 active:bg-accent/80 active:shadow-sm"
+            }
+            Color::Muted => {
+                "bg-muted text-muted-foreground border-muted hover:bg-muted/90 active:bg-muted/80 active:shadow-sm"
+            }
         })
     }
 
