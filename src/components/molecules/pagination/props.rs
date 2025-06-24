@@ -107,7 +107,6 @@ pub fn Pagination(mut props: PaginationProps) -> Element {
                     props.page_number.set(value - 1);
                 },
                 Icon {icon: Icons::ArrowLeft}
-                p { "Previous" }
             }
             {page_selector}
             Button {
@@ -121,7 +120,6 @@ pub fn Pagination(mut props: PaginationProps) -> Element {
                     let value = *props.page_number.peek();
                     props.page_number.set(value + 1);
                 },
-                p { "Next" }
                 Icon {icon: Icons::ArrowRight}
             }
         }

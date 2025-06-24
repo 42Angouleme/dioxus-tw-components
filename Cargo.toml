@@ -1,6 +1,6 @@
 [package]
 name = "dioxus-tw-components"
-version = "0.1.11"
+version = "0.1.12"
 edition = "2024"
 license = "MIT OR Apache-2.0"
 description = "Components made for Dioxus using TailwindCSS 4."
