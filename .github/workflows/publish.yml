@@ -20,6 +20,8 @@ jobs:
         with:
           fetch-depth: 0
 
+      - uses: cargo-bins/cargo-binstall@main
+
       - name: Install cargo-release
         run: cargo binstall cargo-release
 
