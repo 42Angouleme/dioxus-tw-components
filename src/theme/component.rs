@@ -99,9 +99,9 @@ fn ColorSelector(
         ColorChoice::Simple(_) => {
             rsx! {
                 ToggleDiv {
-                    is_selected: selected_color() == format!("{}-foreground", color_str),
+                    is_selected: selected_color() == format!("{color_str}-foreground"),
                     onclick: move |_| {
-                        *selected_color.write() = format!("{}-foreground", color_str);
+                        *selected_color.write() = format!("{color_str}-foreground");
                     },
                     Icon { icon: Icons::Colorize }
                 }
@@ -118,19 +118,19 @@ fn ColorSelector(
             let bg = if &*color_str.read() == "background" {
                 "bg-background".to_string()
             } else {
-                format!("bg-{}", color_str)
+                format!("bg-{color_str}")
             };
 
             let text = if &*color_str.read() == "background" {
                 "text-foreground".to_string()
             } else {
-                format!("text-{}-foreground", color_str)
+                format!("text-{color_str}-foreground")
             };
 
             let is_selected = if &*color_str.read() == "background" {
                 selected_color() == "foreground"
             } else {
-                selected_color() == format!("{}-foreground", color_str)
+                selected_color() == format!("{color_str}-foreground")
             };
 
             rsx! {
@@ -141,7 +141,7 @@ fn ColorSelector(
                             log::debug!("there");
                             *selected_color.write() = "foreground".to_string();
                         } else {
-                            *selected_color.write() = format!("{}-foreground", color_str);
+                            *selected_color.write() = format!("{color_str}-foreground");
                         }
                     },
                     Icon { icon: Icons::FlipToFront }

@@ -272,8 +272,7 @@ pub fn AccordionContent(mut props: AccordionContentProps) -> Element {
                             Ok(size) => format!("{}px", size.height),
                             Err(e) => {
                                 log::error!(
-                                    "AccordionContent: Failed to get element height(id probably not set): setting it to auto: {:?}",
-                                    e
+                                    "AccordionContent: Failed to get element height(id probably not set): setting it to auto: {e:?}",
                                 );
                                 "auto".to_string()
                             }

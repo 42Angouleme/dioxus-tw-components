@@ -246,7 +246,7 @@ pub struct SortTableProps {
 
     headers: Vec<String>,
 
-    data: Vec<SortableRow>,
+    data: ReadOnlySignal<Vec<SortableRow>>,
 }
 
 pub struct SortTableState {
@@ -323,12 +323,12 @@ where
 pub fn SortTable(mut props: SortTableProps) -> Element {
     props.update_class_attribute();
     let mut state = use_signal(|| {
-        SortTableState::new(props.headers.clone(), props.data.clone())
+        SortTableState::new(props.headers.clone(), props.data.read().clone())
             .set_default_sort(props.default_sort.clone())
     });
     use_effect(move || {
         state.set(
-            SortTableState::new(props.headers.clone(), props.data.clone())
+            SortTableState::new(props.headers.clone(), props.data.read().clone())
                 .set_default_sort(props.default_sort.clone()),
         );
     });
