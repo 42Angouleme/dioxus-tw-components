@@ -61,7 +61,9 @@ pub fn Pagination(mut props: PaginationProps) -> Element {
                 }
                 p { class: "text-center h-9 px-2 py-2 select-none", "..." }
             }
-            for page in (std::cmp::max(1_isize, *props.page_number.read() as isize - 1) as usize)..=std::cmp::min(*max_pages.read(), *props.page_number.read() + 1) {
+            for page in (std::cmp::max(1_isize, *props.page_number.read() as isize - 1)
+                as usize)..=std::cmp::min(*max_pages.read(), *props.page_number.read() + 1)
+            {
                 Button {
                     class: props.class,
                     style: props.style,
@@ -106,7 +108,7 @@ pub fn Pagination(mut props: PaginationProps) -> Element {
                     let value = *props.page_number.peek();
                     props.page_number.set(value - 1);
                 },
-                Icon {icon: Icons::ArrowLeft}
+                Icon { icon: Icons::ArrowLeft }
             }
             {page_selector}
             Button {
@@ -120,7 +122,7 @@ pub fn Pagination(mut props: PaginationProps) -> Element {
                     let value = *props.page_number.peek();
                     props.page_number.set(value + 1);
                 },
-                Icon {icon: Icons::ArrowRight}
+                Icon { icon: Icons::ArrowRight }
             }
         }
     }
