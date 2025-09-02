@@ -137,13 +137,20 @@ pub fn ModalClose(mut props: ModalCloseProps) -> Element {
         props.update_class_attribute();
     }
 
+    let onkeypress = move |event: KeyboardEvent| {
+        event.stop_propagation();
+        if event.data.key() == Key::Escape {
+            state.write().toggle();
+        }
+    };
+
     let onclick = move |event: Event<MouseData>| {
         event.stop_propagation();
         state.write().toggle();
     };
 
     rsx! {
-        div { onclick, ..props.attributes,
+        div { onclick, onkeypress, ..props.attributes,
             if !has_children {
                 Icon { icon: Icons::Close }
             } else {
