@@ -6,6 +6,8 @@ use crate::{attributes::*, components::atoms::icon::*};
 
 struct CarouselState {
     is_circular: bool,
+    autoscroll_duration: usize,
+    block_autoscoll: bool,
     carousel_size: u32,
     // Use a key there so we can just +1 or -1 instead of having a vec
     current_item_key: u32,
@@ -14,9 +16,11 @@ struct CarouselState {
 }
 
 impl CarouselState {
-    fn new(current_item_key: u32, is_circular: bool) -> Self {
+    fn new(current_item_key: u32, is_circular: bool, autoscroll_duration: usize) -> Self {
         Self {
             current_item_key,
+            autoscroll_duration,
+            block_autoscoll: false,
             is_circular,
             carousel_size: 0,
             content_width: 0,
@@ -73,6 +77,8 @@ pub struct CarouselProps {
     default_item_key: u32,
     #[props(default = false)]
     is_circular: bool,
+    #[props(default = 0)]
+    autoscroll_duration: usize, // 0 means no autoscroll, duration in ms btw
 
     children: Element,
 }
@@ -83,6 +89,7 @@ impl std::default::Default for CarouselProps {
             attributes: Vec::<Attribute>::default(),
             default_item_key: 0,
             is_circular: false,
+            autoscroll_duration: 0,
             children: rsx! {},
         }
     }
@@ -106,6 +113,7 @@ pub fn Carousel(mut props: CarouselProps) -> Element {
         Signal::new(CarouselState::new(
             props.default_item_key,
             props.is_circular,
+            props.autoscroll_duration,
         ))
     });
 
@@ -135,10 +143,45 @@ impl std::default::Default for CarouselWindowProps {
 
 #[component]
 pub fn CarouselWindow(mut props: CarouselWindowProps) -> Element {
+    let mut carousel_state = use_context::<Signal<CarouselState>>();
+
     props.update_class_attribute();
 
+    use_effect(move || {
+        let mut timer = document::eval(&format!(
+            "setInterval(() => {{
+                dioxus.send(true);
+            }}, {});",
+            // Do not read signal due to carousel_state write just bellow which will cause carousel to have panic attack when autoscolling
+            carousel_state.peek().autoscroll_duration
+        ));
+        spawn(async move {
+            while (timer.recv::<bool>().await).is_ok() {
+                // Same as above
+                if carousel_state.peek().autoscroll_duration != 0
+                    && !carousel_state.peek().block_autoscoll
+                {
+                    scroll_carousel(true, carousel_state);
+                    carousel_state.write().translate();
+                }
+            }
+        });
+    });
+
     rsx! {
-        div { ..props.attributes,{props.children} }
+        div {
+            onmouseover: move |_| carousel_state.write().block_autoscoll = true,
+            onmouseleave: move |_| carousel_state.write().block_autoscoll = false,
+            ..props.attributes,
+            {props.children}
+            div { class: "absolute left-1/2 -translate-x-1/2 bottom-1 flex space-x-2",
+                for i in 0..carousel_state.read().carousel_size {
+                    div {
+                        class: if i == carousel_state.read().current_item_key { "size-2 rounded-full bg-foreground" } else { "size-2 rounded-full bg-foreground/50" },
+                    }
+                }
+            }
+        }
     }
 }
 
@@ -264,7 +307,13 @@ pub fn CarouselTrigger(mut props: CarouselTriggerProps) -> Element {
     let icon = get_next_prev_icons(props.next);
 
     rsx! {
-        button { onclick, ..props.attributes, {icon} }
+        button {
+            onmouseover: move |_| carousel_state.write().block_autoscoll = true,
+            onmouseleave: move |_| carousel_state.write().block_autoscoll = false,
+            onclick,
+            ..props.attributes,
+            {icon}
+        }
     }
 }
 
