@@ -62,10 +62,18 @@ impl std::default::Default for ModalProps {
 /// ```
 #[component]
 pub fn Modal(props: ModalProps) -> Element {
-    use_context_provider(|| Signal::new(ModalState::new(props.is_active)));
+    let mut state = use_context_provider(|| Signal::new(ModalState::new(props.is_active)));
 
     rsx! {
-        {props.children}
+        div {
+            tabindex: 0,
+            onkeydown: move |e: KeyboardEvent| {
+                if e.key() == Key::Escape {
+                    state.write().toggle();
+                }
+            },
+            {props.children}
+        }
     }
 }
 
@@ -137,20 +145,13 @@ pub fn ModalClose(mut props: ModalCloseProps) -> Element {
         props.update_class_attribute();
     }
 
-    let onkeypress = move |event: KeyboardEvent| {
-        event.stop_propagation();
-        if event.data.key() == Key::Escape {
-            state.write().toggle();
-        }
-    };
-
     let onclick = move |event: Event<MouseData>| {
         event.stop_propagation();
         state.write().toggle();
     };
 
     rsx! {
-        div { onclick, onkeypress, ..props.attributes,
+        div { onclick, ..props.attributes,
             if !has_children {
                 Icon { icon: Icons::Close }
             } else {
