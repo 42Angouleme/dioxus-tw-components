@@ -33,7 +33,7 @@ impl ToTableData for SortableRow {
     }
 }
 
-#[derive(Clone, PartialEq)]
+#[derive(Debug, Clone, PartialEq)]
 pub struct SortableCell {
     content: Element,
     style: String,
@@ -95,6 +95,23 @@ pub enum KeyType {
     Integer(i128),
     UnsignedInteger(u128),
     Object(Box<dyn Sortable>),
+}
+
+impl std::fmt::Debug for KeyType {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        write!(
+            f,
+            "{}",
+            match self {
+                Self::None => "None",
+                Self::Element(_) => "Element",
+                Self::String(_) => "String",
+                Self::Integer(_) => "Integer",
+                Self::UnsignedInteger(_) => "UnsignedInteger",
+                _ => "Object(_)",
+            },
+        )
+    }
 }
 
 impl From<&str> for KeyType {
@@ -244,6 +261,9 @@ pub struct SortTableProps {
     #[props(optional, into)]
     default_sort: Option<String>,
 
+    #[props(optional, into)]
+    current_sort_index: Option<Signal<usize>>,
+
     headers: Vec<String>,
 
     data: ReadOnlySignal<Vec<SortableRow>>,
@@ -253,20 +273,29 @@ pub struct SortTableState {
     headers: Vec<String>,
     data: Vec<SortableRow>,
     sorted_col_index: usize,
+    current_sort_index: Option<Signal<usize>>,
     sort_ascending: bool,
 }
 
 impl SortTableState {
-    pub fn new(headers: Vec<String>, data: Vec<SortableRow>) -> Self {
+    pub fn new(
+        headers: Vec<String>,
+        data: Vec<SortableRow>,
+        current_sort_index: Option<Signal<usize>>,
+    ) -> Self {
         SortTableState {
             headers,
             data,
             sorted_col_index: 0,
             sort_ascending: true,
+            current_sort_index,
         }
     }
 
     pub fn set_sorted_col_index(&mut self, sorted_col_index: usize) {
+        if let Some(mut signal) = self.current_sort_index {
+            signal.set(sorted_col_index);
+        }
         self.sorted_col_index = sorted_col_index;
     }
 
@@ -323,13 +352,21 @@ where
 pub fn SortTable(mut props: SortTableProps) -> Element {
     props.update_class_attribute();
     let mut state = use_signal(|| {
-        SortTableState::new(props.headers.clone(), props.data.read().clone())
-            .set_default_sort(props.default_sort.clone())
+        SortTableState::new(
+            props.headers.clone(),
+            props.data.read().clone(),
+            props.current_sort_index.clone(),
+        )
+        .set_default_sort(props.default_sort.clone())
     });
     use_effect(move || {
         state.set(
-            SortTableState::new(props.headers.clone(), props.data.read().clone())
-                .set_default_sort(props.default_sort.clone()),
+            SortTableState::new(
+                props.headers.clone(),
+                props.data.read().clone(),
+                props.current_sort_index.clone(),
+            )
+            .set_default_sort(props.default_sort.clone()),
         );
     });
 
