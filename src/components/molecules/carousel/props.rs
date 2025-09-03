@@ -156,7 +156,7 @@ pub fn CarouselWindow(mut props: CarouselWindowProps) -> Element {
             carousel_state.peek().autoscroll_duration
         ));
         spawn(async move {
-            while let Ok(_) = timer.recv::<bool>().await {
+            while (timer.recv::<bool>().await).is_ok() {
                 // Same as above
                 if carousel_state.peek().autoscroll_duration != 0
                     && !carousel_state.peek().block_autoscoll

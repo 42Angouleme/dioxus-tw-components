@@ -296,17 +296,16 @@ impl SortTableState {
     ///
     /// Else, the column will be sorted
     pub fn set_default_sort(mut self, default_sorted_column: Option<String>) -> Self {
-        if let Some(default_sorted_column) = default_sorted_column {
-            if let Some(index) = self
+        if let Some(default_sorted_column) = default_sorted_column
+            && let Some(index) = self
                 .headers
                 .iter()
                 .position(|header| header == &default_sorted_column)
-            {
-                self.sorted_col_index = index;
-                sort_table_keytype(&mut self.data, |t: &SortableRow| {
-                    t.to_keytype()[index].clone()
-                });
-            }
+        {
+            self.sorted_col_index = index;
+            sort_table_keytype(&mut self.data, |t: &SortableRow| {
+                t.to_keytype()[index].clone()
+            });
         }
         self
     }
