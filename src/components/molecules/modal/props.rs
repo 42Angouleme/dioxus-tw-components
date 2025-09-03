@@ -62,10 +62,18 @@ impl std::default::Default for ModalProps {
 /// ```
 #[component]
 pub fn Modal(props: ModalProps) -> Element {
-    use_context_provider(|| Signal::new(ModalState::new(props.is_active)));
+    let mut state = use_context_provider(|| Signal::new(ModalState::new(props.is_active)));
 
     rsx! {
-        {props.children}
+        div {
+            tabindex: 0,
+            onkeydown: move |e: KeyboardEvent| {
+                if e.key() == Key::Escape {
+                    state.write().toggle();
+                }
+            },
+            {props.children}
+        }
     }
 }
 
