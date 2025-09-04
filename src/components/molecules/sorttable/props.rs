@@ -327,7 +327,7 @@ impl SortTableState {
     ///
     /// If None or the column is not found, the first column will be sorted
     ///
-    /// Else, the column will be sorted
+    /// Else, the column will be 
     pub fn set_default_sort(mut self, column_name: Option<String>) -> Self {
         let column_index = column_name
             .and_then(|col| self.headers.iter().position(|h| h == &col))
