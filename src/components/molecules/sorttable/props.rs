@@ -97,6 +97,62 @@ pub enum KeyType {
     Object(Box<dyn Sortable>),
 }
 
+impl PartialEq for KeyType {
+    fn eq(&self, other: &Self) -> bool {
+        match (self, other) {
+            (KeyType::None, KeyType::None) => true,
+            (KeyType::String(a), KeyType::String(b)) => a == b,
+            (KeyType::Integer(a), KeyType::Integer(b)) => a == b,
+            (KeyType::UnsignedInteger(a), KeyType::UnsignedInteger(b)) => a == b,
+            (KeyType::Object(a), KeyType::Object(b)) => a.to_sortable() == b.to_sortable(),
+            _ => false,
+        }
+    }
+}
+
+impl Eq for KeyType {}
+
+impl PartialOrd for KeyType {
+    fn partial_cmp(&self, other: &Self) -> Option<std::cmp::Ordering> {
+        Some(self.cmp(other))
+    }
+}
+
+impl Ord for KeyType {
+    fn cmp(&self, other: &Self) -> std::cmp::Ordering {
+        match (self, other) {
+            (KeyType::String(a), KeyType::String(b)) => a.cmp(b),
+            (KeyType::Integer(a), KeyType::Integer(b)) => b.cmp(a),
+            (KeyType::UnsignedInteger(a), KeyType::UnsignedInteger(b)) => b.cmp(a),
+            (KeyType::Object(a), KeyType::Object(b)) => a.to_sortable().cmp(&b.to_sortable()),
+            _ => std::cmp::Ordering::Equal,
+        }
+    }
+}
+
+impl std::fmt::Display for KeyType {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match self {
+            KeyType::None => {
+                write!(f, "None")
+            }
+            KeyType::String(str) => {
+                write!(f, "{str}")
+            }
+            KeyType::Integer(nb) => {
+                write!(f, "{nb}")
+            }
+            KeyType::UnsignedInteger(nb) => {
+                write!(f, "{nb}")
+            }
+            KeyType::Object(obj) => {
+                write!(f, "{}", obj.to_string())
+            }
+            _ => write!(f, ""),
+        }
+    }
+}
+
 impl std::fmt::Debug for KeyType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         write!(
@@ -186,62 +242,6 @@ impl From<u8> for KeyType {
     }
 }
 
-impl PartialEq for KeyType {
-    fn eq(&self, other: &Self) -> bool {
-        match (self, other) {
-            (KeyType::None, KeyType::None) => true,
-            (KeyType::String(a), KeyType::String(b)) => a == b,
-            (KeyType::Integer(a), KeyType::Integer(b)) => a == b,
-            (KeyType::UnsignedInteger(a), KeyType::UnsignedInteger(b)) => a == b,
-            (KeyType::Object(a), KeyType::Object(b)) => a.to_sortable() == b.to_sortable(),
-            _ => false,
-        }
-    }
-}
-
-impl Eq for KeyType {}
-
-impl PartialOrd for KeyType {
-    fn partial_cmp(&self, other: &Self) -> Option<std::cmp::Ordering> {
-        Some(self.cmp(other))
-    }
-}
-
-impl Ord for KeyType {
-    fn cmp(&self, other: &Self) -> std::cmp::Ordering {
-        match (self, other) {
-            (KeyType::String(a), KeyType::String(b)) => a.cmp(b),
-            (KeyType::Integer(a), KeyType::Integer(b)) => b.cmp(a),
-            (KeyType::UnsignedInteger(a), KeyType::UnsignedInteger(b)) => b.cmp(a),
-            (KeyType::Object(a), KeyType::Object(b)) => a.to_sortable().cmp(&b.to_sortable()),
-            _ => std::cmp::Ordering::Equal,
-        }
-    }
-}
-
-impl std::fmt::Display for KeyType {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            KeyType::None => {
-                write!(f, "None")
-            }
-            KeyType::String(str) => {
-                write!(f, "{str}")
-            }
-            KeyType::Integer(nb) => {
-                write!(f, "{nb}")
-            }
-            KeyType::UnsignedInteger(nb) => {
-                write!(f, "{nb}")
-            }
-            KeyType::Object(obj) => {
-                write!(f, "{}", obj.to_string())
-            }
-            _ => write!(f, ""),
-        }
-    }
-}
-
 #[derive(Clone, PartialEq, Props, UiComp)]
 pub struct SortTableProps {
     #[props(extends = GlobalAttributes)]
@@ -261,8 +261,10 @@ pub struct SortTableProps {
     #[props(optional, into)]
     default_sort: Option<String>,
 
-    #[props(optional, into)]
-    current_sort_index: Option<Signal<usize>>,
+    /// Provides a handle to the current sorted column index.
+    /// Can be set to 0, will be updated to Self::default_sort if provided and valid
+    #[props(default = use_signal(|| 0), into)]
+    sorted_col_index: Signal<usize>,
 
     headers: Vec<String>,
 
@@ -272,8 +274,7 @@ pub struct SortTableProps {
 pub struct SortTableState {
     headers: Vec<String>,
     data: Vec<SortableRow>,
-    sorted_col_index: usize,
-    current_sort_index: Option<Signal<usize>>,
+    sorted_col_index: Signal<usize>,
     sort_ascending: bool,
 }
 
@@ -281,62 +282,66 @@ impl SortTableState {
     pub fn new(
         headers: Vec<String>,
         data: Vec<SortableRow>,
-        current_sort_index: Option<Signal<usize>>,
+        current_sort_index: Signal<usize>,
     ) -> Self {
         SortTableState {
             headers,
             data,
-            sorted_col_index: 0,
             sort_ascending: true,
-            current_sort_index,
+            sorted_col_index: current_sort_index,
         }
     }
 
     pub fn set_sorted_col_index(&mut self, sorted_col_index: usize) {
-        if let Some(mut signal) = self.current_sort_index {
-            signal.set(sorted_col_index);
-        }
-        self.sorted_col_index = sorted_col_index;
+        self.sorted_col_index.set(sorted_col_index);
     }
 
     pub fn get_sorted_col_index(&self) -> usize {
-        self.sorted_col_index
+        *self.sorted_col_index.read()
     }
 
     pub fn reverse_data(&mut self) {
         self.data.reverse();
     }
 
-    pub fn toggle_sort_ascending(&mut self) {
+    pub fn toggle_sort_direction(&mut self) {
         self.sort_ascending = !self.sort_ascending;
     }
 
-    pub fn set_sort_ascending(&mut self, sort_ascending: bool) {
-        self.sort_ascending = sort_ascending;
+    pub fn set_sort_direction(&mut self, ascending: bool) {
+        self.sort_ascending = ascending;
     }
 
-    pub fn get_sort_ascending(&self) -> bool {
+    pub fn is_sort_ascending(&self) -> bool {
         self.sort_ascending
     }
 
-    /// Set the default sort column
+    fn is_column_sortable(&self, column_index: usize) -> bool {
+        self.data
+            .first()
+            .and_then(|row| row.get(column_index))
+            .is_some_and(|cell| cell.sort_by != KeyType::None)
+    }
+
+    /// Set the default sort column based on its name
     ///
-    /// If the column is not found, the first column will be sorted
+    /// If None or the column is not found, the first column will be sorted
     ///
     /// Else, the column will be sorted
-    pub fn set_default_sort(mut self, default_sorted_column: Option<String>) -> Self {
-        if let Some(default_sorted_column) = default_sorted_column {
-            if let Some(index) = self
-                .headers
-                .iter()
-                .position(|header| header == &default_sorted_column)
-            {
-                self.sorted_col_index = index;
-                sort_table_keytype(&mut self.data, |t: &SortableRow| {
-                    t.to_keytype()[index].clone()
-                });
-            }
+    pub fn set_default_sort(mut self, column_name: Option<String>) -> Self {
+        let column_index = column_name
+            .and_then(|col| self.headers.iter().position(|h| h == &col))
+            .filter(|&idx| self.is_column_sortable(idx))
+            .unwrap_or(0);
+
+        self.sorted_col_index.set(column_index);
+
+        if self.is_column_sortable(column_index) {
+            sort_table_keytype(&mut self.data, |t: &SortableRow| {
+                t.to_keytype()[column_index].clone()
+            });
         }
+
         self
     }
 }
@@ -355,7 +360,7 @@ pub fn SortTable(mut props: SortTableProps) -> Element {
         SortTableState::new(
             props.headers.clone(),
             props.data.read().clone(),
-            props.current_sort_index.clone(),
+            props.sorted_col_index,
         )
         .set_default_sort(props.default_sort.clone())
     });
@@ -364,7 +369,7 @@ pub fn SortTable(mut props: SortTableProps) -> Element {
             SortTableState::new(
                 props.headers.clone(),
                 props.data.read().clone(),
-                props.current_sort_index.clone(),
+                props.sorted_col_index,
             )
             .set_default_sort(props.default_sort.clone()),
         );
@@ -393,41 +398,29 @@ pub fn SortTable(mut props: SortTableProps) -> Element {
                         TableHead {
                             class: "{header_class}",
                             onclick: move |_| {
-                                if state
-                                    .read()
-                                    .data
-                                    .first()
-                                    .is_some_and(|row| {
-                                        row.get(index).is_some_and(|cell| cell.sort_by == KeyType::None)
-                                    })
-                                {
+                                if state.peek().is_column_sortable(index) == false {
                                     return;
                                 }
                                 let sorted_col_index = state.read().get_sorted_col_index();
                                 if sorted_col_index == index {
                                     state.write().reverse_data();
-                                    state.write().toggle_sort_ascending();
+                                    state.write().toggle_sort_direction();
                                 } else {
                                     sort_table_keytype(
                                         &mut state.write().data,
                                         |t: &SortableRow| t.to_keytype()[index].clone(),
                                     );
-                                    state.write().set_sort_ascending(true);
+                                    state.write().set_sort_direction(true);
                                 }
                                 state.write().set_sorted_col_index(index);
                             },
                             div { class: "flex flex-row items-center justify-between space-x-1",
                                 p { {head.to_string()} }
-                                if state
-                                    .read()
-                                    .data
-                                    .first()
-                                    .is_some_and(|row| {
-                                        row.get(index).is_some_and(|cell| cell.sort_by != KeyType::None)
-                                    }) && state.read().get_sorted_col_index() == index
+                                if state.read().is_column_sortable(index)
+                                    && state.read().get_sorted_col_index() == index
                                 {
                                     Icon {
-                                        class: if state.read().get_sort_ascending() { "fill-foreground transition-all -rotate-180" } else { "fill-foreground transition-all" },
+                                        class: if state.read().is_sort_ascending() { "fill-foreground transition-all -rotate-180" } else { "fill-foreground transition-all" },
                                         icon: Icons::ExpandMore,
                                     }
                                 }
