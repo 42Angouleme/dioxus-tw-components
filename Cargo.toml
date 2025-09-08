@@ -1,6 +1,6 @@
 [package]
 name = "dioxus-tw-components"
-version = "0.1.14"
+version = "0.2.0"
 edition = "2024"
 license = "MIT OR Apache-2.0"
 description = "Components made for Dioxus using TailwindCSS 4."
@@ -14,26 +14,30 @@ authors = ["Louis Truchelut", "kbz_8", "Ziale", "gpoblon", "42Angouleme"]
 name = "dioxus_tw_components"
 path = "src/lib.rs"
 
-[features]
-theme = []
+[[example]]
+name = "main"
 
 [dependencies]
-dioxus-tw-components-sorttable-macro = { version = "0.1.0", path = "./dioxus-tw-components-sorttable-macro" }
-dioxus-tw-components-macro = { version = "0.1.0", path = "./dioxus-tw-components-macro" }
-log = "0.4.22"
-dioxus = { version = "0.6.3", features = ["web"] }
-console = "0.15.10"
-tailwind_fuse = { version = "0.3.2", features = ["variant"] }
-
-serde_json = "1.0.139"
-
-slugify = "0.1.0"
-
-chrono = "0.4.39"
+dioxus = { version = "0.7.0-rc.0", features = [] }
 strum = { version = "0.27.1", default-features = false, features = ["derive"] }
 
-[target.'cfg(target_arch = "wasm32")'.dependencies]
-gloo-timers = { version = "0.3.0", features = ["futures"] }
+[features]
+default = ["web"]
+web = ["dioxus/web"]
+desktop = ["dioxus/desktop"]
+mobile = ["dioxus/mobile"]
 
-[target.'cfg(not(target_arch = "wasm32"))'.dependencies]
-tokio = { version = "1.43.0", features = ["time"] }
+[profile]
+
+[profile.wasm-dev]
+inherits = "dev"
+opt-level = 1
+
+[profile.server-dev]
+inherits = "dev"
+
+[profile.android-dev]
+inherits = "dev"
+
+[build-dependencies]
+minify-html = "0.16.4"

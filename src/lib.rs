@@ -1,48 +1,21 @@
-#![allow(non_snake_case)]
-
-use dioxus::html::geometry::*;
-
-pub mod attributes;
-
-mod components;
-pub use components::*;
-
 pub mod bootstrap;
+pub use bootstrap::*;
 
-pub mod hooks;
+pub mod components;
+pub use components::button::*;
+pub use components::icon::*;
+pub use components::placeholder::*;
 
-pub mod prelude;
+use dioxus::dioxus_core::{Attribute, AttributeValue};
 
-#[cfg(feature = "theme")]
-pub mod theme;
-
-pub use dioxus_tw_components_sorttable_macro::Row;
-
-pub struct LibState {
-    last_click_coordinates: Coordinates,
-}
-
-impl std::default::Default for LibState {
-    fn default() -> Self {
-        Self {
-            last_click_coordinates: Coordinates::new(
-                ScreenPoint::zero(),
-                ClientPoint::zero(),
-                ElementPoint::zero(),
-                PagePoint::zero(),
-            ),
+pub(crate) fn setup_class_attribute(attributes: &mut Vec<Attribute>, default_classes: &str) {
+    // Find the class attribute in the vec and modify it
+    if let Some(class_attribute) = attributes.iter_mut().find(|attr| attr.name == "class") {
+        if let AttributeValue::Text(ref mut value) = class_attribute.value {
+            *value = format!("{} {}", default_classes, value.clone());
         }
+    } else {
+        // Else push the class attribute in the vec
+        attributes.push(Attribute::new("class", default_classes, None, true));
     }
 }
-
-impl LibState {
-    pub fn get_last_click_coordinates(&self) -> &Coordinates {
-        &self.last_click_coordinates
-    }
-
-    pub fn set_last_click_coordinates(&mut self, coordinates: Coordinates) {
-        self.last_click_coordinates = coordinates;
-    }
-}
-
-extern crate slugify;
