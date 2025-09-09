@@ -3,8 +3,6 @@
 	border-radius: var(--radius);
 	height: 6rem;
 	width: 6rem;
-	position: relative;
-	overflow: hidden;
 }
 
 .placeholder[data-color="primary"] {
@@ -33,11 +31,6 @@
 
 .placeholder[data-animation="light"] {
 	animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-	@keyframes pulse {
-		50% {
-			opacity: 0.5;
-		}
-	}
 }
 
 .placeholder[data-animation="full"] {
@@ -45,18 +38,26 @@
 	overflow: hidden;
 }
 
-.placeholder::before {
+.placeholder[data-animation="full"]::before {
+	content: "";
 	position: absolute;
 	top: 0;
 	left: 0;
 	right: 0;
 	bottom: 0;
 	transform: translateX(-100%);
-	background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.4));
+	background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
 	animation: shimmer 2s infinite;
-	@keyframes shimmer {
-		100% {
-			transform: translateX(200%);
-		}
+}
+
+@keyframes pulse {
+	50% {
+		opacity: 0.5;
+	}
+}
+
+@keyframes shimmer {
+	100% {
+		transform: translateX(100%);
 	}
 }

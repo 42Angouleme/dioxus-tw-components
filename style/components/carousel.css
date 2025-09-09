@@ -1,0 +1,79 @@
+.carousel-container {
+	width: 100%;
+	@media (width >= 40rem) {
+		max-width: 40rem;
+	}
+	@media (width >= 48rem) {
+		max-width: 48rem;
+	}
+	@media (width >= 64rem) {
+		max-width: 64rem;
+	}
+	@media (width >= 80rem) {
+		max-width: 80rem;
+	}
+	@media (width >= 96rem) {
+		max-width: 96rem;
+	}
+}
+
+.carousel {
+	display: flex;
+	align-items: center;
+}
+
+.carousel-window {
+	position: relative;
+	overflow: hidden;
+	flex-grow: 1;
+	border-radius: var(--radius);
+	border: 1px solid;
+	border-color: var(--border);
+}
+
+.carousel-sub-window {
+	position: absolute;
+	left: 50%;
+	transform: translateX(-50%);
+	display: flex;
+}
+
+.carousel-sub-window > :not(:last-child) {
+	margin-inline-start: 0px;
+	margin-inline-end: 0.5rem;
+};
+
+.carousel-content {
+	display: flex;
+}
+
+.carousel-content[data-animation="light"] {
+	transition-property: transform, translate, scale, rotate;
+	transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+	transition-duration: 500ms;
+}
+
+.carousel-content[data-animation="full"] {
+	transition-property: transform, translate, scale, rotate;
+	transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+	transition-duration: 500ms;
+}
+
+.carousel-item {
+	position: relative;
+	min-width: 0px;
+	flex-shrink: 0px;
+	flex-grow: 0px;
+	padding: 0.5rem;
+	flex-basis: 100%;
+}
+
+.carousel-trigger {
+	width: 5rem;
+	height: 5rem;
+	display: flex;
+	flex-wrap: nowrap;
+	align-items: center;
+	justify: center;
+	cursor: pointer;
+}

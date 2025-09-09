@@ -1,8 +1,7 @@
 use dioxus::prelude::*;
 use dioxus_core::AttributeValue;
-use dioxus_tw_components_macro::UiComp;
 
-use crate::{attributes::*, components::atoms::icon::*};
+use crate::components::icon::*;
 
 struct CarouselState {
     is_circular: bool,
@@ -68,7 +67,7 @@ impl CarouselState {
     }
 }
 
-#[derive(Clone, PartialEq, Props, UiComp)]
+#[derive(Clone, PartialEq, Props)]
 pub struct CarouselProps {
     #[props(extends = div, extends = GlobalAttributes)]
     attributes: Vec<Attribute>,
@@ -83,30 +82,6 @@ pub struct CarouselProps {
     children: Element,
 }
 
-impl std::default::Default for CarouselProps {
-    fn default() -> Self {
-        Self {
-            attributes: Vec::<Attribute>::default(),
-            default_item_key: 0,
-            is_circular: false,
-            autoscroll_duration: 0,
-            children: rsx! {},
-        }
-    }
-}
-
-/// Usage :
-/// ```ignore
-/// Carousel { default_item_key: 0,
-///     CarouselTrigger { next: false }
-///     CarouselWindow {
-///         CarouselContent { id: "carousel-1",
-///             CarouselItem { item_key: 0, div { "ITEM 1" } }
-///             CarouselItem { item_key: 1, div { "ITEM 2" } }
-///         }
-///     }
-///     CarouselTrigger { next: true }
-/// }
 #[component]
 pub fn Carousel(mut props: CarouselProps) -> Element {
     use_context_provider(|| {
@@ -117,14 +92,15 @@ pub fn Carousel(mut props: CarouselProps) -> Element {
         ))
     });
 
-    props.update_class_attribute();
+    let default_classes = "carousel-container carousel";
+    crate::setup_class_attribute(&mut props.attributes, default_classes);
 
     rsx! {
         div { ..props.attributes,{props.children} }
     }
 }
 
-#[derive(Clone, PartialEq, Props, UiComp)]
+#[derive(Clone, PartialEq, Props)]
 pub struct CarouselWindowProps {
     #[props(extends = div, extends = GlobalAttributes)]
     attributes: Vec<Attribute>,
@@ -132,20 +108,9 @@ pub struct CarouselWindowProps {
     children: Element,
 }
 
-impl std::default::Default for CarouselWindowProps {
-    fn default() -> Self {
-        Self {
-            attributes: Vec::<Attribute>::default(),
-            children: rsx! {},
-        }
-    }
-}
-
 #[component]
 pub fn CarouselWindow(mut props: CarouselWindowProps) -> Element {
     let mut carousel_state = use_context::<Signal<CarouselState>>();
-
-    props.update_class_attribute();
 
     use_effect(move || {
         let mut timer = document::eval(&format!(
@@ -168,43 +133,41 @@ pub fn CarouselWindow(mut props: CarouselWindowProps) -> Element {
         });
     });
 
+    let default_classes = "carousel-window";
+    crate::setup_class_attribute(&mut props.attributes, default_classes);
+
     rsx! {
         div {
             onmouseover: move |_| carousel_state.write().block_autoscoll = true,
             onmouseleave: move |_| carousel_state.write().block_autoscoll = false,
             ..props.attributes,
             {props.children}
-            div { class: "absolute left-1/2 -translate-x-1/2 bottom-1 flex space-x-2",
+            div { class: "carousel-sub-window",
                 for i in 0..carousel_state.read().carousel_size {
-                    div { class: if i == carousel_state.read().current_item_key { "size-2 rounded-full bg-foreground" } else { "size-2 rounded-full bg-foreground/50" } }
+                    div {
+                        style: format!(
+                            "width: 0.5rem; height: 0.5rem; border-radius: calc(infinity * 1px); {};",
+                            if i == carousel_state.read().current_item_key {
+                                "background-color: var(--foreground)"
+                            } else {
+                                "background-color: color-mix(in oklab, var(--foreground) 50%, transparent)"
+                            },
+                        ),
+                    }
                 }
             }
         }
     }
 }
 
-#[derive(Clone, PartialEq, Props, UiComp)]
+#[derive(Clone, PartialEq, Props)]
 pub struct CarouselContentProps {
     #[props(extends = div, extends = GlobalAttributes)]
     attributes: Vec<Attribute>,
 
     id: ReadOnlySignal<String>,
 
-    #[props(default)]
-    pub animation: ReadOnlySignal<Animation>,
-
     children: Element,
-}
-
-impl std::default::Default for CarouselContentProps {
-    fn default() -> Self {
-        Self {
-            attributes: Vec::<Attribute>::default(),
-            id: ReadOnlySignal::<String>::default(),
-            animation: ReadOnlySignal::<Animation>::default(),
-            children: rsx! {},
-        }
-    }
 }
 
 /// You need to pass it an id for it to work
@@ -212,14 +175,15 @@ impl std::default::Default for CarouselContentProps {
 pub fn CarouselContent(mut props: CarouselContentProps) -> Element {
     let mut carousel_state = use_context::<Signal<CarouselState>>();
 
-    props.update_class_attribute();
-
     let style = use_memo(move || {
         format!(
             "transform: translateX(-{}px)",
             carousel_state.read().get_current_translation()
         )
     });
+
+    let default_classes = "carousel-content";
+    crate::setup_class_attribute(&mut props.attributes, default_classes);
 
     rsx! {
         div {
@@ -241,7 +205,7 @@ pub fn CarouselContent(mut props: CarouselContentProps) -> Element {
     }
 }
 
-#[derive(Clone, PartialEq, Props, UiComp)]
+#[derive(Clone, PartialEq, Props)]
 pub struct CarouselItemProps {
     /// Represent position in the carousel
     item_key: u32,
@@ -252,25 +216,16 @@ pub struct CarouselItemProps {
     children: Element,
 }
 
-impl std::default::Default for CarouselItemProps {
-    fn default() -> Self {
-        Self {
-            item_key: 0,
-            attributes: Vec::<Attribute>::default(),
-            children: rsx! {},
-        }
-    }
-}
-
 #[component]
 pub fn CarouselItem(mut props: CarouselItemProps) -> Element {
     let mut state = use_context::<Signal<CarouselState>>();
 
-    props.update_class_attribute();
-
     let onmounted = move |_| {
         state.write().increment_carousel_size();
     };
+
+    let default_classes = "carousel-item";
+    crate::setup_class_attribute(&mut props.attributes, default_classes);
 
     rsx! {
         div {
@@ -282,7 +237,7 @@ pub fn CarouselItem(mut props: CarouselItemProps) -> Element {
     }
 }
 
-#[derive(Default, Clone, PartialEq, Props, UiComp)]
+#[derive(Default, Clone, PartialEq, Props)]
 pub struct CarouselTriggerProps {
     #[props(default = false)]
     next: bool,
@@ -295,14 +250,15 @@ pub struct CarouselTriggerProps {
 pub fn CarouselTrigger(mut props: CarouselTriggerProps) -> Element {
     let mut carousel_state = use_context::<Signal<CarouselState>>();
 
-    props.update_class_attribute();
-
     let onclick = move |_| async move {
         scroll_carousel(props.next, carousel_state);
         carousel_state.write().translate();
     };
 
     let icon = get_next_prev_icons(props.next);
+
+    let default_classes = "carousel-trigger";
+    crate::setup_class_attribute(&mut props.attributes, default_classes);
 
     rsx! {
         button {

@@ -17,6 +17,10 @@
 	cursor: pointer;
 }
 
+.buttongroup .button {
+	border-radius: 0px;
+}
+
 .button[data-size="xs"] {
 	height: 1rem;
 	padding-left: 0.5rem;
@@ -91,7 +95,7 @@
 .button[data-variant="outline"] {
 	--btn-bg: transparent;
 	--btn-text: var(--btn-color);
-	--btn-border: 1px solid var(--btn-color);
+	--btn-border: 2px solid var(--btn-color);
 }
 
 .button[data-variant="ghost"] {

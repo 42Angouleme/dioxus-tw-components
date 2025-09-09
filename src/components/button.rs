@@ -39,7 +39,6 @@ pub fn Button(mut props: ButtonProps) -> Element {
 
     rsx! {
         button {
-            class: if !props.noclasses { "button" },
             onclick,
             ondoubleclick,
             onmousedown,

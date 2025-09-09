@@ -33,39 +33,24 @@
 
 @layer base {
 	 :root {
-		--background: hsl(0 0% 100%);
-		--foreground: hsl(240 10% 3.9%);
-		--primary: hsl(292 100% 30%);
-		--primary-foreground: hsl(355.7 100% 97.3%);
-		--secondary: hsl(123 100% 22%);
-		--secondary-foreground: hsl(123 100% 70%);
-		--accent: hsl(240 4.8% 95.9%);
-		--accent-foreground: hsl(240 5.9% 10%);
+		--background: #000;
+		--foreground: #eee;
+		--primary: #eee;
+		--primary-foreground: #000;
+		--secondary: hsl(240 3.7% 15.9%);
+		--secondary-foreground: hsl(0 0% 98%);
+		--accent: hsl(12 6.5% 15.1%);
+		--accent-foreground: hsl(0 0% 98%);
 		--muted: hsl(240 4.8% 95.9%);
 		--muted-foreground: hsl(240 3.8% 46.1%);
 		--destructive: hsl(0 84.2% 60.2%);
 		--destructive-foreground: hsl(0 0% 98%);
 		--success: hsl(142 70% 45%);
 		--success-foreground: hsl(120 100% 97.3%);
-		--border: hsl(240 5.9% 90%);
-		--input: hsl(240 5.9% 90%);
-		--ring: hsl(240 10% 3.9%);
+		--border: #fff;
+		--input: hsl(240 3.7% 15.9%);
 		--shadow: 0 0px 0px 0px rgba(0, 0, 0, 0.3);
 		--radius: 10px;
-	}
-	.dark {
-		--background: hsl(20 14.3% 4.1%);
-		--foreground: hsl(0 0% 95%);
-		--primary: hsl(346.8 77.2% 49.8%);
-		--primary-foreground: hsl(355.7 100% 97.3%);
-		--secondary: hsl(240 3.7% 15.9%);
-		--secondary-foreground: hsl(0 0% 98%);
-		--accent: hsl(12 6.5% 15.1%);
-		--accent-foreground: hsl(0 0% 98%);
-		--border: hsl(240 3.7% 15.9%);
-		--input: hsl(240 3.7% 15.9%);
-		--ring: hsl(240 10% 3.9%);
-		--shadow: 0 0px 0px 0px rgba(255, 255, 255, 0.3);
 	}
 	.h1 {
 		@apply text-4xl font-extrabold md:text-5xl;
@@ -93,5 +78,8 @@
 	}
 	.anchor {
 		@apply text-foreground/70 hover:text-foreground transition-colors cursor-pointer;
+	}
+	body {
+		@apply bg-background;
 	}
 }

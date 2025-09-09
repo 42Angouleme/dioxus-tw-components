@@ -1,0 +1,40 @@
+.accordion-trigger {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	width: 100%;
+	font-weight: 500;
+	color: var(--foreground);
+	cursor: pointer;
+	user-select: none;
+}
+
+.default-accordion-trigger {
+	transition-property: transform, translate, scale, rotate;
+	transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+	transition-duration: 300ms;
+}
+
+.accordion-trigger[data-state="active"] .default-accordion-trigger {
+	rotate: -180deg;
+}
+
+.accordion-content {
+	font-size: 0.875rem;
+	color: var(--foreground);
+	overflow: hidden;
+	margin-bottom: 0.5rem;
+	transition-property: none;
+}
+
+.accordion-content[data-animation="light"] {
+	transition-property: all;
+	transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+	transition-duration: 150ms;
+}
+
+.accordion-content[data-animation="full"] {
+	transition-property: all;
+	transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+	transition-duration: 150ms;
+}
