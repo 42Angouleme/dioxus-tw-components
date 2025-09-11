@@ -32,6 +32,7 @@ pub use components::textarea::*;
 pub use components::toast::*;
 pub use components::toggle::*;
 
+use dioxus::prelude::*;
 use dioxus::dioxus_core::{Attribute, AttributeValue};
 
 pub(crate) fn setup_class_attribute(attributes: &mut Vec<Attribute>, default_classes: &str) {
@@ -44,4 +45,17 @@ pub(crate) fn setup_class_attribute(attributes: &mut Vec<Attribute>, default_cla
         // Else push the class attribute in the vec
         attributes.push(Attribute::new("class", default_classes, None, true));
     }
+}
+
+use std::sync::atomic::AtomicUsize;
+
+const ID_PREFIX: &str = "dx42-";
+static UNIQUE_ID_COUNTER: AtomicUsize = AtomicUsize::new(0);
+
+pub(crate) fn use_unique_id() -> Signal<String> {
+    use_signal(|| format!(
+        "{}{}",
+        ID_PREFIX,
+        UNIQUE_ID_COUNTER.fetch_add(1, std::sync::atomic::Ordering::Relaxed)
+    ))
 }

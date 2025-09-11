@@ -80,6 +80,6 @@
 		@apply text-foreground/70 hover:text-foreground transition-colors cursor-pointer;
 	}
 	body {
-		@apply bg-background;
+		@apply bg-background pb-20;
 	}
 }

@@ -142,7 +142,7 @@ pub fn CarouselWindow(mut props: CarouselWindowProps) -> Element {
             onmouseleave: move |_| carousel_state.write().block_autoscoll = false,
             ..props.attributes,
             {props.children}
-            div { class: "carousel-sub-window",
+            div { class: "carousel-item-indicator",
                 for i in 0..carousel_state.read().carousel_size {
                     div {
                         style: format!(

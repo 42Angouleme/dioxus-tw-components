@@ -12,7 +12,7 @@ fn App() -> Element {
     rsx! {
         document::Stylesheet { href: TAILWIND_CSS }
         Bootstrap {}
-        div { class: "flex flex-col space-y-2 p-4 w-fit mx-auto text-foreground",
+        div { class: "flex flex-col space-y-2 p-4 w-fit mx-auto text-foreground justify-center items-center",
             Button {
                 "data-color": "primary",
                 "data-size": "lg",
@@ -54,6 +54,7 @@ fn App() -> Element {
             Icon { class: "text-5xl mx-auto", icon: Icons::Discord }
             Placeholder { "data-animation": "full" }
             Placeholder { "data-animation": "light" }
+            Checkbox { class: "!mb-2" }
             Separator { class: "!bg-white" }
         }
         div { class: "flex flex-col space-y-2 p-4 w-fit mx-auto text-foreground",
@@ -138,17 +139,21 @@ fn App() -> Element {
                 CarouselTrigger { next: false }
                 CarouselWindow {
                     CarouselContent { id: "carousel-prev", class: "h-32",
+                        "data-animation": "full",
                         CarouselItem { item_key: 0,
+                            class: "bg-primary/40",
                             div { class: "flex items-center justify-center h-full w-full font-bold text-foreground",
                                 "Item 1"
                             }
                         }
                         CarouselItem { item_key: 1,
+                            class: "bg-gradient-to-r from-primary/40 to-secondary/40",
                             div { class: "flex items-center justify-center h-full w-full font-bold text-foreground",
                                 "Item 2"
                             }
                         }
                         CarouselItem { item_key: 2,
+                            class: "bg-secondary/40",
                             div { class: "flex items-center justify-center h-full w-full font-bold text-foreground",
                                 "Item 3"
                             }
