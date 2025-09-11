@@ -16,11 +16,12 @@
 
 .hovercard-content {
     padding: 1rem;
-    background-color: var(--background);
+    background-color: var(--popover);
+    color: var(--popover-foreground);
     white-space: nowrap;
     border: 1px solid var(--border);
     border-radius: var(--radius);
-    box-shadow: var(--global-shadow);
+    box-shadow: var(--shadow);
     z-index: 30;
     opacity: 1;
     position: absolute;

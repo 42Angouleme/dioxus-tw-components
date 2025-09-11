@@ -5,9 +5,9 @@
     user-select: none;
     color: var(--foreground);
     background-color: var(--background);
-    border: 1px solid var(--input);
+    border: 1px solid var(--border);
     border-radius: var(--radius);
-    box-shadow: var(--global-shadow);
+    box-shadow: var(--shadow-sm);
     white-space: nowrap;
     cursor: pointer;
 }
@@ -39,11 +39,13 @@
     left: 50%;
     z-index: 50;
     min-width: 24rem;
-    background-color: var(--background);
+    background-color: var(--card);
+    color: var(--card-foreground);
     border: 1px solid var(--border);
     border-radius: var(--radius);
     position: fixed;
     transform: translate(-50%, -50%);
+    box-shadow: var(--shadow-lg);
 }
 
 .modal-content[data-state="inactive"] {

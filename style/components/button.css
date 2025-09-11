@@ -9,16 +9,16 @@
 	border: var(--btn-border);
 	color: var(--btn-text);
 
-	font-weight: 500; 
-	text-align: center; 
+	font-weight: 500;
+	text-align: center;
 	cursor: pointer;
-	user-select: none; 
+	user-select: none;
 	border-radius: var(--radius);
 	cursor: pointer;
 }
 
 .buttongroup .button {
-	border-radius: 0px;
+	border-radius: var(--radius);
 }
 
 .button[data-size="xs"] {

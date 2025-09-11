@@ -13,7 +13,7 @@
 
 .toggle:focus {
     outline: none;
-    box-shadow: 0 0 0 2px rgba(var(--ring-rgb), 0.2);
+    box-shadow: 0 0 0 2px hsl(var(--ring) / 0.2);
 }
 
 .toggle[data-state="checked"] {
@@ -32,7 +32,7 @@
     width: 1.25rem;
     border-radius: 50%;
     background-color: var(--background);
-    box-shadow: var(--global-shadow);
+    box-shadow: var(--shadow);
     transition: transform 0.2s ease;
     transform: translateX(0);
 }

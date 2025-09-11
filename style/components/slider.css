@@ -32,7 +32,7 @@
     background-color: var(--background);
     cursor: pointer;
     transition: all 0.2s ease;
-    box-shadow: var(--global-shadow);
+    box-shadow: var(--shadow);
 }
 
 .slider-thumb:hover {

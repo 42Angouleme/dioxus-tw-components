@@ -32,7 +32,7 @@
 .tabs-trigger[data-state="active"] {
     background-color: var(--background);
     color: var(--foreground);
-    box-shadow: var(--global-shadow);
+    box-shadow: var(--shadow);
 }
 
 .tabs-content {

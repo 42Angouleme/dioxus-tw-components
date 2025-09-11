@@ -14,7 +14,7 @@
 
 .input:focus {
     border-color: var(--ring);
-    box-shadow: 0 0 0 2px rgba(var(--ring-rgb), 0.2);
+    box-shadow: 0 0 0 2px hsl(var(--ring) / 0.2);
 }
 
 .input::placeholder {

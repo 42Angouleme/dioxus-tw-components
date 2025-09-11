@@ -5,7 +5,7 @@
     height: 2.25rem;
     width: 100%;
     border-radius: var(--radius);
-    border: 1px solid var(--input);
+    border: 1px solid var(--border);
     background-color: var(--background);
     padding: 0.5rem 0.75rem;
     font-size: 0.875rem;
@@ -17,7 +17,7 @@
 
 .select:focus {
     border-color: var(--ring);
-    box-shadow: 0 0 0 2px rgba(var(--ring-rgb), 0.2);
+    box-shadow: 0 0 0 2px hsl(var(--ring) / 0.2);
 }
 
 .select:disabled {
@@ -40,7 +40,7 @@
     border-radius: var(--radius);
     border: 1px solid var(--border);
     background-color: var(--background);
-    box-shadow: var(--global-shadow);
+    box-shadow: var(--shadow);
     margin-top: 0.25rem;
 }
 

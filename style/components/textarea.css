@@ -3,7 +3,7 @@
     min-height: 4.5rem;
     width: 100%;
     border-radius: var(--radius);
-    border: 1px solid var(--input);
+    border: 1px solid var(--border);
     background-color: var(--background);
     padding: 0.75rem;
     font-size: 0.875rem;
@@ -15,7 +15,7 @@
 
 .textarea:focus {
     border-color: var(--ring);
-    box-shadow: 0 0 0 2px rgba(var(--ring-rgb), 0.2);
+    box-shadow: 0 0 0 2px hsl(var(--ring) / 0.2);
 }
 
 .textarea::placeholder {
