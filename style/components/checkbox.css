@@ -13,10 +13,29 @@
 	cursor: pointer;
 }
 
-.checkbox[data-checked="checked"] {
+.checkbox[data-state="checked"] {
 	background-color: var(--foreground);
 	box-shadow: none;
 	color: var(--background);
+}
+
+/* Checkbox variants */
+.checkbox[data-variant="primary"][data-state="checked"] {
+	background-color: var(--primary);
+	border-color: var(--primary);
+	color: var(--primary-foreground);
+}
+
+.checkbox[data-variant="destructive"][data-state="checked"] {
+	background-color: var(--destructive);
+	border-color: var(--destructive);
+	color: var(--destructive-foreground);
+}
+
+.checkbox[data-variant="success"][data-state="checked"] {
+	background-color: var(--success);
+	border-color: var(--success);
+	color: var(--success-foreground);
 }
 
 .checkbox-indicator {

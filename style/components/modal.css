@@ -48,7 +48,7 @@
     box-shadow: var(--shadow-lg);
 }
 
-.modal-content[data-state="inactive"] {
+.modal-content[data-state="closed"] {
     visibility: hidden;
 }
 
@@ -57,8 +57,8 @@
     transition: all 0.3s ease;
 }
 
-.modal-content[data-state="inactive"][data-animation="light"],
-.modal-content[data-state="inactive"][data-animation="full"] {
+.modal-content[data-state="closed"][data-animation="light"],
+.modal-content[data-state="closed"][data-animation="full"] {
     transform: translate(-50%, 100%);
     opacity: 0;
 }
@@ -74,7 +74,7 @@
     background-color: var(--foreground);
 }
 
-.modal-background[data-state="inactive"] {
+.modal-background[data-state="closed"] {
     visibility: hidden;
 }
 
@@ -83,24 +83,45 @@
     transition: all 0.3s ease;
 }
 
-.modal-background[data-state="inactive"][data-animation="light"],
-.modal-background[data-state="inactive"][data-animation="full"] {
+.modal-background[data-state="closed"][data-animation="light"],
+.modal-background[data-state="closed"][data-animation="full"] {
     opacity: 0;
     visibility: hidden;
 }
 
-.modal-background[data-style="primary"] {
+/* Modal size variants */
+.modal-content[data-size="sm"] {
+    min-width: 20rem;
+    max-width: 24rem;
+}
+
+.modal-content[data-size="md"] {
+    min-width: 24rem;
+    max-width: 32rem;
+}
+
+.modal-content[data-size="lg"] {
+    min-width: 32rem;
+    max-width: 48rem;
+}
+
+.modal-content[data-size="xl"] {
+    min-width: 48rem;
+    max-width: 64rem;
+}
+
+.modal-background[data-variant="primary"] {
     background-color: var(--primary);
 }
 
-.modal-background[data-style="secondary"] {
+.modal-background[data-variant="secondary"] {
     background-color: var(--secondary);
 }
 
-.modal-background[data-style="destructive"] {
+.modal-background[data-variant="destructive"] {
     background-color: var(--destructive);
 }
 
-.modal-background[data-style="success"] {
+.modal-background[data-variant="success"] {
     background-color: var(--success);
 }

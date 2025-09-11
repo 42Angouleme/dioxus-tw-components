@@ -56,7 +56,9 @@
 	font-size: 1.25rem;
 }
 
-.button[data-color="primary"] {
+/* Color variants - can be combined with data-variant */
+.button[data-color="primary"],
+.button:not([data-variant]):not([data-color]) {
 	--btn-color: var(--primary);
 	--btn-color-foreground: var(--primary-foreground);
 	--btn-border: var(--primary);
