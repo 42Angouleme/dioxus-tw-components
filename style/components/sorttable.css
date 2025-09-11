@@ -1,0 +1,34 @@
+.sorttable {
+    width: 100%;
+}
+
+.sorttable-header {
+    cursor: pointer;
+    user-select: none;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.sorttable-header:hover {
+    color: var(--accent-foreground);
+    background-color: var(--accent);
+}
+
+.sorttable-sort-icon {
+    opacity: 0;
+    transition: opacity 0.2s ease;
+}
+
+.sorttable-header:hover .sorttable-sort-icon,
+.sorttable-header[data-sorted] .sorttable-sort-icon {
+    opacity: 1;
+}
+
+.sorttable-header[data-sort="asc"] .sorttable-sort-icon {
+    transform: rotate(0deg);
+}
+
+.sorttable-header[data-sort="desc"] .sorttable-sort-icon {
+    transform: rotate(180deg);
+}

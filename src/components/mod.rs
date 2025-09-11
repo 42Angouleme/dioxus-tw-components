@@ -1,4 +1,5 @@
 pub mod accordion;
+pub mod breadcrumb;
 pub mod button;
 pub mod buttongroup;
 pub mod callout;
@@ -7,6 +8,7 @@ pub mod checkbox;
 pub mod dropdown;
 pub mod formlist;
 pub mod header;
+pub mod hovercard;
 pub mod icon;
 pub mod input;
 pub mod lightswitch;

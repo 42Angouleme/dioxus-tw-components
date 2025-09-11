@@ -1,0 +1,18 @@
+.breadcrumb {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    font-weight: normal;
+    gap: 0.5rem;
+    font-size: 0.875rem;
+    color: var(--muted-foreground);
+}
+
+.breadcrumb-item:last-child {
+    color: var(--foreground);
+    font-weight: 500;
+}
+
+.breadcrumb-separator {
+    font-weight: 600;
+}

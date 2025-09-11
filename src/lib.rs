@@ -3,6 +3,7 @@ pub use bootstrap::*;
 
 pub mod components;
 pub use components::accordion::*;
+pub use components::breadcrumb::*;
 pub use components::button::*;
 pub use components::buttongroup::*;
 pub use components::callout::*;
@@ -11,6 +12,7 @@ pub use components::checkbox::*;
 pub use components::dropdown::*;
 pub use components::formlist::*;
 pub use components::header::*;
+pub use components::hovercard::*;
 pub use components::icon::*;
 pub use components::input::*;
 pub use components::lightswitch::*;

@@ -1,0 +1,8 @@
+.navbar {
+    container: navbar / inline-size;
+    display: flex;
+    height: 3.5rem;
+    max-width: var(--breakpoint-2xl);
+    align-items: center;
+    white-space: nowrap;
+}

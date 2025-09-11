@@ -1,0 +1,104 @@
+.modal-trigger {
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    user-select: none;
+    color: var(--foreground);
+    background-color: var(--background);
+    border: 1px solid var(--input);
+    border-radius: var(--radius);
+    box-shadow: var(--global-shadow);
+    white-space: nowrap;
+    cursor: pointer;
+}
+
+.modal-trigger:hover {
+    background-color: var(--accent);
+    color: var(--accent-foreground);
+}
+
+.modal-close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    border-radius: var(--radius);
+    border: 1px solid transparent;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.modal-close:active {
+    border-color: var(--border);
+}
+
+.modal-content {
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    top: 50%;
+    left: 50%;
+    z-index: 50;
+    min-width: 24rem;
+    background-color: var(--background);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    position: fixed;
+    transform: translate(-50%, -50%);
+}
+
+.modal-content[data-state="inactive"] {
+    visibility: hidden;
+}
+
+.modal-content[data-animation="light"],
+.modal-content[data-animation="full"] {
+    transition: all 0.3s ease;
+}
+
+.modal-content[data-state="inactive"][data-animation="light"],
+.modal-content[data-state="inactive"][data-animation="full"] {
+    transform: translate(-50%, 100%);
+    opacity: 0;
+}
+
+.modal-background {
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 40;
+    opacity: 0.15;
+    position: fixed;
+    background-color: var(--foreground);
+}
+
+.modal-background[data-state="inactive"] {
+    visibility: hidden;
+}
+
+.modal-background[data-animation="light"],
+.modal-background[data-animation="full"] {
+    transition: all 0.3s ease;
+}
+
+.modal-background[data-state="inactive"][data-animation="light"],
+.modal-background[data-state="inactive"][data-animation="full"] {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.modal-background[data-style="primary"] {
+    background-color: var(--primary);
+}
+
+.modal-background[data-style="secondary"] {
+    background-color: var(--secondary);
+}
+
+.modal-background[data-style="destructive"] {
+    background-color: var(--destructive);
+}
+
+.modal-background[data-style="success"] {
+    background-color: var(--success);
+}

@@ -1,0 +1,13 @@
+.scrollable {
+    overflow: auto;
+}
+
+.scrollable[data-orientation="horizontal"] {
+    overflow-x: auto;
+    overflow-y: hidden;
+}
+
+.scrollable[data-orientation="vertical"] {
+    overflow-y: auto;
+    overflow-x: hidden;
+}
