@@ -52,3 +52,6 @@ pub use tabs::{Tabs, TabsContent, TabsList, TabsTrigger};
 
 pub mod toast;
 pub use toast::{Toast, ToastRenderer, Toaster, use_toast};
+
+pub mod markdown;
+pub use markdown::Markdown;
