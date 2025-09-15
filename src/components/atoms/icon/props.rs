@@ -1194,9 +1194,13 @@ pub enum Icons {
     LogoDev,
     Logout,
     Looks,
+    #[strum(to_string = "looks_3")]
     Looks3,
+    #[strum(to_string = "looks_4")]
     Looks4,
+    #[strum(to_string = "looks_5")]
     Looks5,
+    #[strum(to_string = "looks_6")]
     Looks6,
     LooksOne,
     LooksTwo,
