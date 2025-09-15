@@ -5,37 +5,21 @@
 	padding: 0;
 	border: 1px solid;
 	border-color: var(--border);
-	border-radius: var(--radius);
+	border-radius: 4px;
 	margin: 0;
 	background-color: var(--background);
 	box-shadow: var(--shadow);
 	color: var(--foreground);
 	cursor: pointer;
+	transition-property: color, background-color, border-color, outline-color, text-decoration-color, fill, stroke, --tw-gradient-from, --tw-gradient-via, --tw-gradient-to;
+	transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+	transition-duration: 150ms;
 }
 
-.checkbox[data-state="checked"] {
+.checkbox[data-checked="checked"] {
 	background-color: var(--foreground);
 	box-shadow: none;
 	color: var(--background);
-}
-
-/* Checkbox variants */
-.checkbox[data-variant="primary"][data-state="checked"] {
-	background-color: var(--primary);
-	border-color: var(--primary);
-	color: var(--primary-foreground);
-}
-
-.checkbox[data-variant="destructive"][data-state="checked"] {
-	background-color: var(--destructive);
-	border-color: var(--destructive);
-	color: var(--destructive-foreground);
-}
-
-.checkbox[data-variant="success"][data-state="checked"] {
-	background-color: var(--success);
-	border-color: var(--success);
-	color: var(--success-foreground);
 }
 
 .checkbox-indicator {

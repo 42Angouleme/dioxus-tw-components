@@ -1,5 +1,4 @@
 pub mod accordion;
-pub mod breadcrumb;
 pub mod button;
 pub mod buttongroup;
 pub mod callout;

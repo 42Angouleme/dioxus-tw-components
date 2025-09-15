@@ -57,7 +57,7 @@ pub fn FormList(mut props: FormListProps) -> Element {
     crate::setup_class_attribute(&mut props.attributes, default_classes);
 
     let mut state = use_context_provider(|| Signal::new(FormListState::new(props.current_size)));
-    
+
     use_effect(move || {
         state.write().set_max_size(props.max_size);
     });
@@ -100,5 +100,93 @@ pub fn FormListLabel(mut props: FormListLabelProps) -> Element {
 
     rsx! {
         label { ..props.attributes, {props.children} }
+    }
+}
+
+#[derive(Clone, PartialEq, Props)]
+pub struct FormListTriggerPlusProps {
+    #[props(extends = div, extends = GlobalAttributes)]
+    attributes: Vec<Attribute>,
+
+    children: Element,
+}
+
+#[component]
+pub fn FormListTriggerPlus(mut props: FormListTriggerPlusProps) -> Element {
+    let mut state = use_context::<Signal<FormListState>>();
+
+    let default_classes = "formlist-trigger-plus";
+    crate::setup_class_attribute(&mut props.attributes, default_classes);
+
+    rsx! {
+        div {
+            onclick: move |_| {
+                state.write().add_one();
+            },
+            ..props.attributes,
+            {props.children}
+        }
+    }
+}
+
+#[derive(Clone, PartialEq, Props)]
+pub struct FormListTriggerMinusProps {
+    #[props(extends = div, extends = GlobalAttributes)]
+    attributes: Vec<Attribute>,
+
+    children: Element,
+}
+
+#[component]
+pub fn FormListTriggerMinus(mut props: FormListTriggerMinusProps) -> Element {
+    let mut state = use_context::<Signal<FormListState>>();
+
+    let default_classes = "formlist-trigger-minus";
+    crate::setup_class_attribute(&mut props.attributes, default_classes);
+
+    rsx! {
+        div {
+            onclick: move |_| {
+                state.write().remove_one();
+            },
+            ..props.attributes,
+            {props.children}
+        }
+    }
+}
+
+#[derive(Clone, PartialEq, Props)]
+pub struct FormListContentProps {
+    #[props(extends = div, extends = GlobalAttributes)]
+    attributes: Vec<Attribute>,
+
+    #[props(default)]
+    list_fields: Vec<Element>,
+}
+
+#[component]
+pub fn FormListContent(mut props: FormListContentProps) -> Element {
+    let mut state = use_context::<Signal<FormListState>>();
+
+    let default_classes = "formlist-content";
+    crate::setup_class_attribute(&mut props.attributes, default_classes);
+
+    let max_size = props.list_fields.len();
+    use_effect(move || {
+        state.write().set_max_size(max_size);
+    });
+
+    let fields = props
+        .list_fields
+        .iter()
+        .take(state.read().get_current_size())
+        .map(|field| {
+            rsx! {
+                {field.clone()}
+            }
+        });
+
+    rsx! {
+        div { ..props.attributes,{fields} }
     }
 }

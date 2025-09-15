@@ -1,5 +1,5 @@
-use dioxus::prelude::*;
 use crate::components::icon::*;
+use dioxus::prelude::*;
 
 #[derive(Clone, PartialEq, Props)]
 pub struct CheckboxProps {
@@ -30,7 +30,6 @@ pub fn Checkbox(mut props: CheckboxProps) -> Element {
      * The hidden native input ensures that assistive technologies (like screen readers) still
      * recognize the component as a proper checkbox.
      */
-
     use_effect(move || {
         let checked = *checked.read();
         let js = document::eval(
@@ -49,7 +48,7 @@ pub fn Checkbox(mut props: CheckboxProps) -> Element {
                     input.indeterminate = false;
                     break;
             }
-            "#
+            "#,
         );
 
         let _ = js.send(id.clone()());

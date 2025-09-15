@@ -3,7 +3,6 @@ pub use bootstrap::*;
 
 pub mod components;
 pub use components::accordion::*;
-pub use components::breadcrumb::*;
 pub use components::button::*;
 pub use components::buttongroup::*;
 pub use components::callout::*;
@@ -34,8 +33,8 @@ pub use components::textarea::*;
 pub use components::toast::*;
 pub use components::toggle::*;
 
-use dioxus::prelude::*;
 use dioxus::dioxus_core::{Attribute, AttributeValue};
+use dioxus::prelude::*;
 
 pub(crate) fn setup_class_attribute(attributes: &mut Vec<Attribute>, default_classes: &str) {
     // Find the class attribute in the vec and modify it
@@ -55,9 +54,11 @@ const ID_PREFIX: &str = "dx42-";
 static UNIQUE_ID_COUNTER: AtomicUsize = AtomicUsize::new(0);
 
 pub(crate) fn use_unique_id() -> Signal<String> {
-    use_signal(|| format!(
-        "{}{}",
-        ID_PREFIX,
-        UNIQUE_ID_COUNTER.fetch_add(1, std::sync::atomic::Ordering::Relaxed)
-    ))
+    use_signal(|| {
+        format!(
+            "{}{}",
+            ID_PREFIX,
+            UNIQUE_ID_COUNTER.fetch_add(1, std::sync::atomic::Ordering::Relaxed)
+        )
+    })
 }

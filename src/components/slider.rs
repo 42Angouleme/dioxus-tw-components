@@ -4,15 +4,15 @@ use dioxus::prelude::*;
 pub struct SliderProps {
     #[props(extends = div, extends = GlobalAttributes)]
     attributes: Vec<Attribute>,
-    
+
     #[props(optional)]
-    value: f64,
-    #[props(optional, default = 0.0)]
-    min: f64,
-    #[props(optional, default = 100.0)]
-    max: f64,
-    #[props(optional, default = 1.0)]
-    step: f64,
+    value: i64,
+    #[props(optional, default = 0)]
+    min: i64,
+    #[props(optional, default = 100)]
+    max: i64,
+    #[props(optional, default = 10)]
+    step: i64,
 
     #[props(optional)]
     oninput: EventHandler<FormEvent>,
@@ -23,12 +23,12 @@ pub fn Slider(mut props: SliderProps) -> Element {
     let default_classes = "slider";
     crate::setup_class_attribute(&mut props.attributes, default_classes);
 
-    let percentage = (props.value - props.min) / (props.max - props.min) * 100.0;
+    let percentage = (props.value - props.min) / (props.max - props.min) * 100;
 
     rsx! {
         div { ..props.attributes,
             div { class: "slider-track",
-                div { 
+                div {
                     class: "slider-range",
                     style: "width: {percentage}%"
                 }
@@ -36,10 +36,10 @@ pub fn Slider(mut props: SliderProps) -> Element {
             input {
                 class: "slider-thumb",
                 r#type: "range",
-                min: props.min,
-                max: props.max,
-                step: props.step,
-                value: props.value,
+                min: props.min.to_string(),
+                max: props.max.to_string(),
+                step: props.step.to_string(),
+                value: props.value.to_string(),
                 oninput: move |event| props.oninput.call(event),
             }
         }
@@ -48,12 +48,12 @@ pub fn Slider(mut props: SliderProps) -> Element {
 
 #[derive(Clone, PartialEq, Props)]
 pub struct SliderTicksProps {
-    #[props(optional, default = 10.0)]
-    step: f64,
-    #[props(optional, default = 0.0)]
-    min: f64,
-    #[props(optional, default = 100.0)]
-    max: f64,
+    #[props(optional, default = 10)]
+    step: i64,
+    #[props(optional, default = 0)]
+    min: i64,
+    #[props(optional, default = 100)]
+    max: i64,
 
     #[props(extends = datalist, extends = GlobalAttributes)]
     attributes: Vec<Attribute>,
@@ -73,9 +73,12 @@ pub fn SliderTicks(mut props: SliderTicksProps) -> Element {
 
     rsx! {
         datalist { ..props.attributes,
-            for tick in ticks {
-                option { value: "{tick}" }
+            for i in props.min..props.max {
+                if i % props.step == 0 {
+                    option { value: i }
+                }
             }
+            option { value: props.max }
         }
     }
 }

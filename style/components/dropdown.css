@@ -69,33 +69,3 @@
 .dropdown-content[data-state="open"][data-animation="full"] {
     transform: translateX(-50%) scale(1);
 }
-
-/* Positioning variants */
-.dropdown-content[data-side="top"] {
-    bottom: 100%;
-    top: auto;
-    margin-top: 0;
-    margin-bottom: 0.5rem;
-}
-
-.dropdown-content[data-side="bottom"] {
-    top: 100%;
-    margin-top: 0.5rem;
-}
-
-.dropdown-content[data-side="left"] {
-    right: 100%;
-    left: auto;
-    top: 0;
-    margin-top: 0;
-    margin-right: 0.5rem;
-    transform: translateX(0);
-}
-
-.dropdown-content[data-side="right"] {
-    left: 100%;
-    top: 0;
-    margin-top: 0;
-    margin-left: 0.5rem;
-    transform: translateX(0);
-}

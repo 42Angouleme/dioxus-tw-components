@@ -1,7 +1,7 @@
 use dioxus::prelude::*;
 use dioxus_core::AttributeValue;
 
-#[derive(Default, Clone, PartialEq, Props)]
+#[derive(Clone, PartialEq, Props)]
 pub struct ToggleProps {
     #[props(extends = button, extends = GlobalAttributes)]
     attributes: Vec<Attribute>,

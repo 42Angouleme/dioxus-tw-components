@@ -34,6 +34,11 @@ pub fn ProgressBarInner(mut props: ProgressBarInnerProps) -> Element {
     let default_classes = "progressbar-inner";
     crate::setup_class_attribute(&mut props.attributes, default_classes);
 
+    // Avoid ProgressBar's data-style being applied to ProgressBarInner
+    if props.attributes.iter_mut().find(|attr| attr.name == "data-style").is_none() {
+        props.attributes.push(Attribute::new("data-style", "none", None, true));
+    }
+
     let progress = if props.progress > 100 {
         100
     } else {
@@ -41,8 +46,8 @@ pub fn ProgressBarInner(mut props: ProgressBarInnerProps) -> Element {
     };
 
     rsx! {
-        div { 
-            style: "width: {progress}%", 
+        div {
+            style: "width: {progress}%",
             ..props.attributes,
             div { {props.children} }
         }

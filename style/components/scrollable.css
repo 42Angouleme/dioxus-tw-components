@@ -1,13 +1,17 @@
 .scrollable {
-    overflow: auto;
+    overflow-x: hidden;
+    overflow-y: auto;
+	min-width: 8rem;
+	border: 1px solid;
+	border-color: var(--border);
+	border-radius: var(--radius);
+	padding: 0.5rem;
 }
 
 .scrollable[data-orientation="horizontal"] {
-    overflow-x: auto;
-    overflow-y: hidden;
+	rotate: -90deg;
+	transform-origin: top right;
 }
 
 .scrollable[data-orientation="vertical"] {
-    overflow-y: auto;
-    overflow-x: hidden;
 }

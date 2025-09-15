@@ -1,4 +1,5 @@
 use crate::components::icon::*;
+use crate::dioxus_core::IntoAttributeValue;
 use dioxus::prelude::*;
 use dioxus_core::AttributeValue;
 

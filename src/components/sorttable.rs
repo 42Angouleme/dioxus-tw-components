@@ -1,4 +1,4 @@
-use crate::components::{table::*, icon::*};
+use crate::components::{icon::*, table::*};
 use dioxus::prelude::*;
 
 #[derive(Clone, PartialEq)]
@@ -60,13 +60,13 @@ pub fn SortTable(mut props: SortTableProps) -> Element {
     let state = use_context_provider(|| Signal::new(SortTableState::new()));
 
     rsx! {
-        Table { ..props.attributes,
+        table { ..props.attributes,
             TableHeader {
                 TableRow {
                     for column in &props.columns {
-                        SortTableHead { 
+                        SortTableHead {
                             key: "{column.key}",
-                            column: column.clone() 
+                            column: column.clone()
                         }
                     }
                 }
@@ -107,9 +107,9 @@ pub fn SortTableHead(props: SortTableHeadProps) -> Element {
                     },
                     onclick,
                     "{props.column.title}"
-                    Icon { 
-                        class: "sorttable-sort-icon", 
-                        icon: Icons::ExpandMore 
+                    Icon {
+                        class: "sorttable-sort-icon",
+                        icon: Icons::ExpandMore
                     }
                 }
             } else {

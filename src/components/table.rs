@@ -55,6 +55,24 @@ pub fn TableBody(mut props: TableBodyProps) -> Element {
 }
 
 #[derive(Clone, PartialEq, Props)]
+pub struct TableFooterProps {
+    #[props(extends = tfoot, extends = GlobalAttributes)]
+    attributes: Vec<Attribute>,
+
+    children: Element,
+}
+
+#[component]
+pub fn TableFooter(mut props: TableFooterProps) -> Element {
+    let default_classes = "table-footer";
+    crate::setup_class_attribute(&mut props.attributes, default_classes);
+
+    rsx! {
+        tfoot { ..props.attributes,{props.children} }
+    }
+}
+
+#[derive(Clone, PartialEq, Props)]
 pub struct TableRowProps {
     #[props(extends = tr, extends = GlobalAttributes)]
     attributes: Vec<Attribute>,

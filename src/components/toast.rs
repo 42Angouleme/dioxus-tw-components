@@ -1,4 +1,5 @@
 use crate::components::icon::*;
+use crate::dioxus_core::IntoAttributeValue;
 use dioxus::prelude::*;
 use dioxus_core::AttributeValue;
 
@@ -17,7 +18,7 @@ pub struct ToastItem {
 impl ToastItem {
     pub fn new(title: String, description: String) -> Self {
         Self {
-            id: format!("toast-{}", rand::random::<u32>()),
+            id: crate::use_unique_id().read().clone(),
             title,
             description,
             duration: 5000,
@@ -55,15 +56,16 @@ pub fn Toaster(mut props: ToasterProps) -> Element {
     let default_classes = "toast";
     crate::setup_class_attribute(&mut props.attributes, default_classes);
 
-    let state = use_context_provider::<Signal<ToasterState>>(|| Signal::new(ToasterState::default()));
+    let state =
+        use_context_provider::<Signal<ToasterState>>(|| Signal::new(ToasterState::default()));
 
     rsx! {
         {props.children}
         div { ..props.attributes,
             for toast in &state.read().toasts {
-                ToastView { 
+                ToastView {
                     key: "{toast.id}",
-                    toast: toast.clone() 
+                    toast: toast.clone()
                 }
             }
         }
@@ -90,7 +92,10 @@ pub fn ToastView(props: ToastViewProps) -> Element {
             }
             #[cfg(not(target_arch = "wasm32"))]
             {
-                tokio::time::sleep(std::time::Duration::from_millis(props.toast.duration as u64)).await;
+                tokio::time::sleep(std::time::Duration::from_millis(
+                    props.toast.duration as u64,
+                ))
+                .await;
             }
             state.write().remove_toast(id);
         });
@@ -139,4 +144,10 @@ impl ToastRenderer for Signal<ToasterState> {
         let toast = ToastItem::new(title.to_string(), description.to_string());
         self.write().add_toast(toast);
     }
+}
+
+/// Hook that returns the ToasterState to spawn a Toast
+pub fn use_toast() -> Signal<ToasterState> {
+    // Will panic if no Toaster {} upper in the DOM
+    use_context::<Signal<ToasterState>>()
 }
