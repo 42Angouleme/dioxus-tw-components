@@ -32,6 +32,9 @@ slugify = "0.1.0"
 chrono = "0.4.39"
 strum = { version = "0.27.1", default-features = false, features = ["derive"] }
 
+# Markdown renderer
+pulldown-cmark = "0.13.0"
+
 [target.'cfg(target_arch = "wasm32")'.dependencies]
 gloo-timers = { version = "0.3.0", features = ["futures"] }
 
