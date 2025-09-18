@@ -17,7 +17,7 @@
 }
 
 .toggle[data-state="checked"] {
-    background-color: var(--primary);
+    background-color: var(--foreground);
 }
 
 .toggle:disabled {
@@ -31,7 +31,7 @@
     height: 1.25rem;
     width: 1.25rem;
     border-radius: 50%;
-    background-color: var(--background);
+    background-color: var(--foreground);
     box-shadow: var(--shadow);
     transition: transform 0.2s ease;
     transform: translateX(0);
@@ -39,4 +39,5 @@
 
 .toggle[data-state="checked"] .toggle-thumb {
     transform: translateX(1.25rem);
+    background-color: var(--background);
 }

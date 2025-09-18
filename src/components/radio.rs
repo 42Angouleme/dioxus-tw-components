@@ -1,43 +1,23 @@
 use dioxus::prelude::*;
 
-#[derive(Default, Clone, PartialEq, Props)]
-pub struct RadioProps {
-    #[props(extends = input, extends = GlobalAttributes)]
-    attributes: Vec<Attribute>,
-    #[props(optional, default = false)]
-    checked: bool,
-
-    #[props(optional)]
-    oninput: EventHandler<FormEvent>,
-}
-
-#[component]
-pub fn Radio(mut props: RadioProps) -> Element {
-    let default_classes = "radio-input";
-    crate::setup_class_attribute(&mut props.attributes, default_classes);
-
-    let oninput = move |event| props.oninput.call(event);
-
-    rsx! {
-        input {
-            r#type: "radio",
-            checked: props.checked,
-            oninput,
-            ..props.attributes,
-        }
-    }
+#[derive(Clone, Copy)]
+struct RadioGroupCtx {
+    value: Signal<String>,
 }
 
 #[derive(Clone, PartialEq, Props)]
 pub struct RadioGroupProps {
     #[props(extends = div, extends = GlobalAttributes)]
     attributes: Vec<Attribute>,
-
     children: Element,
 }
 
 #[component]
 pub fn RadioGroup(mut props: RadioGroupProps) -> Element {
+    use_context_provider(|| RadioGroupCtx {
+        value: Signal::new(String::new()),
+    });
+
     let default_classes = "radio";
     crate::setup_class_attribute(&mut props.attributes, default_classes);
 
@@ -47,19 +27,28 @@ pub fn RadioGroup(mut props: RadioGroupProps) -> Element {
 }
 
 #[derive(Clone, PartialEq, Props)]
-pub struct RadioLabelProps {
-    #[props(extends = label, extends = GlobalAttributes)]
+pub struct RadioItemProps {
+    #[props(extends = input, extends = GlobalAttributes)]
     attributes: Vec<Attribute>,
-
-    children: Element,
+    value: String,
 }
 
 #[component]
-pub fn RadioLabel(mut props: RadioLabelProps) -> Element {
-    let default_classes = "radio-label";
+pub fn RadioItem(mut props: RadioItemProps) -> Element {
+    let mut state = use_context::<RadioGroupCtx>();
+
+    let default_classes = "radio-input";
     crate::setup_class_attribute(&mut props.attributes, default_classes);
 
+    let value = props.value.clone();
+    let checked = use_memo(move || (state.value)() == value);
+
     rsx! {
-        label { ..props.attributes, {props.children} }
+        input {
+            r#type: "radio",
+            checked,
+            onclick: move |_| state.value.set(props.value.clone()),
+            ..props.attributes,
+        }
     }
 }

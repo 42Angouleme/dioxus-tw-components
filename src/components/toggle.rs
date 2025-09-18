@@ -28,10 +28,7 @@ pub fn Toggle(mut props: ToggleProps) -> Element {
 
     rsx! {
         button {
-            "data-state": match interior_sig() {
-                true => "checked",
-                false => "unchecked",
-            },
+            "data-state": if interior_sig() { "checked" } else { "unchecked" },
             r#type: "button",
             onclick,
             ..props.attributes,

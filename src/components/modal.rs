@@ -35,22 +35,6 @@ pub struct ModalProps {
     children: Element,
 }
 
-/// Usage: \
-/// ```ignore
-/// Modal {
-///     ModalTrigger {
-///          "Open Modal"
-///     }
-///     ModalBackground {}
-///     ModalContent {
-///        div {
-///             ModalClose { "X" }
-///        }
-///        div { class: "h4", "TITLE" }
-///        div { class: "paragraph", "CONTENT" }
-///    }
-/// }
-/// ```
 #[component]
 pub fn Modal(props: ModalProps) -> Element {
     let mut state = use_context_provider(|| Signal::new(ModalState::new(props.is_active)));
@@ -83,7 +67,7 @@ pub struct ModalTriggerProps {
 pub fn ModalTrigger(mut props: ModalTriggerProps) -> Element {
     let mut state = use_context::<Signal<ModalState>>();
 
-    let default_classes = "modal-trigger";
+    let default_classes = "button";
     crate::setup_class_attribute(&mut props.attributes, default_classes);
 
     let onclick = move |event: Event<MouseData>| {
@@ -93,7 +77,7 @@ pub fn ModalTrigger(mut props: ModalTriggerProps) -> Element {
     };
 
     rsx! {
-        div { onclick, ..props.attributes, {props.children} }
+        button { onclick, ..props.attributes, {props.children} }
     }
 }
 
@@ -104,6 +88,15 @@ pub struct ModalCloseProps {
 
     #[props(optional)]
     children: Element,
+}
+
+impl std::default::Default for ModalCloseProps {
+    fn default() -> Self {
+        Self {
+            attributes: Vec::<Attribute>::default(),
+            children: Ok(VNode::default()), // Default this way to be able to check the children in SidePanelClose
+        }
+    }
 }
 
 /// Div to close the content modal, by default it is a cross located at the top left corner of the modal

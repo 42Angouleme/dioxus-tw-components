@@ -223,7 +223,7 @@ fn App() -> Element {
         div { class: "flex flex-col space-y-4 min-w-96 w-fit mt-6 mx-auto pb-10 border-b-1 border-white",
             LightSwitch {}
         }
-        div { class: "hidden flex flex-col space-y-4 min-w-96 w-fit mt-6 mx-auto pb-10 border-b-1 border-white",
+        div { class: "flex flex-col space-y-4 min-w-96 w-fit mt-6 mx-auto pb-10 border-b-1 border-white",
             Modal {
                 ModalTrigger { "OpenModal" }
                 ModalBackground {
@@ -231,6 +231,7 @@ fn App() -> Element {
                     "data-animation": "full",
                 }
                 ModalContent {
+                    "data-animation": "full",
                     div {
                         ModalClose {}
                     }
@@ -319,7 +320,76 @@ fn App() -> Element {
                     }
                     div { class: "h4 mb-6", "Title" }
                     div {
-                        class: "paragraph",
+                        class: "paragraph w-128",
+                        r#"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
+                        ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                        laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in
+                        voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat
+                        non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                        "#
+                    }
+                }
+            }
+            SidePanel {
+                SidePanelTrigger { "OpenSidePanel" }
+                SidePanelBackground {
+                    "data-animation": "full",
+                }
+                SidePanelContent {
+                    "data-side": "left",
+                    "data-animation": "full",
+                    div {
+                        SidePanelClose {}
+                    }
+                    div { class: "h4 mb-6", "Title" }
+                    div {
+                        class: "paragraph w-128",
+                        r#"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
+                        ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                        laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in
+                        voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat
+                        non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                        "#
+                    }
+                }
+            }
+            SidePanel {
+                SidePanelTrigger { "OpenSidePanel" }
+                SidePanelBackground {
+                    "data-animation": "full",
+                }
+                SidePanelContent {
+                    "data-side": "top",
+                    "data-animation": "full",
+                    div {
+                        SidePanelClose {}
+                    }
+                    div { class: "h4 mb-6", "Title" }
+                    div {
+                        class: "paragraph w-128",
+                        r#"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
+                        ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                        laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in
+                        voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat
+                        non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                        "#
+                    }
+                }
+            }
+            SidePanel {
+                SidePanelTrigger { "OpenSidePanel" }
+                SidePanelBackground {
+                    "data-animation": "full",
+                }
+                SidePanelContent {
+                    "data-side": "bottom",
+                    "data-animation": "full",
+                    div {
+                        SidePanelClose {}
+                    }
+                    div { class: "h4 mb-6", "Title" }
+                    div {
+                        class: "paragraph w-128",
                         r#"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
                         ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
                         laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in
@@ -411,6 +481,14 @@ fn App() -> Element {
         div { class: "flex flex-col space-y-4 min-w-96 w-fit mt-6 mx-auto pb-10 border-b-1 border-white",
             Button {
                 onclick: move |_| {
+                    toast
+                        .title("Title")
+                        .description(rsx! {
+                            div { "Content" }
+                        })
+                        .color(ToastColor::Destructive)
+                        .animation(ToastAnimation::Full)
+                        .render();
                 },
                 "Toasting"
             }
@@ -434,11 +512,14 @@ fn App() -> Element {
         }
         div { class: "flex flex-col space-y-4 min-w-96 w-fit mt-6 mx-auto pb-10 border-b-1 border-white",
             div { class: "flex space-x-2",
-                for i in 0..3 {
-                    div { class: "flex flex-col items-center space-y-2",
-                        p { class: "text-foreground font-bold", "{i}" }
-                        Radio {
-                            "data-style": "destructive",
+                RadioGroup {
+                    for i in 0..3 {
+                        div { class: "flex flex-col items-center space-y-2",
+                            p { class: "text-foreground font-bold", "{i}" }
+                            RadioItem {
+                                value: i.to_string(),
+                                "data-style": "destructive",
+                            }
                         }
                     }
                 }

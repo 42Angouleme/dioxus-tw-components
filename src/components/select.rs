@@ -24,54 +24,6 @@ pub fn SelectGroup(mut props: SelectGroupProps) -> Element {
 }
 
 #[derive(Clone, PartialEq, Props)]
-pub struct SelectProps {
-    #[props(extends = select, extends = GlobalAttributes)]
-    attributes: Vec<Attribute>,
-
-    #[props(optional)]
-    oninput: EventHandler<FormEvent>,
-
-    children: Element,
-}
-
-#[component]
-pub fn Select(mut props: SelectProps) -> Element {
-    let default_classes = "select";
-    crate::setup_class_attribute(&mut props.attributes, default_classes);
-
-    let oninput = move |event| props.oninput.call(event);
-
-    rsx! {
-        select { oninput, ..props.attributes, {props.children} }
-    }
-}
-
-#[derive(Clone, PartialEq, Props)]
-pub struct SelectItemProps {
-    #[props(extends = option, extends = GlobalAttributes)]
-    attributes: Vec<Attribute>,
-
-    #[props(optional)]
-    value: String,
-
-    children: Element,
-}
-
-#[component]
-pub fn SelectItem(mut props: SelectItemProps) -> Element {
-    let default_classes = "select-item";
-    crate::setup_class_attribute(&mut props.attributes, default_classes);
-
-    rsx! {
-        option {
-            value: props.value,
-            ..props.attributes,
-            {props.children}
-        }
-    }
-}
-
-#[derive(Clone, PartialEq, Props)]
 pub struct SelectPlaceholderProps {
     #[props(extends = option, extends = GlobalAttributes)]
     attributes: Vec<Attribute>,
@@ -106,37 +58,28 @@ pub fn SelectLabel(mut props: SelectLabelProps) -> Element {
 }
 
 #[derive(Clone, PartialEq, Props)]
-pub struct SelectTriggerProps {
-    #[props(extends = div, extends = GlobalAttributes)]
+pub struct SelectItemProps {
+    #[props(extends = option, extends = GlobalAttributes)]
     attributes: Vec<Attribute>,
+
+    #[props(optional, default = None)]
+    selected: Option<bool>,
 
     children: Element,
 }
 
 #[component]
-pub fn SelectTrigger(mut props: SelectTriggerProps) -> Element {
-    let default_classes = "select-trigger";
+pub fn SelectItem(mut props: SelectItemProps) -> Element {
+    let default_classes = "select-item";
     crate::setup_class_attribute(&mut props.attributes, default_classes);
 
-    rsx! {
-        div { ..props.attributes, {props.children} }
-    }
-}
-
-#[derive(Clone, PartialEq, Props)]
-pub struct SelectContentProps {
-    #[props(extends = div, extends = GlobalAttributes)]
-    attributes: Vec<Attribute>,
-
-    children: Element,
-}
-
-#[component]
-pub fn SelectContent(mut props: SelectContentProps) -> Element {
-    let default_classes = "select-content";
-    crate::setup_class_attribute(&mut props.attributes, default_classes);
-
-    rsx! {
-        div { ..props.attributes, {props.children} }
+    if let Some(selected) = props.selected {
+        rsx! {
+            option { selected, ..props.attributes, {props.children} }
+        }
+    } else {
+        rsx! {
+            option { ..props.attributes,{props.children} }
+        }
     }
 }

@@ -22,6 +22,7 @@ pub fn Checkbox(mut props: CheckboxProps) -> Element {
     let mut checked = use_signal(|| *props.checked.read());
 
     let id = crate::use_unique_id();
+    let id_clone = id.clone();
 
     /**
      * HTML's default checkbox input are notoriously difficult to style consistently across browsers.
@@ -51,7 +52,7 @@ pub fn Checkbox(mut props: CheckboxProps) -> Element {
             "#,
         );
 
-        let _ = js.send(id.clone()());
+        let _ = js.send(id_clone.clone());
         let _ = js.send(if checked { "checked" } else { "unchecked" });
     });
 

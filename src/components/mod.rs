@@ -12,7 +12,6 @@ pub mod icon;
 pub mod input;
 pub mod lightswitch;
 pub mod modal;
-pub mod navbar;
 pub mod pagination;
 pub mod placeholder;
 pub mod progressbar;

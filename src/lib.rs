@@ -16,7 +16,6 @@ pub use components::icon::*;
 pub use components::input::*;
 pub use components::lightswitch::*;
 pub use components::modal::*;
-pub use components::navbar::*;
 pub use components::pagination::*;
 pub use components::placeholder::*;
 pub use components::progressbar::*;
@@ -53,12 +52,10 @@ use std::sync::atomic::AtomicUsize;
 const ID_PREFIX: &str = "dx42-";
 static UNIQUE_ID_COUNTER: AtomicUsize = AtomicUsize::new(0);
 
-pub(crate) fn use_unique_id() -> Signal<String> {
-    use_signal(|| {
-        format!(
-            "{}{}",
-            ID_PREFIX,
-            UNIQUE_ID_COUNTER.fetch_add(1, std::sync::atomic::Ordering::Relaxed)
-        )
-    })
+pub(crate) fn use_unique_id() -> String {
+    format!(
+        "{}{}",
+        ID_PREFIX,
+        UNIQUE_ID_COUNTER.fetch_add(1, std::sync::atomic::Ordering::Relaxed)
+    )
 }

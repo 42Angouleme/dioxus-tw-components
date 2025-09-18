@@ -1,19 +1,49 @@
 .sidepanel-content {
 	position: fixed;
-	top: 0;
-	right: 0;
-	height: 100vh;
-	width: 25rem;
+	width: fit-content;
+	height: fit-content;
 	background-color: var(--background);
-	border-left: 1px solid var(--border);
+	border: 1px solid var(--input);
 	padding: 1rem;
 	z-index: 50;
-	transform: translateX(100%);
+	top: 50%;
+	right: 0;
+	transform: translate(100%, -50%);
 	transition: transform 0.3s ease;
 }
 
+.sidepanel-content[data-side="left"] {
+	right: 100%;
+	transform: translate(-100%, -50%);
+}
+
+.sidepanel-content[data-side="top"] {
+	top: 0;
+	bottom: 100%;
+	left: 50%;
+	transform: translate(-50%, -100%);
+}
+
+.sidepanel-content[data-side="bottom"] {
+	top: 100%;
+	left: 50%;
+	transform: translate(-50%, 0%);
+}
+
+.sidepanel-content[data-state="active"][data-side="top"] {
+	transform: translate(-50%, 0%);
+}
+
+.sidepanel-content[data-state="active"][data-side="bottom"] {
+	transform: translate(-50%, -100%);
+}
+
+.sidepanel-content[data-state="active"][data-side="left"] {
+	transform: translate(100%, -50%);
+}
+
 .sidepanel-content[data-state="active"] {
-	transform: translateX(0);
+	transform: translate(0%, -50%);
 }
 
 .sidepanel-background {
