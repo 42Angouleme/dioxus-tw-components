@@ -283,13 +283,13 @@ fn ToastView(mut state: Signal<ToasterState>, toast: ReadOnlySignal<Toast>) -> E
     let toast_animation = toast.read().animation;
 
     // This is to animate the Toast in and out
-//   use_effect(move || {
-//       let mut timer = document::eval(&format!(
-//           "setInterval(() => {{
-//               dioxus.send(true);
-//           }}, {});",
-//       ), );
-//   });
+    //   use_effect(move || {
+    //       let mut timer = document::eval(&format!(
+    //           "setInterval(() => {{
+    //               dioxus.send(true);
+    //           }}, {});",
+    //       ), );
+    //   });
     use_future(move || async move {
         if toast_animation != ToastAnimation::None {
             #[cfg(target_arch = "wasm32")]

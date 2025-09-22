@@ -44,23 +44,9 @@
 .carousel-item-indicator > :not(:last-child) {
 	margin-inline-start: 0px;
 	margin-inline-end: 0.5rem;
-};
+}
 
 .carousel-content {
-	display: flex;
-	flex-direction: row;
-	transition-property: none;
-}
-
-.carousel-content[data-animation="light"] {
-	display: flex;
-	flex-direction: row;
-	transition-property: transform, translate, scale, rotate;
-	transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-	transition-duration: 500ms;
-}
-
-.carousel-content[data-animation="full"] {
 	display: flex;
 	flex-direction: row;
 	transition-property: transform, translate, scale, rotate;

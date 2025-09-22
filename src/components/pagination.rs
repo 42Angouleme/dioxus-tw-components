@@ -23,16 +23,36 @@ pub fn Pagination(mut props: PaginationProps) -> Element {
 
     let max_pages = use_memo(move || (*props.data_size.read() / *props.page_size.read()) + 1);
 
-    let data_variant_attribute = match props.attributes.iter_mut().find(|attr| attr.name == "data-variant") {
-        Some(attribute) => if let AttributeValue::Text(ref value) = attribute.value { value.clone() } else { "none".to_string() },
+    let data_variant_attribute = match props
+        .attributes
+        .iter_mut()
+        .find(|attr| attr.name == "data-variant")
+    {
+        Some(attribute) => {
+            if let AttributeValue::Text(ref value) = attribute.value {
+                value.clone()
+            } else {
+                "none".to_string()
+            }
+        }
         _ => "none".to_string(),
     };
-    let data_color_attribute = match props.attributes.iter_mut().find(|attr| attr.name == "data-style") {
-        Some(attribute) => if let AttributeValue::Text(ref value) = attribute.value { value.clone() } else { "none".to_string() },
+    let data_color_attribute = match props
+        .attributes
+        .iter_mut()
+        .find(|attr| attr.name == "data-style")
+    {
+        Some(attribute) => {
+            if let AttributeValue::Text(ref value) = attribute.value {
+                value.clone()
+            } else {
+                "none".to_string()
+            }
+        }
         _ => "none".to_string(),
     };
 
-    let page_selector = use_memo( {
+    let page_selector = use_memo({
         let data_variant_attribute = data_variant_attribute.clone();
         let data_color_attribute = data_color_attribute.clone();
         move || {

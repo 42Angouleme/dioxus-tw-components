@@ -13,23 +13,6 @@
     background-color: transparent;
 }
 
-.dropdown-toggle {
-    padding: 0.5rem 1rem;
-    font-size: 0.875rem;
-    font-weight: 500;
-    background-color: var(--background);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    white-space: nowrap;
-    user-select: none;
-    cursor: pointer;
-}
-
-.dropdown-toggle:hover {
-    background-color: var(--accent);
-    color: var(--accent-foreground);
-}
-
 .dropdown-content {
     z-index: 20;
     display: flex;
@@ -37,8 +20,8 @@
     padding: 0.5rem;
     gap: 0.5rem;
     min-width: 8rem;
-    background-color: var(--popover);
-    color: var(--popover-foreground);
+    background-color: var(--background);
+    color: var(--foreground);
     border-radius: var(--radius);
     border: 1px solid var(--border);
     box-shadow: var(--shadow);

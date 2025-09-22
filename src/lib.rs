@@ -31,6 +31,7 @@ pub use components::tabs::*;
 pub use components::textarea::*;
 pub use components::toast::*;
 pub use components::toggle::*;
+pub mod prelude;
 
 use dioxus::dioxus_core::{Attribute, AttributeValue};
 use dioxus::prelude::*;
