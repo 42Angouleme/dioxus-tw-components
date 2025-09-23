@@ -50,18 +50,18 @@
     font-size: 1.125rem;
 }
 
-.input[data-variant="primary"] {
+.input[data-style="primary"] {
     border-color: var(--primary);
 }
 
-.input[data-variant="secondary"] {
+.input[data-style="secondary"] {
     border-color: var(--secondary);
 }
 
-.input[data-variant="destructive"] {
+.input[data-style="destructive"] {
     border-color: var(--destructive);
 }
 
-.input[data-variant="success"] {
+.input[data-style="success"] {
     border-color: var(--success);
 }

@@ -33,6 +33,9 @@ pub use components::toast::*;
 pub use components::toggle::*;
 pub mod prelude;
 
+#[cfg(feature = "theme")]
+pub mod theme;
+
 use dioxus::dioxus_core::{Attribute, AttributeValue};
 use dioxus::prelude::*;
 

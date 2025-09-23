@@ -26,15 +26,3 @@
     cursor: not-allowed;
     opacity: 0.5;
 }
-
-.textarea[data-size="sm"] {
-    min-height: 3rem;
-    padding: 0.5rem;
-    font-size: 0.8125rem;
-}
-
-.textarea[data-size="lg"] {
-    min-height: 6rem;
-    padding: 1rem;
-    font-size: 1rem;
-}

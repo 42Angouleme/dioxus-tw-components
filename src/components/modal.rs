@@ -118,7 +118,10 @@ pub fn ModalClose(mut props: ModalCloseProps) -> Element {
     };
 
     rsx! {
-        div { onclick, ..props.attributes,
+        div {
+            "data-state": state.read().into_value(),
+            onclick,
+            ..props.attributes,
             if !has_children {
                 Icon { icon: Icons::Close }
             } else {

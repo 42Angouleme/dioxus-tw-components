@@ -13,7 +13,7 @@ pub struct IconProps {
 #[component]
 pub fn Icon(props: IconProps) -> Element {
     rsx! {
-        p { style: "font-family: 'Material Icons';", ..props.attributes, "{props.icon.to_string()}" }
+        p { style: "font-family: 'Material Icons'; user-select: none;", ..props.attributes, "{props.icon.to_string()}" }
     }
 }
 

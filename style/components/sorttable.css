@@ -1,34 +1,32 @@
 .sorttable {
     width: 100%;
+	caption-side: bottom;
+	font-size: 0.875rem;
+	color: var(--foreground);
+	background-color: var(--background);
 }
 
 .sorttable-header {
     cursor: pointer;
     user-select: none;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
 }
 
-.sorttable-header:hover {
-    color: var(--accent-foreground);
-    background-color: var(--accent);
+.sorttable-icon {
+	fill: var(--foreground);
+	font-family: 'Material Icons';
+	user-select: none;
+	transition-property: all;
+	transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+	transition-duration: 150ms;
 }
 
-.sorttable-sort-icon {
-    opacity: 0;
-    transition: opacity 0.2s ease;
+.sorttable-header-content {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-between;
 }
 
-.sorttable-header:hover .sorttable-sort-icon,
-.sorttable-header[data-sorted] .sorttable-sort-icon {
-    opacity: 1;
-}
-
-.sorttable-header[data-sort="asc"] .sorttable-sort-icon {
-    transform: rotate(0deg);
-}
-
-.sorttable-header[data-sort="desc"] .sorttable-sort-icon {
-    transform: rotate(180deg);
+.sorttable-header-content > :not(:last-child) {
+	margin-inline-end: 0.25rem;
 }

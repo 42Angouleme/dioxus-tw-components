@@ -25,7 +25,7 @@ pub fn Pagination(mut props: PaginationProps) -> Element {
 
     let data_variant_attribute = match props
         .attributes
-        .iter_mut()
+        .iter()
         .find(|attr| attr.name == "data-variant")
     {
         Some(attribute) => {
@@ -39,7 +39,7 @@ pub fn Pagination(mut props: PaginationProps) -> Element {
     };
     let data_color_attribute = match props
         .attributes
-        .iter_mut()
+        .iter()
         .find(|attr| attr.name == "data-style")
     {
         Some(attribute) => {
@@ -52,61 +52,9 @@ pub fn Pagination(mut props: PaginationProps) -> Element {
         _ => "none".to_string(),
     };
 
-    let page_selector = use_memo({
-        let data_variant_attribute = data_variant_attribute.clone();
-        let data_color_attribute = data_color_attribute.clone();
-        move || {
-            let mut next_dots = false;
-            let mut prev_dots = false;
-            if *props.page_number.read() > 2 {
-                prev_dots = true;
-            }
-            if *props.page_number.read() <= max_pages.read().checked_sub(2).unwrap_or(0) {
-                next_dots = true;
-            }
-            rsx! {
-                if prev_dots {
-                    Button {
-                        class: props.class,
-                        disabled: *props.page_number.read() == 1,
-                        "data-variant": data_variant_attribute.clone(),
-                        "data-style": data_color_attribute.clone(),
-                        onclick: move |_event: MouseEvent| {
-                            props.page_number.set(1);
-                        },
-                        "1"
-                    }
-                    p { class: "pagination-dots", "..." }
-                }
-                for page in (std::cmp::max(1_isize, *props.page_number.read() as isize - 1)
-                    as usize)..=std::cmp::min(*max_pages.read(), *props.page_number.read() + 1)
-                {
-                    Button {
-                        class: props.class,
-                        "data-variant": data_variant_attribute.clone(),
-                        "data-style": data_color_attribute.clone(),
-                        disabled: *props.page_number.read() == page,
-                        onclick: move |_event: MouseEvent| {
-                            props.page_number.set(page);
-                        },
-                        "{page}"
-                    }
-                }
-                if next_dots {
-                    p { class: "pagination-dots", "..." }
-                    Button {
-                        class: props.class,
-                        "data-variant": data_variant_attribute.clone(),
-                        "data-style": data_color_attribute.clone(),
-                        disabled: *props.page_number.read() == *max_pages.read(),
-                        onclick: move |_event: MouseEvent| {
-                            props.page_number.set(*max_pages.peek());
-                        },
-                        "{*max_pages.read()}"
-                    }
-                }
-            }
-        }
+    let prev_dots = use_memo(move || (*props.page_number.read() > 2));
+    let next_dots = use_memo(move || {
+        (*props.page_number.read() <= max_pages.read().checked_sub(2).unwrap_or(0))
     });
 
     rsx! {
@@ -123,7 +71,46 @@ pub fn Pagination(mut props: PaginationProps) -> Element {
                 },
                 Icon { icon: Icons::ArrowLeft }
             }
-            {page_selector}
+            if *prev_dots.read() {
+                Button {
+                    class: props.class,
+                    disabled: *props.page_number.read() == 1,
+                    "data-variant": data_variant_attribute.clone(),
+                    "data-style": data_color_attribute.clone(),
+                    onclick: move |_event: MouseEvent| {
+                        props.page_number.set(1);
+                    },
+                    "1"
+                }
+                p { class: "pagination-dots", "..." }
+            }
+            for page in (std::cmp::max(1_isize, *props.page_number.read() as isize - 1)
+                as usize)..=std::cmp::min(*max_pages.read(), *props.page_number.read() + 1)
+            {
+                Button {
+                    class: props.class,
+                    "data-variant": data_variant_attribute.clone(),
+                    "data-style": data_color_attribute.clone(),
+                    disabled: *props.page_number.read() == page,
+                    onclick: move |_event: MouseEvent| {
+                        props.page_number.set(page);
+                    },
+                    "{page}"
+                }
+            }
+            if *next_dots.read() {
+                p { class: "pagination-dots", "..." }
+                Button {
+                    class: props.class,
+                    "data-variant": data_variant_attribute.clone(),
+                    "data-style": data_color_attribute.clone(),
+                    disabled: *props.page_number.read() == *max_pages.read(),
+                    onclick: move |_event: MouseEvent| {
+                        props.page_number.set(*max_pages.peek());
+                    },
+                    "{*max_pages.read()}"
+                }
+            }
             Button {
                 class: format!("pagination-nav-button {}", props.class),
                 "data-variant": data_variant_attribute.clone(),

@@ -15,6 +15,11 @@
 	user-select: none; 
 	border-radius: var(--radius);
 	cursor: pointer;
+
+	height: 2.25rem;
+	padding-left: 1rem;
+	padding-right: 1rem;
+	font-size: 1rem;
 }
 
 .buttongroup .button {
@@ -33,13 +38,6 @@
 	padding-left: 0.75rem;
 	padding-right: 0.75rem;
 	font-size: 0.875rem;
-}
-
-.button[data-size="md"] {
-	height: 2.25rem;
-	padding-left: 1rem;
-	padding-right: 1rem;
-	font-size: 1rem;
 }
 
 .button[data-size="lg"] {

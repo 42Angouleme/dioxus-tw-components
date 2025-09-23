@@ -28,3 +28,6 @@ pub use crate::components::tabs::*;
 pub use crate::components::textarea::*;
 pub use crate::components::toast::*;
 pub use crate::components::toggle::*;
+
+#[cfg(feature = "theme")]
+pub use crate::theme::*;
