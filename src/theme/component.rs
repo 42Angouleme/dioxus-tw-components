@@ -21,8 +21,10 @@ fn ColorPicker() -> Element {
     let selected_color = use_signal(|| String::from("primary"));
 
     let mut theme_manager = use_context::<Signal<ThemeManager>>();
+    let const_theme_manager = theme_manager.clone();
 
     let current_theme = theme_manager.read().current_theme;
+    let colors = theme_manager.read().themes[current_theme].colors.clone();
 
     let oninput = move |event: FormEvent| {
         // TODO Very ugly but works
@@ -76,7 +78,7 @@ fn ColorPicker() -> Element {
                 style: "visibility: hidden;",
                 oninput,
             }
-            for (str , color) in theme_manager.read().themes[current_theme].colors.iter() {
+            for (str , color) in colors.into_iter() {
                 ColorSelector {
                     color_str: str,
                     color: color.clone(),
