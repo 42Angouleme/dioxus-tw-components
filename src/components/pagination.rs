@@ -53,9 +53,8 @@ pub fn Pagination(mut props: PaginationProps) -> Element {
     };
 
     let prev_dots = use_memo(move || (*props.page_number.read() > 2));
-    let next_dots = use_memo(move || {
-        (*props.page_number.read() <= max_pages.read().checked_sub(2).unwrap_or(0))
-    });
+    let next_dots =
+        use_memo(move || *props.page_number.read() <= max_pages.read().checked_sub(2).unwrap_or(0));
 
     rsx! {
         div { class: format!("{} {}", default_classes, props.class),

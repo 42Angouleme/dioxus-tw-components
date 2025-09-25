@@ -53,7 +53,7 @@ pub struct AccordionProps {
 }
 
 #[component]
-pub fn Accordion(mut props: AccordionProps) -> Element {
+pub fn Accordion(props: AccordionProps) -> Element {
     use_context_provider(|| Signal::new(AccordionState::new(props.multi_open)));
 
     rsx! {
@@ -71,7 +71,7 @@ pub struct AccordionItemProps {
 
 /// Wrapper for the [AccordionTrigger] and [AccordionContent] components
 #[component]
-pub fn AccordionItem(mut props: AccordionItemProps) -> Element {
+pub fn AccordionItem(props: AccordionItemProps) -> Element {
     rsx! {
         div { ..props.attributes,{props.children} }
     }
@@ -186,7 +186,7 @@ pub fn AccordionContent(mut props: AccordionContentProps) -> Element {
         false => "0".to_string(),
     };
 
-    let mut attributes = props.attributes.clone();
+    let attributes = props.attributes.clone();
 
     let default_classes = "accordion-content";
     crate::setup_class_attribute(&mut props.attributes, default_classes);
@@ -199,9 +199,9 @@ pub fn AccordionContent(mut props: AccordionContentProps) -> Element {
                     if !props.height.read().is_empty() {
                         return;
                     }
-                    if let Some(data_attribute) = attributes
+                    if attributes
                         .iter()
-                        .find(|attr| attr.name == "data-animation")
+                        .any(|attr| attr.name == "data-animation")
                     {
                         elem_height
                             .set(

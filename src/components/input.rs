@@ -4,17 +4,15 @@ use dioxus::prelude::*;
 pub struct InputProps {
     #[props(extends = input, extends = GlobalAttributes)]
     attributes: Vec<Attribute>,
-    #[props(optional)]
-    value: String,
 
     #[props(optional)]
-    onkeypress: EventHandler<KeyboardEvent>,
+    default_value: String,
+
     #[props(optional)]
-    onblur: EventHandler<FocusEvent>,
+    value: Signal<String>,
+
     #[props(optional)]
-    oninput: EventHandler<FormEvent>,
-    #[props(optional)]
-    onmounted: EventHandler<Event<MountedData>>,
+    onchange: EventHandler<FormEvent>,
 }
 
 #[component]
@@ -22,19 +20,15 @@ pub fn Input(mut props: InputProps) -> Element {
     let default_classes = "input";
     crate::setup_class_attribute(&mut props.attributes, default_classes);
 
-    let onkeypress = move |event| props.onkeypress.call(event);
-    let onblur = move |event| props.onblur.call(event);
-    let oninput = move |event| props.oninput.call(event);
-
-    let onmounted = move |event: Event<MountedData>| props.onmounted.call(event);
+    let oninput = move |event: FormEvent| {
+        props.value.set(event.data.value().clone());
+        props.onchange.call(event);
+    };
 
     rsx! {
         input {
-            onmounted,
-            onkeypress,
-            onblur,
             oninput,
-            value: props.value,
+            value: props.default_value,
             ..props.attributes,
         }
     }

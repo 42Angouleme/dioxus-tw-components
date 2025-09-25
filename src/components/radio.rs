@@ -3,6 +3,7 @@ use dioxus::prelude::*;
 #[derive(Clone, Copy)]
 struct RadioGroupCtx {
     value: Signal<String>,
+    onchange: EventHandler<MouseEvent>,
 }
 
 #[derive(Clone, PartialEq, Props)]
@@ -10,12 +11,22 @@ pub struct RadioGroupProps {
     #[props(extends = div, extends = GlobalAttributes)]
     attributes: Vec<Attribute>,
     children: Element,
+
+    #[props(optional)]
+    default_value: String,
+
+    #[props(optional)]
+    value: Signal<String>,
+
+    #[props(optional)]
+    onchange: EventHandler<MouseEvent>,
 }
 
 #[component]
 pub fn RadioGroup(mut props: RadioGroupProps) -> Element {
     use_context_provider(|| RadioGroupCtx {
-        value: Signal::new(String::new()),
+        value: props.value,
+        onchange: props.onchange,
     });
 
     let default_classes = "radio";
@@ -47,7 +58,10 @@ pub fn RadioItem(mut props: RadioItemProps) -> Element {
         input {
             r#type: "radio",
             checked,
-            onclick: move |_| state.value.set(props.value.clone()),
+            onclick: move |event| {
+                state.value.set(props.value.clone());
+                state.onchange.call(event);
+            },
             ..props.attributes,
         }
     }

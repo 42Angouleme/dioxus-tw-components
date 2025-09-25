@@ -249,11 +249,11 @@ impl std::default::Default for Theme {
         );
 
         colors.insert(
-            "ring-3".to_string(),
+            "popover".to_string(),
             ColorChoice::Simple(HslColor {
-                h: 240,
-                s: 10.0,
-                l: 3.9,
+                h: 0,
+                s: 0.0,
+                l: 96.08,
             }),
         );
 
@@ -399,11 +399,11 @@ impl Theme {
         );
 
         colors.insert(
-            "ring-3".to_string(),
+            "popover".to_string(),
             ColorChoice::Simple(HslColor {
-                h: 0,
-                s: 0.0,
-                l: 100.0,
+                h: 214,
+                s: 15.22,
+                l: 18.04,
             }),
         );
 

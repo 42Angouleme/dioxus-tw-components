@@ -35,11 +35,10 @@ pub fn ProgressBarInner(mut props: ProgressBarInnerProps) -> Element {
     crate::setup_class_attribute(&mut props.attributes, default_classes);
 
     // Avoid ProgressBar's data-style being applied to ProgressBarInner
-    if props
+    if !props
         .attributes
         .iter_mut()
-        .find(|attr| attr.name == "data-style")
-        .is_none()
+        .any(|attr| attr.name == "data-style")
     {
         props
             .attributes

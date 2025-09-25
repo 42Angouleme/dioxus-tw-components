@@ -6,7 +6,13 @@ pub struct SelectGroupProps {
     attributes: Vec<Attribute>,
 
     #[props(optional)]
-    oninput: EventHandler<FormEvent>,
+    default_value: String,
+
+    #[props(optional)]
+    value: Signal<String>,
+
+    #[props(optional)]
+    onchange: EventHandler<FormEvent>,
 
     children: Element,
 }
@@ -16,10 +22,18 @@ pub fn SelectGroup(mut props: SelectGroupProps) -> Element {
     let default_classes = "select-group";
     crate::setup_class_attribute(&mut props.attributes, default_classes);
 
-    let oninput = move |event| props.oninput.call(event);
+    let oninput = move |event: FormEvent| {
+        props.value.set(event.data.value().clone());
+        props.onchange.call(event);
+    };
 
     rsx! {
-        select { oninput, ..props.attributes, {props.children} }
+        select {
+            oninput,
+            value: props.default_value,
+            ..props.attributes,
+            {props.children}
+        }
     }
 }
 

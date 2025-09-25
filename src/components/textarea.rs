@@ -4,13 +4,15 @@ use dioxus::prelude::*;
 pub struct TextAreaProps {
     #[props(extends = textarea, extends = GlobalAttributes)]
     attributes: Vec<Attribute>,
-    #[props(optional)]
-    value: String,
 
     #[props(optional)]
-    oninput: EventHandler<FormEvent>,
+    default_value: String,
+
     #[props(optional)]
-    onmounted: EventHandler<Event<MountedData>>,
+    value: Signal<String>,
+
+    #[props(optional)]
+    onchange: EventHandler<FormEvent>,
 }
 
 #[component]
@@ -18,15 +20,15 @@ pub fn TextArea(mut props: TextAreaProps) -> Element {
     let default_classes = "textarea";
     crate::setup_class_attribute(&mut props.attributes, default_classes);
 
-    let oninput = move |event| props.oninput.call(event);
-
-    let onmounted = move |event: Event<MountedData>| props.onmounted.call(event);
+    let oninput = move |event: FormEvent| {
+        props.value.set(event.data.value().clone());
+        props.onchange.call(event);
+    };
 
     rsx! {
         textarea {
-            onmounted,
             oninput,
-            value: props.value,
+            value: props.default_value,
             ..props.attributes,
         }
     }

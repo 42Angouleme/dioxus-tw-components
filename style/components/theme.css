@@ -1,8 +1,8 @@
 .theme-picker {
-	height: 100vh;
+	height: fit-content;
 	min-width: 0px;
 	width: 100%;
-	padding: 0;
+	padding: 1rem 0;
 	z-index: 999;
 }
 
@@ -12,7 +12,6 @@
 	align-items: flex-start;
 	overflow: auto;
 	height: 100%;
-	margin-top: 5rem;
 	padding: auto 0.5rem;
 }
 

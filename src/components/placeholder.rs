@@ -13,11 +13,10 @@ pub fn Placeholder(mut props: PlaceholderProps) -> Element {
     crate::setup_class_attribute(&mut props.attributes, default_classes);
 
     // Placeholders are fully animated by default
-    if props
+    if !props
         .attributes
         .iter()
-        .find(|attr| attr.name == "data-animation")
-        .is_none()
+        .any(|attr| attr.name == "data-animation")
     {
         props
             .attributes

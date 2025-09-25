@@ -4,7 +4,7 @@
 	height: 2.25rem;
 	border-radius: var(--radius);
 	border: 1px input var(--input);
-	background-color: var(--background);
+	background-color: var(--bakcground);
 	padding: 0.5rem 0.75rem;
 	font-size: 0.875rem;
 	color: var(--foreground);
@@ -12,18 +12,21 @@
 }
 
 .select-placeholder {
+	background-color: var(--popover);
 	color: var(--foreground);
 	visibility: hidden;
 	font-weight: 700;
 }
 
 .select-label {
+	background-color: var(--popover);
 	color: var(--foreground);
 	font-size: 0.875rem;
 	font-weight: 600;
 }
 
 .select-itme {
+	background-color: var(--popover);
 	color: var(--foreground);
 	font-size: 0.875rem;
 }

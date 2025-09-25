@@ -13,10 +13,6 @@ impl FormListState {
         }
     }
 
-    fn get_max_size(&self) -> usize {
-        self.max_size
-    }
-
     fn set_max_size(&mut self, max_size: usize) {
         self.max_size = max_size;
     }

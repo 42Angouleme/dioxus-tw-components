@@ -6,7 +6,7 @@ pub struct SliderProps {
     attributes: Vec<Attribute>,
 
     #[props(optional)]
-    value: i64,
+    default_value: i64,
     #[props(optional, default = 0)]
     min: i64,
     #[props(optional, default = 100)]
@@ -15,13 +15,21 @@ pub struct SliderProps {
     step: i64,
 
     #[props(optional)]
-    oninput: EventHandler<FormEvent>,
+    value: Signal<i64>,
+
+    #[props(optional)]
+    onchange: EventHandler<FormEvent>,
 }
 
 #[component]
 pub fn Slider(mut props: SliderProps) -> Element {
     let default_classes = "slider";
     crate::setup_class_attribute(&mut props.attributes, default_classes);
+
+    let oninput = move |event: FormEvent| {
+        props.value.set(event.data.value().parse().unwrap_or(0));
+        props.onchange.call(event);
+    };
 
     rsx! {
         input {
@@ -30,8 +38,8 @@ pub fn Slider(mut props: SliderProps) -> Element {
             min: props.min.to_string(),
             max: props.max.to_string(),
             step: props.step.to_string(),
-            value: props.value.to_string(),
-            oninput: move |event| props.oninput.call(event),
+            value: props.default_value.to_string(),
+            oninput,
             ..props.attributes
         }
     }

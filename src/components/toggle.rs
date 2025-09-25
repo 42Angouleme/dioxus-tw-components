@@ -1,5 +1,4 @@
 use dioxus::prelude::*;
-use dioxus_core::AttributeValue;
 
 #[derive(Clone, PartialEq, Props)]
 pub struct ToggleProps {

@@ -34,7 +34,7 @@ fn main() -> Result<(), Box<dyn Error>> {
         let mut cfg = Cfg::new();
         cfg.keep_comments = true;
         cfg.allow_removing_spaces_between_attributes = true;
-        let minified = minify(&content.as_bytes(), &cfg);
+        let minified = minify(content.as_bytes(), &cfg);
 
         write!(&mut style, "{}", String::from_utf8(minified)?)?;
     }

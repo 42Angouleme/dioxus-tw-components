@@ -26,7 +26,7 @@ fn ColorPicker() -> Element {
     let current_theme = theme_manager.read().current_theme;
     let colors = theme_manager.read().themes[current_theme].colors.clone();
 
-    let oninput = move |event: FormEvent| {
+    let onchange = move |event: FormEvent| {
         // TODO Very ugly but works
 
         // Convert the event value to an HslColor struct
@@ -76,7 +76,7 @@ fn ColorPicker() -> Element {
                 id: "color-picker-input",
                 r#type: "color",
                 style: "visibility: hidden;",
-                oninput,
+                onchange,
             }
             for (str , color) in colors.into_iter() {
                 ColorSelector {
@@ -221,8 +221,8 @@ fn RadiusSelector() -> Element {
             Input {
                 "data-size": "sm",
                 r#type: "text",
-                value: theme_manager.read().themes[current_theme].radius.to_style(),
-                oninput: move |event: FormEvent| {
+                default_value: theme_manager.read().themes[current_theme].radius.to_style(),
+                onchange: move |event: FormEvent| {
                     let value = event.data().value();
                     theme_manager.write().themes[current_theme].radius = RadiusCss(value);
                 },

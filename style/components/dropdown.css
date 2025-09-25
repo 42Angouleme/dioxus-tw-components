@@ -20,7 +20,7 @@
     padding: 0.5rem;
     gap: 0.5rem;
     min-width: 8rem;
-    background-color: var(--background);
+    background-color: var(--popover);
     color: var(--foreground);
     border-radius: var(--radius);
     border: 1px solid var(--border);
