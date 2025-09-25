@@ -21,7 +21,6 @@ fn ColorPicker() -> Element {
     let selected_color = use_signal(|| String::from("primary"));
 
     let mut theme_manager = use_context::<Signal<ThemeManager>>();
-    let const_theme_manager = theme_manager.clone();
 
     let current_theme = theme_manager.read().current_theme;
     let colors = theme_manager.read().themes[current_theme].colors.clone();
