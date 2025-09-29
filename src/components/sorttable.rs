@@ -324,7 +324,7 @@ impl SortTableState {
     ///
     /// If None or the column is not found, the first column will be sorted
     ///
-    /// Else, the column will be 
+    /// Else, the column will be
     pub fn set_default_sort(mut self, column_name: Option<String>) -> Self {
         let column_index = column_name
             .and_then(|col| self.headers.iter().position(|h| h == &col))
@@ -387,7 +387,7 @@ pub fn SortTable(mut props: SortTableProps) -> Element {
                         th {
                             class: "table-head {header_class}",
                             onclick: move |_| {
-                                if state.peek().is_column_sortable(index) == false {
+                                if !state.peek().is_column_sortable(index) {
                                     return;
                                 }
                                 let sorted_col_index = state.read().get_sorted_col_index();
