@@ -1,4 +1,4 @@
-# Dioxus Tailwind Components [![Main CI](https://github.com/42Angouleme/dioxus-tw-components/actions/workflows/mail.yml/badge.svg)](https://github.com/42Angouleme/dioxus-tw-components/actions/workflows/mail.yml)
+# Dioxus Components [![Main CI](https://github.com/42Angouleme/dioxus-tw-components/actions/workflows/mail.yml/badge.svg)](https://github.com/42Angouleme/dioxus-tw-components/actions/workflows/mail.yml)
 
 A simple but highly customizable and efficient cross-platform components library for Dioxus 0.7.
 
@@ -47,7 +47,7 @@ Here's a non exhaustive list of all currently available components:
 
 ## Docsite
 
-Dioxus Tailwind Components offers a docsite to showcase the components and experiment with them.
+Dioxus Components offers a docsite to showcase the components and experiment with them.
 Here is the [docsite (live)](https://42angouleme.github.io/dioxus-tw-components-docsite) showcase _a la Storybook_, which also comes with a live theme customizer and exporter.
 While most of the time the showcase will be your first choice, you might want to manipulate the docsite source code, which you'll find [here](https://github.com/42Angouleme/dioxus-tw-components-docsite).
 Additionally, you can use it to export custom themes to embed in your own projects.
@@ -74,7 +74,7 @@ fn main() {
 #[component]
 fn App() -> Element {
     rsx! {
-        // Launches Dioxus Tailwind Components. Some components may not work without this.
+        // Launches Dioxus Components. Some components may not work without this.
         Bootstrap {}
 
         // Rest of your application
@@ -84,7 +84,7 @@ fn App() -> Element {
 
 ### Input CSS
 
-Dioxus Tailwind Components uses special CSS variable names to style properly. You may add them to your css files:
+Dioxus Components uses special CSS variable names to style properly. You may add them to your css files:
 <details>
     <summary>
         Example variable CSS file
@@ -159,4 +159,4 @@ We hope that this initiative serves as a useful resource and inspiration for you
 
 This project is licensed under either the [MIT license](./LICENSE-MIT) or the [Apache-2 License](./LICENSE-APACHE).
 
-Unless you explicitly state otherwise, any contribution intentionally submitted for inclusion in Dioxus Tailwind Components by you shall be licensed as MIT or Apache-2 without any additional terms or conditions.
+Unless you explicitly state otherwise, any contribution intentionally submitted for inclusion in Dioxus Components by you shall be licensed as MIT or Apache-2 without any additional terms or conditions.
