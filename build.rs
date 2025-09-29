@@ -13,7 +13,7 @@ const SOURCE_DIR: &str = "./style/components/";
 fn main() -> Result<(), Box<dyn Error>> {
     println!("cargo::rerun-if-changed=style/components");
 
-    let out_dir = env::var("CARGO_MANIFEST_DIR")?;
+    let out_dir = env::var("OUT_DIR")?;
     let dest_path = Path::new(&out_dir).join("dioxus-tw-components-style.css");
     let mut style = File::create(&dest_path)?;
 
