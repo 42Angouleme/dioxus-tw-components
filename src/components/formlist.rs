@@ -13,6 +13,10 @@ impl FormListState {
         }
     }
 
+    fn get_max_size(&self) -> usize {
+        self.max_size
+    }
+
     fn set_max_size(&mut self, max_size: usize) {
         self.max_size = max_size;
     }
@@ -185,4 +189,18 @@ pub fn FormListContent(mut props: FormListContentProps) -> Element {
     rsx! {
         div { ..props.attributes,{fields} }
     }
+}
+
+#[component]
+pub fn FormListMaxSize() -> Element {
+    let state = use_context::<Signal<FormListState>>();
+
+    rsx! { "{state.read().get_max_size()}" }
+}
+
+#[component]
+pub fn FormListCurrentSize() -> Element {
+    let state = use_context::<Signal<FormListState>>();
+
+    rsx! { "{state.read().get_current_size()}" }
 }

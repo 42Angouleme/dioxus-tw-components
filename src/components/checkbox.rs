@@ -3,7 +3,7 @@ use dioxus::prelude::*;
 
 #[derive(Clone, PartialEq, Props)]
 pub struct CheckboxProps {
-    #[props(extends = GlobalAttributes)]
+    #[props(extends = button, extends = GlobalAttributes)]
     attributes: Vec<Attribute>,
 
     #[props(optional)]
@@ -12,8 +12,9 @@ pub struct CheckboxProps {
     #[props(optional)]
     checked: Signal<bool>,
 
+    /// Return value determines if the event should strop propagation (false by default)
     #[props(optional)]
-    onchange: EventHandler<MouseEvent>,
+    onchange: Callback<bool, bool>,
 }
 
 #[component]
@@ -65,7 +66,9 @@ pub fn Checkbox(mut props: CheckboxProps) -> Element {
                 let new_checked = !checked();
                 checked.set(new_checked);
                 props.checked.set(new_checked);
-                props.onchange.call(event);
+                if props.onchange.call(new_checked) {
+                    event.stop_propagation();
+                }
             },
 
             // Aria says only spacebar can change state of checkboxes.

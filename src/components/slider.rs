@@ -2,7 +2,7 @@ use dioxus::prelude::*;
 
 #[derive(Default, Clone, PartialEq, Props)]
 pub struct SliderProps {
-    #[props(extends = div, extends = GlobalAttributes)]
+    #[props(extends = input, extends = GlobalAttributes)]
     attributes: Vec<Attribute>,
 
     #[props(optional)]
@@ -41,6 +41,31 @@ pub fn Slider(mut props: SliderProps) -> Element {
             value: props.default_value.to_string(),
             oninput,
             ..props.attributes
+        }
+    }
+}
+
+#[derive(Clone, PartialEq, Props)]
+pub struct SliderLabelProps {
+    #[props(extends = div, extends = GlobalAttributes)]
+    attributes: Vec<Attribute>,
+
+    #[props(optional, default = 0)]
+    value: i64,
+    #[props(optional, default = 100)]
+    max: i64,
+}
+
+#[component]
+pub fn SliderLabel(mut props: SliderLabelProps) -> Element {
+    let default_classes = "slider-label";
+    crate::setup_class_attribute(&mut props.attributes, default_classes);
+
+    rsx! {
+        div {..props.attributes,
+            {props.value.to_string()}
+            " / "
+            {props.max.to_string()}
         }
     }
 }
