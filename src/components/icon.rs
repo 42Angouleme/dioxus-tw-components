@@ -11,7 +11,10 @@ pub struct IconProps {
 }
 
 #[component]
-pub fn Icon(props: IconProps) -> Element {
+pub fn Icon(mut props: IconProps) -> Element {
+    let default_classes = "icon";
+    crate::setup_class_attribute(&mut props.attributes, default_classes);
+
     rsx! {
         p { style: "font-family: 'Material Icons'; user-select: none;", ..props.attributes, "{props.icon.to_string()}" }
     }

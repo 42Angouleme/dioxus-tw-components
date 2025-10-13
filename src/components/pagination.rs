@@ -68,7 +68,7 @@ pub fn Pagination(mut props: PaginationProps) -> Element {
                     let value = *props.page_number.peek();
                     props.page_number.set(value - 1);
                 },
-                Icon { icon: Icons::ArrowLeft }
+                Icon { style: "font-family: 'Material Icons'; user-select: none; font-size: 1.5rem;", icon: Icons::ArrowLeft }
             }
             if *prev_dots.read() {
                 Button {
@@ -119,7 +119,7 @@ pub fn Pagination(mut props: PaginationProps) -> Element {
                     let value = *props.page_number.peek();
                     props.page_number.set(value + 1);
                 },
-                Icon { icon: Icons::ArrowRight }
+                Icon { style: "font-family: 'Material Icons'; user-select: none; font-size: 1.5rem;", icon: Icons::ArrowRight }
             }
         }
     }

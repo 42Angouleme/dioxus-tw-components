@@ -1,6 +1,5 @@
 .scrollable {
     overflow-x: hidden;
-    overflow-y: auto;
 	min-width: 8rem;
 	border: 1px solid;
 	border-color: var(--border);
