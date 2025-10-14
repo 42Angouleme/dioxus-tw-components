@@ -1,4 +1,5 @@
 .scrollable {
+	overflow-y: auto;
     overflow-x: hidden;
 	min-width: 8rem;
 	border: 1px solid;
@@ -13,4 +14,5 @@
 }
 
 .scrollable[data-orientation="vertical"] {
+	grid-auto-flow: row;
 }

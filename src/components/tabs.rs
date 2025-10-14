@@ -14,11 +14,8 @@ pub struct TabsProps {
 }
 
 #[component]
-pub fn Tabs(mut props: TabsProps) -> Element {
+pub fn Tabs(props: TabsProps) -> Element {
     use_context_provider(|| Signal::new(TabsState(props.default_tab.read().clone())));
-
-    let default_classes = "tabs";
-    crate::setup_class_attribute(&mut props.attributes, default_classes);
 
     rsx! {
         div { ..props.attributes, {props.children} }

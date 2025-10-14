@@ -12,21 +12,18 @@
 }
 
 .select-placeholder {
-	background-color: var(--popover);
 	color: var(--foreground);
 	visibility: hidden;
 	font-weight: 700;
 }
 
 .select-label {
-	background-color: var(--popover);
 	color: var(--foreground);
 	font-size: 0.875rem;
 	font-weight: 600;
 }
 
-.select-itme {
-	background-color: var(--popover);
+.select-item {
 	color: var(--foreground);
 	font-size: 0.875rem;
 }
