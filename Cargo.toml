@@ -16,7 +16,7 @@ path = "src/lib.rs"
 
 [dependencies]
 dioxus-tw-components-sorttable-macro = { version = "0.1.0", path = "./dioxus-tw-components-sorttable-macro" }
-dioxus = { version = "0.7.0-rc.1", features = [] }
+dioxus = { version = "0.7.0-rc.2", features = [] }
 strum = { version = "0.27.1", default-features = false, features = ["derive"] }
 chrono = "0.4.39"
 log = "0.4.22"

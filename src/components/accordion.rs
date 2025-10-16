@@ -83,11 +83,11 @@ pub struct AccordionTriggerProps {
     attributes: Vec<Attribute>,
 
     #[props(optional)]
-    id: ReadOnlySignal<String>,
+    id: ReadSignal<String>,
 
     /// Determine if the accordion item is open by default
     #[props(optional, into)]
-    is_open: ReadOnlySignal<bool>,
+    is_open: ReadSignal<bool>,
 
     #[props(optional, default)]
     onclick: EventHandler<MouseEvent>,
@@ -159,10 +159,10 @@ pub struct AccordionContentProps {
     attributes: Vec<Attribute>,
 
     #[props(optional)]
-    id: ReadOnlySignal<String>,
+    id: ReadSignal<String>,
 
     #[props(optional)]
-    height: ReadOnlySignal<String>,
+    height: ReadSignal<String>,
 
     children: Element,
 }

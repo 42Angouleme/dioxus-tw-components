@@ -40,5 +40,5 @@
 }
 
 .tabs-content[data-state="inactive"] {
-    display: none;
+    display: none !important;
 }

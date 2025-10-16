@@ -276,7 +276,7 @@ impl std::fmt::Display for ToastState {
 
 /// Used to render the Toast, also update the ToasterState
 #[component]
-fn ToastView(mut state: Signal<ToasterState>, toast: ReadOnlySignal<Toast>) -> Element {
+fn ToastView(mut state: Signal<ToasterState>, toast: ReadSignal<Toast>) -> Element {
     let mut toast_state = use_signal(|| ToastState::Opening);
 
     let duration_in_ms = toast.read().duration_in_ms;

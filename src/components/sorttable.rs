@@ -265,7 +265,7 @@ pub struct SortTableProps {
 
     headers: Vec<String>,
 
-    data: ReadOnlySignal<Vec<SortableRow>>,
+    data: ReadSignal<Vec<SortableRow>>,
 }
 
 pub struct SortTableState {

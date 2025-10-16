@@ -38,10 +38,7 @@ fn main() -> Result<(), Box<dyn Error>> {
 
         write!(&mut style, "{}", String::from_utf8(minified)?)?;
     }
-    write!(
-        &mut style,
-        "}}",
-    )?;
+    write!(&mut style, "}}",)?;
 
     Ok(())
 }

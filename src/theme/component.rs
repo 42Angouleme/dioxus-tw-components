@@ -92,7 +92,7 @@ fn ColorPicker() -> Element {
 
 #[component]
 fn ColorSelector(
-    color_str: ReadOnlySignal<String>,
+    color_str: ReadSignal<String>,
     color: ColorChoice,
     mut selected_color: Signal<String>,
 ) -> Element {

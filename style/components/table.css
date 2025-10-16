@@ -2,6 +2,9 @@
     width: 100%;
     border-collapse: collapse;
     border-spacing: 0;
+	color: var(--foreground);
+	font-size: 0.875rem;
+	background-color: var(--background);
 }
 
 .table-header {

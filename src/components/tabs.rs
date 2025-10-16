@@ -5,7 +5,7 @@ struct TabsState(String);
 #[derive(Clone, PartialEq, Props)]
 pub struct TabsProps {
     #[props(optional)]
-    default_tab: ReadOnlySignal<String>,
+    default_tab: ReadSignal<String>,
 
     #[props(extends = div, extends = GlobalAttributes)]
     attributes: Vec<Attribute>,
@@ -46,7 +46,7 @@ pub struct TabsTriggerProps {
     attributes: Vec<Attribute>,
 
     #[props(optional)]
-    id: ReadOnlySignal<String>,
+    id: ReadSignal<String>,
 
     children: Element,
 }
@@ -80,7 +80,7 @@ pub struct TabsContentProps {
     attributes: Vec<Attribute>,
 
     #[props(optional)]
-    id: ReadOnlySignal<String>,
+    id: ReadSignal<String>,
 
     children: Element,
 }

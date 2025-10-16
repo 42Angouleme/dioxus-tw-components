@@ -165,7 +165,7 @@ pub struct CarouselContentProps {
     #[props(extends = div, extends = GlobalAttributes)]
     attributes: Vec<Attribute>,
 
-    id: ReadOnlySignal<String>,
+    id: ReadSignal<String>,
 
     children: Element,
 }

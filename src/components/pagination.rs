@@ -8,11 +8,11 @@ pub struct PaginationProps {
     attributes: Vec<Attribute>,
 
     #[props(optional, default)]
-    pub class: ReadOnlySignal<String>,
+    pub class: ReadSignal<String>,
     #[props(into)]
-    pub data_size: ReadOnlySignal<usize>,
+    pub data_size: ReadSignal<usize>,
     #[props(into)]
-    pub page_size: ReadOnlySignal<usize>,
+    pub page_size: ReadSignal<usize>,
     pub page_number: Signal<usize>,
 }
 
@@ -52,7 +52,7 @@ pub fn Pagination(mut props: PaginationProps) -> Element {
         _ => "none".to_string(),
     };
 
-    let prev_dots = use_memo(move || (*props.page_number.read() > 2));
+    let prev_dots = use_memo(move || *props.page_number.read() > 2);
     let next_dots =
         use_memo(move || *props.page_number.read() <= max_pages.read().checked_sub(2).unwrap_or(0));
 
