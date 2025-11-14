@@ -1,0 +1,49 @@
+.hovercard {
+    position: relative;
+    color: var(--foreground);
+}
+
+.hovercard-trigger {
+    font-size: 0.875rem;
+    font-weight: 500;
+    white-space: nowrap;
+    transition: all ease-in-out 200ms;
+}
+
+.hovercard:hover .hovercard-trigger {
+    text-decoration: underline;
+}
+
+.hovercard-content {
+    padding: 1rem;
+    background-color: var(--popover);
+    color: var(--foreground);
+    white-space: nowrap;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    z-index: 30;
+    opacity: 1;
+    position: absolute;
+    margin-top: 0.5rem;
+}
+
+.hovercard-content[data-state="inactive"] {
+    visibility: hidden;
+}
+
+.hovercard-content[data-animation="light"],
+.hovercard-content[data-animation="full"] {
+    transition: all 0.1s ease-out;
+}
+
+.hovercard-content[data-state="inactive"][data-animation="light"],
+.hovercard-content[data-state="inactive"][data-animation="full"] {
+    transform: scale(0.9);
+    opacity: 0;
+}
+
+.hovercard-content[data-state="active"][data-animation="light"],
+.hovercard-content[data-state="active"][data-animation="full"] {
+    transform: scale(1);
+}

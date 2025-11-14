@@ -1,0 +1,137 @@
+.button {
+	--btn-color: var(--foreground);
+	--btn-color-foreground: var(--background);
+	--btn-bg: var(--btn-color);
+	--btn-border: none;
+	--btn-text: var(--btn-color-foreground);
+
+	background-color: var(--btn-bg);
+	border: var(--btn-border);
+	color: var(--btn-text);
+
+	font-weight: 500; 
+	text-align: center; 
+	cursor: pointer;
+	user-select: none; 
+	border-radius: var(--radius);
+	cursor: pointer;
+
+	height: 2.25rem;
+	padding-left: 1rem;
+	padding-right: 1rem;
+	font-size: 0.875rem;
+}
+
+.buttongroup .button {
+	border-radius: 0px;
+}
+
+.button[data-size="xs"] {
+	height: 1rem;
+	padding-left: 0.5rem;
+	padding-right: 0.5rem;
+	font-size: 0.75rem;
+}
+
+.button[data-size="sm"] {
+	height: 1.75rem;
+	padding-left: 0.75rem;
+	padding-right: 0.75rem;
+	font-size: 0.875rem;
+}
+
+.button[data-size="lg"] {
+	height: 2.75rem;
+	padding-left: 1.75rem;
+	padding-right: 1.75rem;
+	font-size: 1.125rem;
+}
+
+.button[data-size="xl"] {
+	height: 3.5rem;
+	padding-left: 2.25rem;
+	padding-right: 2.25rem;
+	font-size: 1.25rem;
+}
+
+.button[data-style="primary"] {
+	--btn-color: var(--primary);
+	--btn-color-foreground: var(--primary-foreground);
+	--btn-border: var(--primary);
+}
+
+.button[data-style="secondary"] {
+	--btn-color: var(--secondary);
+	--btn-color-foreground: var(--secondary-foreground);
+	--btn-border: var(--secondary);
+}
+
+.button[data-style="destructive"] {
+	--btn-color: var(--destructive);
+	--btn-color-foreground: var(--destructive-foreground);
+	--btn-border: var(--destructive);
+}
+
+.button[data-style="success"] {
+	--btn-color: var(--success);
+	--btn-color-foreground: var(--success-foreground);
+	--btn-border: var(--success);
+}
+
+.button[data-style="accent"] {
+	--btn-color: var(--accent);
+	--btn-color-foreground: var(--accent-foreground);
+	--btn-border: var(--accent);
+}
+
+.button[data-style="muted"] {
+	--btn-color: var(--muted);
+	--btn-color-foreground: var(--muted-foreground);
+	--btn-border: var(--muted);
+}
+
+.button[data-variant="outline"] {
+	--btn-bg: transparent;
+	--btn-text: var(--btn-color);
+	--btn-border: 2px solid var(--btn-color);
+}
+
+.button[data-variant="ghost"] {
+	--btn-bg: transparent;
+	--btn-text: var(--btn-color);
+	--btn-border: none;
+}
+
+.button:disabled {
+	opacity: 50%;
+	cursor: not-allowed;
+}
+
+.button:hover {
+	--btn-bg: color-mix(in oklab, var(--btn-color) 60%, transparent);
+}
+
+.button:active {
+	--btn-bg: color-mix(in oklab, var(--btn-color) 30%, transparent);
+	box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+}
+
+.button:hover[data-variant="outline"] {
+	--btn-text: var(--btn-color-foreground);
+}
+
+.button:hover[data-variant="ghost"] {
+	--btn-text: var(--btn-color-foreground);
+}
+
+.button[data-animation="light"] {
+	transition-property: color, background-color, border-color, outline-color, text-decoration-color, fill, stroke, --tw-gradient-from, --tw-gradient-via, --tw-gradient-to;
+	transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+	transition-duration: 150ms;
+}
+
+.button[data-animation="full"] {
+	transition-property: color, background-color, border-color, outline-color, text-decoration-color, fill, stroke, --tw-gradient-from, --tw-gradient-via, --tw-gradient-to;
+	transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+	transition-duration: 150ms;
+}

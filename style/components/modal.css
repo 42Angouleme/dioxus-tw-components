@@ -1,0 +1,108 @@
+.modal-content {
+	position: fixed;
+	width: fit-content;
+	height: fit-content;
+	background-color: var(--background);
+	border: 1px solid var(--input);
+	padding: 1rem;
+	z-index: 50;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	box-shadow: var(--shadow-lg);
+}
+
+.modal-content[data-state="inactive"] {
+	opacity: 0%;
+	visibility: hidden;
+}
+
+.modal-content[data-animation="light"],
+.modal-content[data-animation="full"] {
+	transition: all 0.3s ease;
+}
+
+.modal-content[data-state="inactive"][data-animation="light"],
+.modal-content[data-state="inactive"][data-animation="full"] {
+	transform: translate(-50%, 100%);
+}
+
+.modal-content[data-size="sm"] {
+	min-width: 20rem;
+	max-width: 24rem;
+}
+
+.modal-content[data-size="md"] {
+	min-width: 24rem;
+	max-width: 32rem;
+}
+
+.modal-content[data-size="lg"] {
+	min-width: 32rem;
+	max-width: 48rem;
+}
+
+.modal-content[data-size="xl"] {
+	min-width: 48rem;
+	max-width: 64rem;
+}
+
+.modal-background {
+	width: 100vw;
+	height: 100vh;
+	top: 0;
+	left: 0;
+	z-index: 40;
+	opacity: 15%;
+	position: fixed;
+	background-color: var(--foreground);
+}
+
+.modal-background[data-state="inactive"] {
+	opacity: 0%;
+	visibility: hidden;
+}
+
+.modal-background[data-animation="light"],
+.modal-background[data-animation="full"] {
+	transition: all 0.3s ease;
+}
+
+.modal-background[data-state="inactive"][data-animation="light"],
+.modal-background[data-state="inactive"][data-animation="full"] {
+	transition-property: all;
+	transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+	transition-duration: 300ms;
+}
+
+.modal-background[data-style="primary"] {
+	background-color: var(--primary);
+}
+
+.modal-background[data-style="secondary"] {
+	background-color: var(--secondary);
+}
+
+.modal-background[data-style="destructive"] {
+	background-color: var(--destructive);
+}
+
+.modal-background[data-style="success"] {
+	background-color: var(--success);
+}
+
+.modal-close {
+	position: absolute;
+	top: 1rem;
+	right: 1rem;
+	cursor: pointer;
+	color: var(--foreground);
+
+	transition-property: all;
+	transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+	transition-duration: 300ms;
+}
+
+.modal-close[data-state="inactive"] {
+	opacity: 0;
+}

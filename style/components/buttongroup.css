@@ -1,0 +1,11 @@
+.buttongroup {
+	display: inline-flex;
+	border: 2px solid var(--border);
+	background-color: var(--bakcground);
+	border-radius: var(--radius);
+	overflow: hidden;
+}
+
+.buttongroup > :not(:last-child) {
+	border-right: 2px solid var(--border);
+}

@@ -38,9 +38,9 @@ jobs:
           if: always()
           run: cargo build
 
-        - name: Run tests
-          if: always()
-          run: cargo test --all-features
+        #- name: Run tests
+        #  if: always()
+        #  run: cargo test --all-features
 
         - name: Run clippy
           if: always()

@@ -4,8 +4,9 @@ public/
 Cargo.lock
 .vscode/
 *.lock
+*-style.css
 package.json
 package-lock.json
 node_modules/
 compile_commands.json
-test/assets/
+examples/assets/tailwind.css

@@ -1,0 +1,18 @@
+.scrollable {
+	overflow-y: auto;
+    overflow-x: hidden;
+	min-width: 8rem;
+	border: 1px solid;
+	border-color: var(--border);
+	border-radius: var(--radius);
+	padding: 0.5rem;
+}
+
+.scrollable[data-orientation="horizontal"] {
+	rotate: -90deg;
+	transform-origin: top right;
+}
+
+.scrollable[data-orientation="vertical"] {
+	grid-auto-flow: row;
+}

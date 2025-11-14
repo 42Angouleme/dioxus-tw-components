@@ -1,0 +1,13 @@
+.slider {
+    width: 100%;
+	cursor: poiner;
+}
+
+.slider:disabled {
+    cursor: not-allowed;
+    opacity: 50%;
+}
+
+.slider-label {
+	font-size: 0.75rem;
+}

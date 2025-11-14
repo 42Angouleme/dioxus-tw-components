@@ -1,0 +1,44 @@
+.tabs-list {
+	width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius);
+    background-color: var(--muted);
+    padding: 0.25rem;
+    color: var(--muted-foreground);
+}
+
+.tabs-trigger {
+    display: flex;
+	flex-grow: 1;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap;
+    border-radius: var(--radius);
+    font-size: 0.875rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.tabs-trigger:hover {
+    color: var(--foreground);
+}
+
+.tabs-trigger[data-state="active"] {
+    background-color: var(--background);
+    color: var(--foreground);
+    box-shadow: var(--shadow);
+}
+
+.tabs-content {
+    margin-top: 0.5rem;
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+    padding: 1.5rem;
+}
+
+.tabs-content[data-state="inactive"] {
+    display: none !important;
+}

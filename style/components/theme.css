@@ -1,0 +1,88 @@
+.theme-picker {
+	height: fit-content;
+	min-width: 0px;
+	width: 100%;
+	padding: 1rem 0;
+	z-index: 999;
+}
+
+.theme-picker-content {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	overflow: auto;
+	height: 100%;
+	padding: auto 0.5rem;
+}
+
+.theme-picker-content > :not(:last-child) {
+	margin-block-start: 0;
+	margin-block-end: 0.5rem;
+}
+
+.theme-picker-color-selector {
+	width: 100%;
+	border-radius: var(--radius);
+	padding: 0.25rem;
+	display: flex;
+	background-color: var(--background);
+	color: var(--foreground);
+	font-weight: 700;
+	font-size: 0.875rem;
+}
+
+.theme-toggle-div {
+	border-radius: var(--radius);
+	padding: 0.25rem;
+    transition: all 0.2s ease;
+}
+
+.theme-toggle-div[data-selected="true"] {
+	background-color: var(--accent);
+}
+
+.theme-toggle-div:active {
+	background-color: color-mix(in oklab, var(--foreground) 45%, transparent);
+}
+
+.theme-minipicker-trigger {
+	border: none !important;
+	box-shadow: none !important;
+	background-color: transparent !important;
+	cursor: pointer;
+	padding: 0.25rem !important;
+	padding-right: 1rem;
+	border-radius: var(--radius);
+	color: var(--foreground) !important;
+}
+.theme-minipicker-trigger:hover {
+	background-color: color-mix(in oklab, var(--foreground) 40%, transparent) !important;
+}
+.theme-minipicker-trigger:active {
+	background-color: color-mix(in oklab, var(--foreground) 60%, transparent) !important;
+}
+
+.theme-minipicker-lightswitch {
+	cursor: pointer;
+	padding: 0.25rem;
+	border-radius: var(--radius);
+}
+.theme-minipicker-lightswitch:hover {
+	background-color: color-mix(in oklab, var(--foreground) 40%, transparent);
+}
+.theme-minipicker-lightswitch:active {
+	background-color: color-mix(in oklab, var(--foreground) 60%, transparent);
+}
+
+@media (width >= 40rem) {
+	.theme-picker {
+		width: 30rem;
+		padding-left: 2rem;
+		padding-right: 2rem;
+	}
+
+	.theme-picker-content {
+		padding-left: 1rem;
+		padding-right: 1rem;
+	}
+}

@@ -1,0 +1,32 @@
+.sorttable {
+    width: 100%;
+	caption-side: bottom;
+	font-size: 0.875rem;
+	color: var(--foreground);
+	background-color: var(--background);
+}
+
+.sorttable-header {
+    cursor: pointer;
+    user-select: none;
+}
+
+.sorttable-icon {
+	fill: var(--foreground);
+	font-family: 'Material Icons';
+	user-select: none;
+	transition-property: all;
+	transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+	transition-duration: 150ms;
+}
+
+.sorttable-header-content {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.sorttable-header-content > :not(:last-child) {
+	margin-inline-end: 0.25rem;
+}

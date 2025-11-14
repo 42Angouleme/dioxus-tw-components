@@ -1,0 +1,63 @@
+.placeholder {
+	background-color: color-mix(in oklab, var(--foreground) 20%, transparent);
+	border-radius: var(--radius);
+	height: 6rem;
+	width: 6rem;
+}
+
+.placeholder[data-style="primary"] {
+	background-color: color-mix(in oklab, var(--primary) 20%, transparent);
+}
+
+.placeholder[data-style="secondary"] {
+	background-color: color-mix(in oklab, var(--secondary) 20%, transparent);
+}
+
+.placeholder[data-style="destructive"] {
+	background-color: color-mix(in oklab, var(--destructive) 20%, transparent);
+}
+
+.placeholder[data-style="success"] {
+	background-color: color-mix(in oklab, var(--success) 20%, transparent);
+}
+
+.placeholder[data-style="accent"] {
+	background-color: color-mix(in oklab, var(--accent) 20%, transparent);
+}
+
+.placeholder[data-style="muted"] {
+	background-color: color-mix(in oklab, var(--muted) 20%, transparent);
+}
+
+.placeholder[data-animation="light"] {
+	animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.placeholder[data-animation="full"] {
+	position: relative;
+	overflow: hidden;
+}
+
+.placeholder[data-animation="full"]::before {
+	content: "";
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	transform: translateX(-100%);
+	background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+	animation: shimmer 2s infinite;
+}
+
+@keyframes pulse {
+	50% {
+		opacity: 0.5;
+	}
+}
+
+@keyframes shimmer {
+	100% {
+		transform: translateX(100%);
+	}
+}

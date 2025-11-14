@@ -6,10 +6,10 @@ pub fn ThemePicker() -> Element {
     rsx! {
         SidePanel {
             MiniPicker {}
-            SidePanelBackground { class: "z-998" }
+            SidePanelBackground { style: "z-index: 998;" }
             SidePanelContent {
-                class: "h-screen min-w-0 w-full sm:w-120 p-0 sm:px-8 z-999",
-                side: Side::Right,
+                class: "theme-picker",
+                "data-side": "right",
                 ColorPicker {}
             }
         }
@@ -23,8 +23,9 @@ fn ColorPicker() -> Element {
     let mut theme_manager = use_context::<Signal<ThemeManager>>();
 
     let current_theme = theme_manager.read().current_theme;
+    let colors = theme_manager.read().themes[current_theme].colors.clone();
 
-    let oninput = move |event: FormEvent| {
+    let onchange = move |event: FormEvent| {
         // TODO Very ugly but works
 
         // Convert the event value to an HslColor struct
@@ -68,15 +69,15 @@ fn ColorPicker() -> Element {
 
     rsx! {
         SidePanelClose {}
-        div { class: "flex flex-col items-start overflow-auto h-full mt-20 py-auto px-2 sm:px-4 space-y-2",
+        div { class: "theme-picker-content",
             Input {
                 role: "button",
                 id: "color-picker-input",
                 r#type: "color",
-                class: "hidden",
-                oninput,
+                style: "visibility: hidden;",
+                onchange,
             }
-            for (str , color) in theme_manager.read().themes[current_theme].colors.iter() {
+            for (str , color) in colors.into_iter() {
                 ColorSelector {
                     color_str: str,
                     color: color.clone(),
@@ -91,7 +92,7 @@ fn ColorPicker() -> Element {
 
 #[component]
 fn ColorSelector(
-    color_str: ReadOnlySignal<String>,
+    color_str: ReadSignal<String>,
     color: ColorChoice,
     mut selected_color: Signal<String>,
 ) -> Element {
@@ -105,7 +106,7 @@ fn ColorSelector(
                     },
                     Icon { icon: Icons::Colorize }
                 }
-                div { class: "bg-{color_str} grow flex items-center justify-center",
+                div { style: "background-color: var(--{color_str}); flex-grow: 1; display: flex; align-items: center; justify-content: center;",
                     p {
                         color: "white",
                         text_shadow: "-1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000",
@@ -116,15 +117,15 @@ fn ColorSelector(
         }
         ColorChoice::Duo(_, _) => {
             let bg = if &*color_str.read() == "background" {
-                "bg-background".to_string()
+                "background".to_string()
             } else {
-                format!("bg-{color_str}")
+                format!("{color_str}")
             };
 
             let text = if &*color_str.read() == "background" {
-                "text-foreground".to_string()
+                "foreground".to_string()
             } else {
-                format!("text-{color_str}-foreground")
+                format!("{color_str}-foreground")
             };
 
             let is_selected = if &*color_str.read() == "background" {
@@ -146,7 +147,17 @@ fn ColorSelector(
                     },
                     Icon { icon: Icons::FlipToFront }
                 }
-                p { class: "{bg} {text} text-center text-sm font-bold grow flex items-center justify-center",
+                p { style: r#"
+                        background-color: var(--{bg});
+                        color: var(--{text});
+                        text-align: center;
+                        font-size: 0.875rem;
+                        font-weight: 700;
+                        flex-grow: 1;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                    "#,
                     "{color_str}"
                 }
                 ToggleDiv {
@@ -161,7 +172,7 @@ fn ColorSelector(
     };
 
     rsx! {
-        div { class: "w-full rounded-global-radius p-1 space-x-1 flex bg-backgroud text-foreground font-bold text-sm border border-border",
+        div { class: "theme-picker-color-selector",
             {content}
         }
     }
@@ -189,7 +200,7 @@ fn ToggleDiv(is_selected: bool, onclick: EventHandler<MouseEvent>, children: Ele
     rsx! {
         div {
             role: "button",
-            class: "group rounded-global-radius p-1 transition-all data-[selected=true]:bg-accent active:bg-foreground/45",
+            class: "theme-toggle-div",
             "data-selected": is_selected,
             onclick,
             {children}
@@ -205,12 +216,12 @@ fn RadiusSelector() -> Element {
 
     rsx! {
         div { id: "radius-selector", class: "w-full",
-            p { class: "text-sm font-medium", "Radius" }
+            p { style: "font-size: 0.875rem; font-weight: 700;", "Radius" }
             Input {
-                size: Size::Sm,
+                "data-size": "sm",
                 r#type: "text",
-                value: theme_manager.read().themes[current_theme].radius.to_style(),
-                oninput: move |event: FormEvent| {
+                default_value: theme_manager.read().themes[current_theme].radius.to_style(),
+                onchange: move |event: FormEvent| {
                     let value = event.data().value();
                     theme_manager.write().themes[current_theme].radius = RadiusCss(value);
                 },
@@ -226,12 +237,12 @@ fn MiniPicker() -> Element {
     let current_theme = theme_manager.read().current_theme;
 
     rsx! {
-        div { class: "flex flex-row p-2 items-center space-x-4",
-            SidePanelTrigger { class: "border-none shadow-none bg-inherit cursor-pointer p-1 rounded-global-radius hover:bg-foreground/40 active:bg-foreground/60",
+        div { style: "display: flex; flex-direction: row; padding: 0.5rem; align-items: center;",
+            SidePanelTrigger { class: "theme-minipicker-trigger",
                 Icon { icon: Icons::Palette }
             }
             LightSwitch {
-                class: "cursor-pointer p-1 rounded-global-radius hover:bg-foreground/40 active:bg-foreground/60",
+                class: "theme-minipicker-lightswitch",
                 onclick: move |_| {
                     if current_theme == 0 {
                         theme_manager.write().current_theme = 1
@@ -248,12 +259,12 @@ fn MiniPicker() -> Element {
 fn ButtonExport() -> Element {
     rsx! {
         Modal {
-            ModalTrigger { class: "w-full text-center", "Export Theme" }
+            ModalTrigger { style: "width: 100%; align-text: center;", "Export Theme" }
             ModalBackground {}
             ModalContent {
                 ModalClose {}
                 h6 { class: "h6", "Theme" }
-                p { class: "text-sm font-medium text-foreground/50 pb-4",
+                p { style: "font-size: 0.875rem; font-widht: 700; color: color-mix(in oklab, var(--foreground) 50%, transparent); padding-bottom: 1rem;",
                     "Copy and paste this in your project's CSS file."
                 }
                 ThemeExport {}
@@ -268,10 +279,9 @@ fn ThemeExport() -> Element {
 
     rsx! {
         Scrollable {
-            orientation: Orientation::Vertical,
-            class: "max-h-80 border-none bg-foreground",
-            pre { class: "bg-foreground text-background pl-4 pr-12 py-2 rounded-global-radius",
-                code { class: "text-sm", "{theme_manager.read().export_to_css()}" }
+            style: "max-height: 20rem; border: none; background-color: var(--foreground);",
+            pre { style: "background-color: var(--foreground); color: var(--background); padding-left: 1rem; padding-right: 3rem; padding-top: 0.5rem; padding-bottom: 0.5rem; border-radius: var(--radius)",
+                code { style: "font-size: 0.875rem;", "{theme_manager.read().export_to_css()}" }
             }
         }
     }

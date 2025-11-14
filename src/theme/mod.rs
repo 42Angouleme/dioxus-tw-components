@@ -75,7 +75,7 @@ impl ToStyle for Theme {
             }
         }
 
-        style.push_str(&format!(" --global-radius: {};\n", self.radius.to_style()));
+        style.push_str(&format!(" --radius: {};\n", self.radius.to_style()));
 
         style
     }
@@ -107,7 +107,7 @@ impl ExportToCss for Theme {
             }
         }
 
-        css.push_str(&format!("  --global-radius: {};\n", self.radius.to_style()));
+        css.push_str(&format!("  --radius: {};\n", self.radius.to_style()));
 
         css.push_str(" }\n");
 
@@ -249,11 +249,11 @@ impl std::default::Default for Theme {
         );
 
         colors.insert(
-            "ring-3".to_string(),
+            "popover".to_string(),
             ColorChoice::Simple(HslColor {
-                h: 240,
-                s: 10.0,
-                l: 3.9,
+                h: 0,
+                s: 0.0,
+                l: 96.08,
             }),
         );
 
@@ -399,11 +399,11 @@ impl Theme {
         );
 
         colors.insert(
-            "ring-3".to_string(),
+            "popover".to_string(),
             ColorChoice::Simple(HslColor {
-                h: 0,
-                s: 0.0,
-                l: 100.0,
+                h: 214,
+                s: 15.22,
+                l: 18.04,
             }),
         );
 
@@ -430,7 +430,7 @@ pub struct HslColor {
 
 impl ToStyle for HslColor {
     fn to_style(&self) -> String {
-        format!("{}deg {}% {}%", self.h, self.s, self.l)
+        format!("hsl({}deg {}% {}%)", self.h, self.s, self.l)
     }
 }
 

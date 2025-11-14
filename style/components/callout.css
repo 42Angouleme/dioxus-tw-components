@@ -1,0 +1,39 @@
+.callout {
+	--callout-bg: color-mix(in oklab, var(--primary) 10%, transparent);
+	--callout-text: var(--primary);
+	--callout-border: var(--primary);
+	display: flex;
+	flex-direction: column;
+	background-color: var(--callout-bg);
+	border-color: var(--callout-text);
+	color: var(--callout-text);
+	border-left-width: 6px;
+	border-style: solid;
+	padding: 0.5rem;
+	padding-left: 1rem;
+	border-radius: var(--radius);
+}
+
+.callout[data-variant="note"] {
+	--callout-bg: color-mix(in oklab, var(--primary) 10%, transparent);
+	--callout-border: var(--primary);
+	--callout-text: var(--primary);
+}
+
+.callout[data-variant="tip"] {
+	--callout-bg: color-mix(in oklab, var(--success) 10%, transparent);
+	--callout-border: var(--success);
+	--callout-text: var(--success);
+}
+
+.callout[data-variant="warning"] {
+	--callout-bg: color-mix(in oklab, rgb(240, 177, 0) 10%, transparent);
+	--callout-border: rgb(240, 177, 0);
+	--callout-text: rgb(240, 177, 0);
+}
+
+.callout[data-variant="caution"] {
+	--callout-bg: color-mix(in oklab, var(--destructive) 10%, transparent);
+	--callout-border: var(--destructive);
+	--callout-text: var(--destructive);
+}

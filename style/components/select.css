@@ -1,0 +1,29 @@
+.select-group {
+	display: flex;
+	width: 100%;
+	height: 2.25rem;
+	border-radius: var(--radius);
+	border: 1px solid var(--input);
+	background-color: var(--background);
+	padding: 0.5rem 0.75rem;
+	font-size: 0.875rem;
+	color: var(--foreground);
+	cursor: pointer;
+}
+
+.select-placeholder {
+	color: var(--foreground);
+	visibility: hidden;
+	font-weight: 700;
+}
+
+.select-label {
+	color: var(--foreground);
+	font-size: 0.875rem;
+	font-weight: 600;
+}
+
+.select-item {
+	color: var(--foreground);
+	font-size: 0.875rem;
+}

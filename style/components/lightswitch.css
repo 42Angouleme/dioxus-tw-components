@@ -1,0 +1,4 @@
+.lightswitch {
+    cursor: pointer;
+	color: var(--foreground);
+}

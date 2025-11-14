@@ -1,0 +1,79 @@
+.toaster {
+	position: fixed;
+	z-index: 1000;
+	width: 100%;
+	bottom: 0;
+	right: 0;
+	@media (width >= 48rem) {
+		max-width: 400px;
+	}
+}
+
+.toast {
+	position: relative;
+	background-color: var(--background);
+	color: var(--foreground);
+	font-size: 0.875rem;
+	border: 1px solid;
+	border-color: var(--border);
+	border-radius: var(--radius);
+    box-shadow: var(--shadow);
+	padding: 1rem;
+	margin: 0.5rem;
+}
+
+.toast[data-style="primary"] {
+	background-color: var(--primary);
+	color: var(--primary-foreground);
+}
+
+.toast[data-style="secondary"] {
+	background-color: var(--secondary);
+	color: var(--secondary-foreground);
+}
+
+.toast[data-style="destructive"] {
+	background-color: var(--destructive);
+	color: var(--destructive-foreground);
+}
+
+.toast[data-style="success"] {
+	background-color: var(--success);
+	color: var(--success-foreground);
+}
+
+.toast[data-animation="light"],
+.toast[data-animation="full"] {
+	transition-property: transform, translate, scale, rotate;
+	transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+	transition-duration: 150ms;
+}
+
+.toast[data-animation="light"][data-state="opening"],
+.toast[data-animation="full"][data-state="opening"] {
+	transform: translateY(100%);
+}
+
+.toast[data-animation="light"][data-state="open"],
+.toast[data-animation="full"][data-state="open"] {
+	transform: translateY(0%);
+}
+
+.toast[data-animation="light"][data-state="closing"],
+.toast[data-animation="full"][data-state="closing"] {
+	transform: translateX(100%);
+}
+
+.toast-close {
+	position: absolute;
+	top: 1rem;
+	right: 1rem;
+	border-radius: var(--radius);
+	transition-property: color;
+	transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+	transition-duration: 150ms;
+}
+
+.toast-close:hover {
+	cursor: pointer;
+}

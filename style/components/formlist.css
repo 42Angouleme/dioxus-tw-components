@@ -1,0 +1,43 @@
+.formlist {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.formlist-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.formlist-label {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--foreground);
+}
+
+.formlist-description {
+    font-size: 0.8125rem;
+    color: var(--muted-foreground);
+}
+
+.formlist-error {
+    font-size: 0.8125rem;
+    color: var(--destructive);
+}
+
+.formlist-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    padding: 1rem;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background-color: var(--card);
+}
+
+.formlist-group-title {
+    font-weight: 600;
+    color: var(--card-foreground);
+    margin-bottom: 0.5rem;
+}

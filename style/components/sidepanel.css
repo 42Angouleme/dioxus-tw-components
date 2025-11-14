@@ -1,0 +1,111 @@
+.sidepanel-content {
+	position: fixed;
+	width: fit-content;
+	height: fit-content;
+	background-color: var(--background);
+	border: 1px solid var(--input);
+	padding: 1rem;
+	z-index: 50;
+	top: 50%;
+	right: 0;
+	overflow: hidden;
+	transform: translate(100%, -50%);
+	transition-property: all;
+	transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+	transition-duration: 300ms;
+}
+
+.sidepanel-content[data-side="left"] {
+	right: 100%;
+	transform: translate(-100%, -50%);
+}
+
+.sidepanel-content[data-side="top"] {
+	top: 0;
+	bottom: 100%;
+	left: 50%;
+	transform: translate(-50%, -100%);
+}
+
+.sidepanel-content[data-side="bottom"] {
+	top: 100%;
+	left: 50%;
+	transform: translate(-50%, 0%);
+}
+
+.sidepanel-content[data-state="active"][data-side="top"] {
+	transform: translate(-50%, 0%);
+}
+
+.sidepanel-content[data-state="active"][data-side="bottom"] {
+	transform: translate(-50%, -100%);
+}
+
+.sidepanel-content[data-state="active"][data-side="left"] {
+	transform: translate(100%, -50%);
+}
+
+.sidepanel-content[data-state="active"] {
+	transform: translate(0%, -50%);
+}
+
+.sidepanel-content[data-state="inactive"] {
+	opacity: 0;
+	visibility: hidden;
+}
+
+.sidepanel-background {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 100vh;
+	background-color: var(--foreground);
+	opacity: 15%;
+	z-index: 40;
+	transition-property: all;
+	transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+	transition-duration: 300ms;
+}
+
+.sidepanel-background[data-state="inactive"] {
+	opacity: 0%;
+	visibility: hidden;
+}
+
+.sidepanel-background[data-style="primary"] {
+	background-color: var(--primary);
+}
+
+.sidepanel-background[data-style="secondary"] {
+	background-color: var(--secondary);
+}
+
+.sidepanel-background[data-style="destructive"] {
+	background-color: var(--destructive);
+}
+
+.sidepanel-background[data-style="success"] {
+	background-color: var(--success);
+}
+
+.sidepanel-background[data-state="active"] {
+	visibility: visible;
+}
+
+.sidepanel-close {
+	position: absolute;
+	top: 1rem;
+	right: 1rem;
+	border-radius: var(--radius);
+	border-color: transparent;
+	cursor: pointer;
+	transition-property: all;
+	transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+	transition-duration: 150ms;
+	color: var(--foreground);
+}
+
+.sidepanel-close[data-state="active"] {
+	border-color: var(--border);
+}
