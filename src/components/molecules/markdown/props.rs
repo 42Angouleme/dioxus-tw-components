@@ -11,26 +11,9 @@ pub struct MarkdownProps {
     pub content: String,
 }
 
-/// Use `dangerous_inner_html` to render markdown content as HTML
-pub fn Markdown(props: MarkdownProps) -> Element {
-    let content = stringToHTML(props.content.clone());
-
-    rsx! {
-        div {
-            class: "prose dark:prose-invert max-w-none",
-            dangerous_inner_html: "{content}"
-        }
-    }
-}
-
 /// Convert a markdown string to HTML
 /// Uses pulldown-cmark crate
 /// Supports tables, footnotes, strikethrough, tasklists, and smart punctuation
-/// # Example
-/// ```
-/// let html = stringToHTML("# Hello World");
-/// assert_eq!(html, "<h1>Hello World</h1>");
-/// ```
 fn stringToHTML(content: String) -> String {
     use pulldown_cmark::{Options, Parser, html};
 
@@ -47,4 +30,16 @@ fn stringToHTML(content: String) -> String {
     html::push_html(&mut html_output, parser);
 
     html_output
+}
+
+/// Uses `dangerous_inner_html` to render markdown content as HTML
+pub fn Markdown(props: MarkdownProps) -> Element {
+    let content = stringToHTML(props.content.clone());
+
+    rsx! {
+        div {
+            class: "prose dark:prose-invert max-w-none",
+            dangerous_inner_html: "{content}"
+        }
+    }
 }
