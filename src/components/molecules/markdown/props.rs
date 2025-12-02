@@ -4,11 +4,25 @@ use dioxus_tw_components_macro::UiComp;
 
 #[derive(Clone, Default, PartialEq, Props, UiComp)]
 pub struct MarkdownProps {
+    #[props(extends = GlobalAttributes)]
+    attributes: Vec<Attribute>,
     /// The markdown content to render
     /// Example: "# Hello World"
     /// Default: ""
     #[props(into, default = String::new())]
     pub content: String,
+}
+
+/// Uses `dangerous_inner_html` to render markdown content as HTML
+pub fn Markdown(mut props: MarkdownProps) -> Element {
+    props.update_class_attribute();
+    let content = stringToHTML(props.content.clone());
+    rsx! {
+        div {
+            dangerous_inner_html: "{content}",
+            ..props.attributes,
+        }
+    }
 }
 
 /// Convert a markdown string to HTML
@@ -30,16 +44,4 @@ fn stringToHTML(content: String) -> String {
     html::push_html(&mut html_output, parser);
 
     html_output
-}
-
-/// Uses `dangerous_inner_html` to render markdown content as HTML
-pub fn Markdown(props: MarkdownProps) -> Element {
-    let content = stringToHTML(props.content.clone());
-
-    rsx! {
-        div {
-            class: "prose dark:prose-invert max-w-none",
-            dangerous_inner_html: "{content}"
-        }
-    }
 }
