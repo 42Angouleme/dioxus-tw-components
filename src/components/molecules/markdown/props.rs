@@ -29,7 +29,7 @@ pub fn Markdown(mut props: MarkdownProps) -> Element {
 /// Uses pulldown-cmark crate
 /// Supports tables, footnotes, strikethrough, tasklists, and smart punctuation
 fn stringToHTML(content: String) -> String {
-    use pulldown_cmark::{html, Options, Parser};
+    use pulldown_cmark::{Options, Parser, html};
 
     let mut options = Options::empty();
     options.insert(Options::ENABLE_TABLES);

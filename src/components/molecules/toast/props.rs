@@ -259,11 +259,7 @@ fn ToastView(mut state: Signal<ToasterState>, toast: ReadOnlySignal<Toast>) -> E
             toast_state.set(ToastState::Open);
 
             let animation_play_time = 150;
-            let animation_duration = if duration_in_ms <= animation_play_time {
-                0
-            } else {
-                duration_in_ms - animation_play_time
-            };
+            let animation_duration = duration_in_ms.saturating_sub(animation_play_time);
             #[cfg(target_arch = "wasm32")]
             {
                 TimeoutFuture::new(animation_duration).await;
