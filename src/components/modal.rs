@@ -86,7 +86,7 @@ pub struct ModalCloseProps {
     #[props(extends = div, extends = GlobalAttributes)]
     attributes: Vec<Attribute>,
 
-    #[props(optional)]
+    #[props(default)]
     children: Element,
 }
 

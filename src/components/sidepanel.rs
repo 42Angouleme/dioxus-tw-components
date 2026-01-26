@@ -16,6 +16,14 @@ impl SidePanelState {
     pub fn toggle(&mut self) {
         self.is_active = !self.is_active;
     }
+
+    pub fn open(&mut self) {
+        self.is_active = true;
+    }
+
+    pub fn close(&mut self) {
+        self.is_active = false;
+    }
 }
 
 impl IntoAttributeValue for SidePanelState {
@@ -64,7 +72,7 @@ pub fn SidePanelTrigger(mut props: SidePanelTriggerProps) -> Element {
 
     let onclick = move |event: Event<MouseData>| {
         event.stop_propagation();
-        state.write().toggle();
+        state.write().open();
         props.onclick.call(event)
     };
 
@@ -78,7 +86,7 @@ pub struct SidePanelCloseProps {
     #[props(extends = div, extends = GlobalAttributes)]
     attributes: Vec<Attribute>,
 
-    #[props(optional)]
+    #[props(default)]
     children: Element,
 }
 
@@ -106,7 +114,7 @@ pub fn SidePanelClose(mut props: SidePanelCloseProps) -> Element {
 
     let onclick = move |event: Event<MouseData>| {
         event.stop_propagation();
-        state.write().is_active = false;
+        state.write().close();
     };
 
     rsx! {
@@ -168,7 +176,7 @@ pub fn SidePanelBackground(mut props: SidePanelBackgroundProps) -> Element {
     let onclick = move |event: Event<MouseData>| {
         event.stop_propagation();
         if props.interactive {
-            state.write().toggle();
+            state.write().close();
             props.onclick.call(event)
         }
     };

@@ -18,6 +18,7 @@ pub fn Markdown(props: MarkdownProps) -> Element {
 
     rsx! {
         div {
+            class: "prose dark:prose-invert max-w-none",
             dangerous_inner_html: "{content}",
             ..props.attributes
         }
