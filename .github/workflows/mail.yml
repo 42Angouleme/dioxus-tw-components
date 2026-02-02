@@ -27,6 +27,11 @@ jobs:
             cache-all-crates: "true"
             cache-on-failure: "false"
 
+        - name: Install apt dependencies
+          run: |
+            apt update
+            apt install libglib2.0-dev build-essential
+
         - name: Install rust tools
           run: |
             rustup update
