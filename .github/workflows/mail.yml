@@ -30,7 +30,7 @@ jobs:
         - name: Install system dependencies
           uses: awalsh128/cache-apt-pkgs-action@latest
           with:
-            packages: build-essential libglib2.0-dev
+            packages: build-essential libglib2.0-dev libgtk-3-dev
             version: 1.0
 
 
