@@ -34,7 +34,7 @@ pub fn Markdown(props: MarkdownProps) -> Element {
 /// assert_eq!(html, "<h1>Hello World</h1>");
 /// ```
 fn string_to_html(content: String) -> String {
-    use pulldown_cmark::{html, Options, Parser};
+    use pulldown_cmark::{Options, Parser, html};
 
     let mut options = Options::empty();
     options.insert(Options::ENABLE_TABLES);
