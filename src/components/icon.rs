@@ -2114,6 +2114,7 @@ pub enum Icons {
     Looks,
     LooksOne,
     LooksTwo,
+<<<<<<< HEAD:src/components/icon.rs
     #[strum(serialize = "looks_3")]
     Looks3,
     #[strum(serialize = "looks_4")]
@@ -2121,6 +2122,11 @@ pub enum Icons {
     #[strum(serialize = "looks_5")]
     Looks5,
     #[strum(serialize = "looks_6")]
+=======
+    Looks3,
+    Looks4,
+    Looks5,
+>>>>>>> main:src/components/atoms/icon/props.rs
     Looks6,
     Loop,
     Loupe,

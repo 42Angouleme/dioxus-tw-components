@@ -71,7 +71,6 @@ pub fn SidePanelTrigger(mut props: SidePanelTriggerProps) -> Element {
     crate::setup_class_attribute(&mut props.attributes, default_classes);
 
     let onclick = move |event: Event<MouseData>| {
-        event.stop_propagation();
         state.write().open();
         props.onclick.call(event)
     };
