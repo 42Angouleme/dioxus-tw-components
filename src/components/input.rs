@@ -5,13 +5,13 @@ pub struct InputProps {
     #[props(extends = input, extends = GlobalAttributes)]
     attributes: Vec<Attribute>,
 
-    #[props(optional)]
+    #[props(default)]
     default_value: String,
 
-    #[props(optional)]
+    #[props(default)]
     value: Signal<String>,
 
-    #[props(optional)]
+    #[props(default)]
     onchange: EventHandler<FormEvent>,
 }
 

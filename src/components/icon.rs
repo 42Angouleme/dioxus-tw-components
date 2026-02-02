@@ -2114,9 +2114,13 @@ pub enum Icons {
     Looks,
     LooksOne,
     LooksTwo,
+    #[strum(serialize = "looks_3")]
     Looks3,
+    #[strum(serialize = "looks_4")]
     Looks4,
+    #[strum(serialize = "looks_5")]
     Looks5,
+    #[strum(serialize = "looks_6")]
     Looks6,
     Loop,
     Loupe,

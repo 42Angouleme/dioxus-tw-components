@@ -1,5 +1,5 @@
 .tabs-list {
-	width: 100%;
+    width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -11,13 +11,14 @@
 
 .tabs-trigger {
     display: flex;
-	flex-grow: 1;
+    flex-grow: 1;
     align-items: center;
     justify-content: center;
     white-space: nowrap;
+	padding: 0.125rem 0.5rem;
     border-radius: var(--radius);
     font-size: 0.875rem;
-    font-weight: 500;
+    font-weight: 600;
     cursor: pointer;
     transition: all 0.2s ease;
 }
@@ -36,6 +37,7 @@
     margin-top: 0.5rem;
     border-radius: var(--radius);
     border: 1px solid var(--border);
+    background-color: var(--background);
     padding: 1.5rem;
 }
 

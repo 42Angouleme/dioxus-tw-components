@@ -1,5 +1,5 @@
 .dropdown {
-    z-index: 20;
+    z-index: 99;
     position: relative;
     color: var(--foreground);
 }
@@ -14,7 +14,7 @@
 }
 
 .dropdown-content {
-    z-index: 20;
+    z-index: 99;
     display: flex;
     flex-direction: column;
     padding: 0.5rem;
@@ -31,6 +31,7 @@
     transform: translateX(-50%);
     white-space: nowrap;
     opacity: 1;
+	visibility: visible;
 }
 
 .dropdown-content[data-state="closed"] {
