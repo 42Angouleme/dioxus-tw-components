@@ -27,10 +27,12 @@ jobs:
             cache-all-crates: "true"
             cache-on-failure: "false"
 
-        - name: Install apt dependencies
-          run: |
-            apt update --yes
-            apt install --yes libglib2.0-dev build-essential
+        - name: Install system dependencies
+          uses: awalsh128/cache-apt-pkgs-action@latest
+          with:
+            packages: build-essential libglib2.0-dev
+            version: 1.0
+
 
         - name: Install rust tools
           run: |
