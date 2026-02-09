@@ -90,7 +90,11 @@ pub fn DropdownToggle(mut props: DropdownToggleProps) -> Element {
 
     rsx! {
         button {
-            onclick: move |_| state.write().toggle(),
+            onclick: move |e: MouseEvent| {
+                e.stop_propagation();
+                e.prevent_default();
+                state.write().toggle();
+            },
             ..props.attributes,
             {props.children}
         }
