@@ -1,8 +1,9 @@
 use dioxus::prelude::*;
 
-#[derive(Clone, Copy)]
+#[derive(Clone)]
 struct RadioGroupCtx {
     value: Signal<String>,
+    default_value: String,
     onchange: EventHandler<MouseEvent>,
 }
 
@@ -26,6 +27,7 @@ pub struct RadioGroupProps {
 pub fn RadioGroup(mut props: RadioGroupProps) -> Element {
     use_context_provider(|| RadioGroupCtx {
         value: props.value,
+        default_value: props.default_value.clone(),
         onchange: props.onchange,
     });
 
@@ -52,7 +54,13 @@ pub fn RadioItem(mut props: RadioItemProps) -> Element {
     crate::setup_class_attribute(&mut props.attributes, default_classes);
 
     let value = props.value.clone();
-    let checked = use_memo(move || (state.value)() == value);
+    let checked = use_memo(move || {
+        if state.value.read().is_empty() {
+            state.default_value == value
+        } else {
+            (state.value)() == value
+        }
+    });
 
     rsx! {
         input {
