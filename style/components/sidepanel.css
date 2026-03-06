@@ -8,7 +8,7 @@
 	z-index: 50;
 	top: 50%;
 	right: 0;
-	overflow: hidden;
+	overflow: clip;
 	transform: translate(100%, -50%);
 	transition-property: all;
 	transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
