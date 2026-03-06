@@ -41,7 +41,7 @@ pub fn Callout(mut props: CalloutProps) -> Element {
 
     rsx! {
         div {..props.attributes,
-            div { style: "display: flex; flex-direction: row; vertical-align: middle;",
+            div { style: "display: flex; flex-direction: row; vertical-align: middle; overflow-wrap: break-word; word-break: break-word; min-width: 0;",
                 Icon {
                     style: "margin-right: 0.5rem; font-size: 0.875rem;",
                     icon: if props.icon.is_some() { props.icon.unwrap() } else { icon },
