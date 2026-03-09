@@ -48,7 +48,7 @@ pub fn Callout(mut props: CalloutProps) -> Element {
                 }
                 "{props.title}"
             }
-            div { style: "font-size: 0.875rem; color: color-mix(in oklab, var(--foreground) 70%, transparent)",
+            div { style: "font-size: 0.875rem; color: color-mix(in oklab, var(--foreground) 70%, transparent); overflow-wrap: break-word; word-break: break-word; min-width: 0;",
                 {props.children}
             }
         }
