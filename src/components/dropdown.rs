@@ -111,7 +111,7 @@ pub struct DropdownContentProps {
 
 #[component]
 pub fn DropdownContent(mut props: DropdownContentProps) -> Element {
-    let state = use_context::<Signal<DropdownState>>();
+    let mut state = use_context::<Signal<DropdownState>>();
 
     let default_classes = "dropdown-content";
     crate::setup_class_attribute(&mut props.attributes, default_classes);
@@ -119,6 +119,9 @@ pub fn DropdownContent(mut props: DropdownContentProps) -> Element {
     rsx! {
         div {
             "data-state": state.read().into_value(),
+            onclick: move |_| {
+                state.write().close();
+            },
             ..props.attributes,
             {props.children}
         }
