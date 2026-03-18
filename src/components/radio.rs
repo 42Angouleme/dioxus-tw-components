@@ -3,7 +3,7 @@ use dioxus::prelude::*;
 #[derive(Clone)]
 struct RadioGroupCtx {
     value: Signal<String>,
-    default_value: String,
+    default_value: Signal<String>,
     onchange: EventHandler<MouseEvent>,
 }
 
@@ -25,11 +25,19 @@ pub struct RadioGroupProps {
 
 #[component]
 pub fn RadioGroup(mut props: RadioGroupProps) -> Element {
+    let mut default_value = use_signal(|| props.default_value.clone());
+
     use_context_provider(|| RadioGroupCtx {
         value: props.value,
-        default_value: props.default_value.clone(),
+        default_value,
         onchange: props.onchange,
     });
+
+    // Sync default_value from prop when it changes.
+    // peek() avoids subscription; write only when different to prevent re-render loops.
+    if *default_value.peek() != props.default_value {
+        *default_value.write() = props.default_value.clone();
+    }
 
     let default_classes = "radio";
     crate::setup_class_attribute(&mut props.attributes, default_classes);
@@ -56,7 +64,7 @@ pub fn RadioItem(mut props: RadioItemProps) -> Element {
     let value = props.value.clone();
     let checked = use_memo(move || {
         if state.value.read().is_empty() {
-            state.default_value == value
+            *state.default_value.read() == value
         } else {
             (state.value)() == value
         }

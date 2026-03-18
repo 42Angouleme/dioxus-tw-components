@@ -24,6 +24,12 @@ pub fn Checkbox(mut props: CheckboxProps) -> Element {
 
     let mut checked = use_signal(|| props.default_checked);
 
+    // Sync checked state when default_checked prop changes (e.g. readonly view with new data).
+    // peek() avoids subscription; write only when different to prevent re-render loops.
+    if *checked.peek() != props.default_checked {
+        *checked.write() = props.default_checked;
+    }
+
     let id = crate::use_unique_id();
     let id_clone = id.clone();
 
