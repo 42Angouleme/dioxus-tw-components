@@ -113,7 +113,7 @@ pub fn Stepper(mut props: StepperProps) -> Element {
                                 class: "button",
                                 "data-variant": "default",
                                 onclick: {
-                                    let on_complete = on_complete.clone();
+                                    let on_complete = *on_complete;
                                     move |_| on_complete.call(())
                                 },
                                 "Complete"
