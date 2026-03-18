@@ -1,0 +1,66 @@
+.stepper {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    width: 100%;
+}
+
+.stepper-progress {
+    display: flex;
+    gap: 0.25rem;
+    width: 100%;
+}
+
+.stepper-progress-segment {
+    flex: 1;
+    height: 0.25rem;
+    border-radius: 0.125rem;
+    background: color-mix(in oklab, var(--muted) 100%, transparent);
+    transition: background 0.2s ease;
+}
+
+.stepper-progress-segment[data-state="completed"] {
+    background: var(--primary);
+}
+
+.stepper-progress-segment[data-state="current"] {
+    background: var(--primary);
+    opacity: 0.7;
+}
+
+.stepper-header {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.stepper-step-label {
+    font-size: 0.875rem;
+    color: color-mix(in oklab, var(--foreground) 50%, transparent);
+}
+
+.stepper-step-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--foreground);
+}
+
+.stepper-content {
+    min-height: 12rem;
+}
+
+.stepper-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border);
+}
+
+.stepper-save-indicator {
+    font-size: 0.75rem;
+    color: var(--primary);
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+}

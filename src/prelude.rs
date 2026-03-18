@@ -22,6 +22,7 @@ pub use crate::components::select::*;
 pub use crate::components::separator::*;
 pub use crate::components::sidepanel::*;
 pub use crate::components::slider::*;
+pub use crate::components::stepper::*;
 pub use crate::components::sorttable::*;
 pub use crate::components::table::*;
 pub use crate::components::tabs::*;

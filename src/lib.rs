@@ -25,6 +25,7 @@ pub use components::select::*;
 pub use components::separator::*;
 pub use components::sidepanel::*;
 pub use components::slider::*;
+pub use components::stepper::*;
 pub use components::sorttable::*;
 pub use components::table::*;
 pub use components::tabs::*;

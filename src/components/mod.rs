@@ -20,6 +20,7 @@ pub mod scrollable;
 pub mod select;
 pub mod separator;
 pub mod sidepanel;
+pub mod stepper;
 pub mod slider;
 pub mod sorttable;
 pub mod table;
