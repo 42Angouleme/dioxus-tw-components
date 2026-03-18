@@ -21,6 +21,9 @@ pub struct StepperProps {
     /// Called when "Complete" is clicked (last step)
     #[props(optional)]
     pub on_complete: Option<EventHandler<()>>,
+    /// Called when a step indicator is clicked (passes step index)
+    #[props(optional)]
+    pub on_step_click: Option<EventHandler<usize>>,
     /// Whether to show "Draft saved" indicator
     #[props(default)]
     pub show_saved: bool,
@@ -54,10 +57,17 @@ pub fn Stepper(mut props: StepperProps) -> Element {
                         } else {
                             "pending"
                         };
+                        let clickable = props.on_step_click.is_some();
                         rsx! {
                             div {
                                 class: "stepper-progress-segment",
+                                class: if clickable { "cursor-pointer" },
                                 "data-state": state,
+                                onclick: move |_| {
+                                    if let Some(ref on_step_click) = props.on_step_click {
+                                        on_step_click.call(i);
+                                    }
+                                },
                             }
                         }
                     }
