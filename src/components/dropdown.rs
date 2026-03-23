@@ -55,6 +55,9 @@ pub struct DropdownProps {
 /// Use 0 closing_delay_ms to disable the auto close feature
 #[component]
 pub fn Dropdown(mut props: DropdownProps) -> Element {
+    // Capture parent dropdown state before providing our own,
+    // so clicking backdrop closes the entire dropdown chain.
+    let parent_state = try_use_context::<Signal<DropdownState>>();
     let mut state = use_context_provider(|| Signal::new(DropdownState::new()));
 
     let default_classes = "dropdown";
@@ -67,6 +70,9 @@ pub fn Dropdown(mut props: DropdownProps) -> Element {
                 class: "dropdown-backdrop",
                 onclick: move |_event| {
                     state.write().close();
+                    if let Some(mut parent) = parent_state {
+                        parent.write().close();
+                    }
                 },
             }
         }
