@@ -137,13 +137,22 @@ pub struct SidePanelContentProps {
 
 #[component]
 pub fn SidePanelContent(mut props: SidePanelContentProps) -> Element {
-    let state = use_context::<Signal<SidePanelState>>();
+    let mut state = use_context::<Signal<SidePanelState>>();
 
     let default_classes = "sidepanel-content";
     crate::setup_class_attribute(&mut props.attributes, default_classes);
 
+    // Close on Escape key
+    let onkeydown = move |event: Event<KeyboardData>| {
+        if event.key() == Key::Escape {
+            state.write().close();
+        }
+    };
+
     rsx! {
         div {
+            tabindex: "0",
+            onkeydown,
             "data-state": state.read().into_value(),
             ..props.attributes,
             {props.children}

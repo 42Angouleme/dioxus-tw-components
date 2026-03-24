@@ -1,7 +1,5 @@
 use dioxus::prelude::*;
 
-
-
 #[derive(Clone, PartialEq, Props)]
 pub struct ButtonProps {
     /// Additional attributes to apply to the element
