@@ -155,14 +155,14 @@ pub fn SidePanelContent(mut props: SidePanelContentProps) -> Element {
 
     // Auto-focus on open
     use_effect(move || {
-        if state.read().is_active {
-            if let Some(ref el) = *panel_ref.read() {
-                let el = el.clone();
-                spawn(async move {
-                    let _ = document::eval("await new Promise(r => setTimeout(r, 100))").await;
-                    let _ = el.set_focus(true).await;
-                });
-            }
+        if state.read().is_active
+            && let Some(ref el) = *panel_ref.read()
+        {
+            let el = el.clone();
+            spawn(async move {
+                let _ = document::eval("await new Promise(r => setTimeout(r, 100))").await;
+                let _ = el.set_focus(true).await;
+            });
         }
     });
 
