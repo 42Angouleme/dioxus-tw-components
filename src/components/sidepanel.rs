@@ -142,17 +142,35 @@ pub fn SidePanelContent(mut props: SidePanelContentProps) -> Element {
     let default_classes = "sidepanel-content";
     crate::setup_class_attribute(&mut props.attributes, default_classes);
 
-    // Close on Escape key
     let onkeydown = move |event: Event<KeyboardData>| {
         if event.key() == Key::Escape {
             state.write().close();
         }
     };
 
+    let mut panel_ref: Signal<Option<MountedEvent>> = use_signal(|| None);
+    let onmounted = move |event: MountedEvent| {
+        panel_ref.set(Some(event));
+    };
+
+    // Auto-focus on open
+    use_effect(move || {
+        if state.read().is_active {
+            if let Some(ref el) = *panel_ref.read() {
+                let el = el.clone();
+                spawn(async move {
+                    let _ = document::eval("await new Promise(r => setTimeout(r, 100))").await;
+                    let _ = el.set_focus(true).await;
+                });
+            }
+        }
+    });
+
     rsx! {
         div {
             tabindex: "0",
             onkeydown,
+            onmounted,
             "data-state": state.read().into_value(),
             ..props.attributes,
             {props.children}

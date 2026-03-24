@@ -1,6 +1,6 @@
 [package]
 name = "dioxus-tw-components"
-version = "0.2.7"
+version = "0.2.8"
 edition = "2024"
 license = "MIT OR Apache-2.0"
 description = "Components made for Dioxus"
