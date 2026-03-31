@@ -1,3 +1,4 @@
+use crate::DropdownManager;
 use dioxus::prelude::*;
 
 struct TabsState(String);
@@ -54,6 +55,7 @@ pub struct TabsTriggerProps {
 #[component]
 pub fn TabsTrigger(mut props: TabsTriggerProps) -> Element {
     let mut state = use_context::<Signal<TabsState>>();
+    let manager = try_use_context::<Signal<DropdownManager>>();
 
     let default_classes = "tabs-trigger";
     crate::setup_class_attribute(&mut props.attributes, default_classes);
@@ -62,6 +64,10 @@ pub fn TabsTrigger(mut props: TabsTriggerProps) -> Element {
 
     let onclick = move |_: MouseEvent| {
         state.write().0 = props.id.read().clone();
+        // Close all open dropdowns
+        if let Some(mut mgr) = manager {
+            mgr.write().advance();
+        }
     };
 
     rsx! {

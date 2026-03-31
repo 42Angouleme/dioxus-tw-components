@@ -8,16 +8,16 @@ pub struct DropdownManager {
 }
 
 impl DropdownManager {
-    fn new() -> Self {
+    pub(crate) fn new() -> Self {
         Self { generation: 0 }
     }
 
-    fn advance(&mut self) -> u64 {
+    pub(crate) fn advance(&mut self) -> u64 {
         self.generation += 1;
         self.generation
     }
 
-    fn generation(&self) -> u64 {
+    pub(crate) fn generation(&self) -> u64 {
         self.generation
     }
 }
