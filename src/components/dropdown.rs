@@ -36,11 +36,20 @@ pub fn DropdownManagerProvider(props: DropdownManagerProviderProps) -> Element {
 #[derive(Clone, Copy)]
 struct DropdownState {
     is_active: bool,
+    manager_generation: u64,
 }
 
 impl DropdownState {
     fn new() -> Self {
-        Self { is_active: false }
+        Self {
+            is_active: false,
+            manager_generation: 0,
+        }
+    }
+
+    fn open_with_generation(&mut self, generation: u64) {
+        self.is_active = true;
+        self.manager_generation = generation;
     }
 
     fn toggle(&mut self) {
@@ -93,24 +102,15 @@ pub fn Dropdown(mut props: DropdownProps) -> Element {
 
     // Generation counter: close this dropdown when another interaction advances the counter
     let manager = try_use_context::<Signal<DropdownManager>>();
-    let mut my_generation = use_signal(|| 0u64);
-    let mut was_active = use_signal(|| false);
 
-    // Watch for generation changes and open/close transitions
-    if let Some(mgr) = manager {
-        let global_gen = mgr.read().generation();
-        let is_active = state.read().get_is_active();
-
-        if is_active && !*was_active.read() {
-            // Just opened — store current generation so we don't self-close
-            my_generation.set(global_gen);
-        } else if is_active && global_gen > *my_generation.read() {
-            // Was already open and generation advanced externally — close
-            state.write().close();
+    use_effect(move || {
+        if let Some(mgr) = manager {
+            let global_gen = mgr.read().generation();
+            if state.peek().get_is_active() && global_gen > state.peek().manager_generation {
+                state.write().close();
+            }
         }
-
-        was_active.set(is_active);
-    }
+    });
 
     let default_classes = "dropdown";
     crate::setup_class_attribute(&mut props.attributes, default_classes);
@@ -127,8 +127,7 @@ pub fn Dropdown(mut props: DropdownProps) -> Element {
                     }
                     // Advance generation so sibling dropdowns close too
                     if let Some(mut mgr) = manager {
-                        let new_gen = mgr.write().advance();
-                        my_generation.set(new_gen);
+                        mgr.write().advance();
                     }
                 },
             }
@@ -158,14 +157,17 @@ pub fn DropdownToggle(mut props: DropdownToggleProps) -> Element {
                 e.stop_propagation();
                 e.prevent_default();
 
-                // Advance generation before opening so other dropdowns close
                 let will_open = !state.read().get_is_active();
-                if will_open
-                    && let Some(mut mgr) = manager
-                {
-                    mgr.write().advance();
+                if will_open {
+                    if let Some(mut mgr) = manager {
+                        let new_gen = mgr.write().advance();
+                        state.write().open_with_generation(new_gen);
+                    } else {
+                        state.write().toggle();
+                    }
+                } else {
+                    state.write().toggle();
                 }
-                state.write().toggle();
             },
             ..props.attributes,
             {props.children}
