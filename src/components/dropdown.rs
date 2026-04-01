@@ -12,7 +12,7 @@ impl DropdownManager {
         Self { generation: 0 }
     }
 
-    pub(crate) fn advance(&mut self) -> u64 {
+    pub fn advance(&mut self) -> u64 {
         self.generation += 1;
         self.generation
     }
