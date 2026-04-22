@@ -6,13 +6,21 @@ pub struct CheckboxProps {
     #[props(extends = button, extends = GlobalAttributes)]
     attributes: Vec<Attribute>,
 
+    /// Form name. Empty = the checkbox does not participate in form submission.
+    #[props(optional, into, default = String::new())]
+    name: String,
+
+    /// Value submitted when checked.
+    #[props(optional, into, default = String::from("on"))]
+    value: String,
+
     #[props(optional)]
     default_checked: bool,
 
     #[props(optional)]
     checked: Signal<bool>,
 
-    /// Return value determines if the event should strop propagation (false by default)
+    /// Return value determines if the event should stop propagation (false by default).
     #[props(optional)]
     onchange: Callback<bool, bool>,
 }
@@ -23,46 +31,17 @@ pub fn Checkbox(mut props: CheckboxProps) -> Element {
     crate::setup_class_attribute(&mut props.attributes, default_classes);
 
     let mut checked = use_signal(|| props.default_checked);
+    let mut prev_default = use_signal(|| props.default_checked);
 
-    // Sync checked state when default_checked prop changes (e.g. readonly view with new data).
-    // peek() avoids subscription; write only when different to prevent re-render loops.
-    if *checked.peek() != props.default_checked {
+    // Re-sync only when the prop itself changes; comparing against `checked` would clobber user clicks.
+    if *prev_default.peek() != props.default_checked {
+        *prev_default.write() = props.default_checked;
         *checked.write() = props.default_checked;
     }
 
     let id = crate::use_unique_id();
-    let id_clone = id.clone();
 
-    // HTML's default checkbox input are notoriously difficult to style consistently across browsers.
-    // This one uses a common pattern using a fake box for look and real input for sementics and
-    // form integration, aria-hidden to prevent duplication.
-    // The hidden native input ensures that assistive technologies (like screen readers) still
-    // recognize the component as a proper checkbox.
-    use_effect(move || {
-        let checked = *checked.read();
-        let js = document::eval(
-            r#"
-            let id = await dioxus.recv();
-            let action = await dioxus.recv();
-            let input = document.getElementById(id);
-
-            switch(action) {
-                case "checked":
-                    input.checked = true;
-                    input.indeterminate = false;
-                    break;
-                case "unchecked": 
-                    input.checked = false;
-                    input.indeterminate = false;
-                    break;
-            }
-            "#,
-        );
-
-        let _ = js.send(id_clone.clone());
-        let _ = js.send(if checked { "checked" } else { "unchecked" });
-    });
-
+    // Styled button is the interactive surface; hidden input carries name/checked for form submission and a11y.
     rsx! {
         button {
             type: "button",
@@ -95,6 +74,9 @@ pub fn Checkbox(mut props: CheckboxProps) -> Element {
         input {
             id,
             type: "checkbox",
+            name: props.name,
+            value: props.value,
+            checked: *checked.read(),
             aria_hidden: "true",
             tabindex: "-1",
             position: "absolute",
