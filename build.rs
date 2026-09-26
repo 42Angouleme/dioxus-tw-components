@@ -6,8 +6,6 @@ use std::{
     path::Path,
 };
 
-use minify_html::{Cfg, minify};
-
 const SOURCE_DIR: &str = "./style/components/";
 
 fn main() -> Result<(), Box<dyn Error>> {
@@ -31,12 +29,11 @@ fn main() -> Result<(), Box<dyn Error>> {
 
         let content = fs::read_to_string(f.path())?;
 
-        let mut cfg = Cfg::new();
-        cfg.keep_comments = true;
-        cfg.allow_removing_spaces_between_attributes = true;
-        let minified = minify(content.as_bytes(), &cfg);
+        // Collapse runs of whitespace: byte-identical to the former minify-html
+        // pass on these files, without its rkyv 0.7 dependency (RUSTSEC-2026-0235).
+        let collapsed = content.split_whitespace().collect::<Vec<_>>().join(" ");
 
-        write!(&mut style, "{}", String::from_utf8(minified)?)?;
+        write!(&mut style, "{collapsed}")?;
     }
     write!(&mut style, "}}",)?;
 
