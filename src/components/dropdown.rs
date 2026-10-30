@@ -37,13 +37,15 @@ pub fn DropdownManagerProvider(props: DropdownManagerProviderProps) -> Element {
 struct DropdownState {
     is_active: bool,
     manager_generation: u64,
+    parent: Option<Signal<DropdownState>>,
 }
 
 impl DropdownState {
-    fn new() -> Self {
+    fn new(parent: Option<Signal<DropdownState>>) -> Self {
         Self {
             is_active: false,
             manager_generation: 0,
+            parent,
         }
     }
 
@@ -98,7 +100,7 @@ pub fn Dropdown(mut props: DropdownProps) -> Element {
     // Capture parent dropdown state before providing our own,
     // so clicking backdrop closes the entire dropdown chain.
     let parent_state = try_use_context::<Signal<DropdownState>>();
-    let mut state = use_context_provider(|| Signal::new(DropdownState::new()));
+    let mut state = use_context_provider(|| Signal::new(DropdownState::new(parent_state)));
 
     // Generation counter: close this dropdown when another interaction advances the counter
     let manager = try_use_context::<Signal<DropdownManager>>();
@@ -162,6 +164,12 @@ pub fn DropdownToggle(mut props: DropdownToggleProps) -> Element {
                     if let Some(mut mgr) = manager {
                         let new_gen = mgr.write().advance();
                         state.write().open_with_generation(new_gen);
+                        // Ancestors stay open: only siblings and unrelated dropdowns close.
+                        let mut ancestor = state.peek().parent;
+                        while let Some(mut parent) = ancestor {
+                            parent.write().manager_generation = new_gen;
+                            ancestor = parent.peek().parent;
+                        }
                     } else {
                         state.write().toggle();
                     }
